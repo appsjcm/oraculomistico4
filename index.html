@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🔮 Oráculo Místico · Tarot · Runas · Luna · Sueños · Numerología · Chat</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://js.puter.com/v2/"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body data-theme="dark">
+    <div id="splash-screen">
+        <div class="splash-logo">🔮 Oráculo Místico</div>
+        <div class="splash-subtitle">Cargando las 78 cartas del Tarot Rider-Waite...</div>
+        <div class="splash-loader"></div>
+        <div class="splash-text" id="splashProgress">Preparando el oráculo...</div>
+    </div>
+    <div class="stars-bg" id="starsContainer"></div>
+    <header>
+        <div class="user-profile">
+            <span id="userNameDisplay"></span>
+            <button class="btn-mystic" id="loginBtn" style="padding: 4px 10px; font-size: 0.6rem;">🔐 Login</button>
+        </div>
+        <button class="settings-btn" id="settingsBtn">⚙️</button>
+        <div class="logo">🔮 Oráculo Místico</div>
+        <div class="subtitle">✦ Tarot · Runas · Luna · Sueños · Numerología · Chat ✦</div>
+    </header>
+    <nav>
+        <button class="nav-btn active" data-section="daily">☀️ Diaria</button>
+        <button class="nav-btn" data-section="tarot">🃏 Tarot</button>
+        <button class="nav-btn" data-section="runas">ᚱ Runas</button>
+        <button class="nav-btn" data-section="tiradas">⚡ Tiradas</button>
+        <button class="nav-btn" data-section="luna">🌙 Luna</button>
+        <button class="nav-btn" data-section="suenos">💭 Sueños</button>
+        <button class="nav-btn" data-section="numerologia">🔢 Numerología</button>
+        <button class="nav-btn" data-section="chat">💬 Chat</button>
+        <button class="nav-btn" data-section="notas">📓 Notas</button>
+        <button class="nav-btn" data-section="historial">📜 Historial</button>
+        <button class="nav-btn" data-section="estadisticas">📊 Estadísticas</button>
+    </nav>
+    <main>
+        <!-- Diaria -->
+        <section id="daily" class="section active">
+            <div class="section-title">☀️ Carta del Día + Runa</div>
+            <p class="section-desc">Un mensaje dual que se renueva cada amanecer</p>
+            <div class="date-display" id="dateDisplay"></div>
+            <div class="daily-container">
+                <div id="dailyCardDisplay"></div>
+                <button class="btn-mystic" id="dailyDrawBtn">🌟 Revelar Mi Carta y Runa del Día</button>
+            </div>
+            <div id="dailyResult"></div>
+            <div class="action-buttons" id="dailyActions" style="display:none">
+                <button class="btn-mystic btn-ia" data-type="daily">🤖 IA</button>
+                <button class="btn-mystic btn-share" data-type="daily">📸</button>
+                <button class="btn-mystic btn-pdf" data-type="daily">📄</button>
+                <button class="btn-mystic btn-share-social" data-type="daily">📱 Compartir</button>
+            </div>
+        </section>
+
+        <!-- Tarot -->
+        <section id="tarot" class="section">
+            <div class="section-title">🃏 Tarot Rider-Waite</div>
+            <p class="section-desc">78 cartas originales con interpretaciones profundas</p>
+            <div class="user-input">
+                <input class="mystic-input" id="tarotQ" placeholder="💬 Tu pregunta...">
+                <button class="mic-btn-small" data-mic="tarotQ">🎤</button>
+            </div>
+            <div class="action-buttons">
+                <button class="btn-mystic" id="drawTarotBtn">🎴 Sacar Una Carta</button>
+            </div>
+            <div id="tarotResult"></div>
+            <div class="action-buttons" id="tarotActions" style="display:none">
+                <button class="btn-mystic btn-ia" data-type="tarot">🤖 IA</button>
+                <button class="btn-mystic btn-share" data-type="tarot">📸</button>
+                <button class="btn-mystic btn-pdf" data-type="tarot">📄</button>
+                <button class="btn-mystic btn-share-social" data-type="tarot">📱 Compartir</button>
+            </div>
+            <div class="ornament">✦ ✧ ✦</div>
+            <div class="section-title" style="font-size:1rem">Arcanos Mayores</div>
+            <div class="cards-grid" id="majorGrid"></div>
+            <div class="ornament">✦ ✧ ✦</div>
+            <div class="section-title" style="font-size:1rem">Arcanos Menores</div>
+            <div class="cards-grid" id="minorGrid"></div>
+        </section>
+
+        <!-- Runas -->
+        <section id="runas" class="section">
+            <div class="section-title">ᚱ Oráculo de las Runas</div>
+            <p class="section-desc">24 runas del Futhark Antiguo</p>
+            <div class="user-input">
+                <input class="mystic-input" id="runaQ" placeholder="🌿 Tu pregunta...">
+                <button class="mic-btn-small" data-mic="runaQ">🎤</button>
+            </div>
+            <div class="action-buttons">
+                <button class="btn-mystic" id="drawRuneBtn">ᚠ Una Runa</button>
+            </div>
+            <div id="runaResult"></div>
+            <div class="action-buttons" id="runaActions" style="display:none">
+                <button class="btn-mystic btn-ia" data-type="runa">🤖 IA</button>
+                <button class="btn-mystic btn-share" data-type="runa">📸</button>
+                <button class="btn-mystic btn-pdf" data-type="runa">📄</button>
+                <button class="btn-mystic btn-share-social" data-type="runa">📱 Compartir</button>
+            </div>
+            <div class="cards-grid" id="runasGrid"></div>
+        </section>
+
+        <!-- Tiradas -->
+        <section id="tiradas" class="section">
+            <div class="section-title">⚡ Tiradas Especiales</div>
+            <p class="section-desc">Elige el tipo de consulta que necesitas</p>
+            <div class="user-input">
+                <input class="mystic-input" id="tiradaQ" placeholder="💬 Tu pregunta...">
+                <button class="mic-btn-small" data-mic="tiradaQ">🎤</button>
+            </div>
+            <div class="subnav">
+                <button class="subnav-btn active" data-sub="tiradas-tarot">🃏 Tarot</button>
+                <button class="subnav-btn" data-sub="tiradas-runes">ᚱ Runas</button>
+            </div>
+            <div id="tiradas-tarot" class="sub-section" style="display:block">
+                <div class="spread-options">
+                    <div class="spread-option" data-spread="celtic"><span class="si">✝️</span><h3>Cruz Celta</h3><p>10 cartas</p></div>
+                    <div class="spread-option" data-spread="ppf"><span class="si">⏳</span><h3>Pasado·Presente·Futuro</h3><p>3 cartas</p></div>
+                    <div class="spread-option" data-spread="love"><span class="si">💕</span><h3>Tirada del Amor</h3><p>5 cartas</p></div>
+                    <div class="spread-option" data-spread="yesno"><span class="si">✅</span><h3>Sí o No</h3><p>1 carta</p></div>
+                    <div class="spread-option" data-spread="week"><span class="si">📅</span><h3>Semana</h3><p>7 cartas</p></div>
+                    <div class="spread-option" data-spread="chakras"><span class="si">🌈</span><h3>7 Chakras</h3><p>7 cartas</p></div>
+                    <div class="spread-option" data-spread="horseshoe"><span class="si">🧲</span><h3>Herradura</h3><p>7 cartas</p></div>
+                    <div class="spread-option" data-spread="star"><span class="si">⭐</span><h3>Estrella</h3><p>5 cartas</p></div>
+                    <div class="spread-option" data-spread="pyramid"><span class="si">🔺</span><h3>Pirámide</h3><p>6 cartas</p></div>
+                    <div class="spread-option" data-spread="elements"><span class="si">🌍</span><h3>5 Elementos</h3><p>5 cartas</p></div>
+                </div>
+            </div>
+            <div id="tiradas-runes" class="sub-section" style="display:none">
+                <div class="action-buttons">
+                    <button class="btn-mystic" id="drawThreeRunesBtn">ᚠᚢᚦ 3 Runas</button>
+                    <button class="btn-mystic" id="drawFiveRunesBtn">ᚠᚢᚦᚨᚱ 5 Runas</button>
+                    <button class="btn-mystic" id="drawSevenRunesBtn">ᚠᚢᚦᚨᚱᚲᚷ 7 Runas</button>
+                </div>
+            </div>
+            <div id="tiradaResult"></div>
+            <div class="action-buttons" id="tiradaActions" style="display:none">
+                <button class="btn-mystic btn-ia" data-type="tirada">🤖 IA</button>
+                <button class="btn-mystic btn-share" data-type="tirada">📸</button>
+                <button class="btn-mystic btn-pdf" data-type="tirada">📄</button>
+                <button class="btn-mystic btn-share-social" data-type="tirada">📱 Compartir</button>
+            </div>
+        </section>
+
+        <!-- Luna ampliada -->
+        <section id="luna" class="section">
+            <div class="section-title">🌙 Oráculo Lunar</div>
+            <p class="section-desc">La Luna guía tus emociones y ciclos</p>
+            <div class="moon-controls">
+                <input type="date" id="moonDate" value="2024-01-11">
+                <button class="btn-mystic" id="calcMoonCustomBtn">🔭 Calcular Fase para esta fecha</button>
+            </div>
+            <div id="moonToday"></div>
+            <div class="action-buttons">
+                <button class="btn-mystic" id="calcMoonBtn">🌙 Fase de Hoy</button>
+                <button class="btn-mystic" id="drawMoonBtn">🌕 Consulta Lunar Aleatoria</button>
+            </div>
+            <div id="lunaResult"></div>
+            <div class="action-buttons" id="lunaActions" style="display:none">
+                <button class="btn-mystic btn-ia" data-type="luna">🤖 IA</button>
+                <button class="btn-mystic btn-share" data-type="luna">📸</button>
+                <button class="btn-mystic btn-pdf" data-type="luna">📄</button>
+                <button class="btn-mystic btn-share-social" data-type="luna">📱 Compartir</button>
+            </div>
+        </section>
+
+        <!-- Sueños ampliado -->
+        <section id="suenos" class="section">
+            <div class="section-title">💭 Intérprete de Sueños</div>
+            <p class="section-desc">Descifra los mensajes ocultos de tu inconsciente</p>
+            <div style="max-width:600px;margin:0 auto">
+                <textarea class="dream-input" id="dreamText" placeholder="✍️ Describe tu sueño..."></textarea>
+                <div class="action-buttons">
+                    <button class="btn-mystic" id="interpretDreamBtn">🔮 Interpretar</button>
+                    <button class="btn-mystic btn-ia" id="dreamIABtn">🤖 IA</button>
+                    <button class="mic-btn-small" data-mic="dreamText">🎤 Dictar</button>
+                </div>
+                <div class="dream-dictionary">
+                    <h3>📖 Diccionario de Símbolos</h3>
+                    <div class="symbol-search">
+                        <input type="text" id="symbolSearch" placeholder="🔍 Buscar símbolo (agua, fuego, volar...)" class="mystic-input">
+                        <div id="symbolResult"></div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-mystic" id="saveDreamBtn">💾 Guardar este sueño</button>
+                </div>
+                <div id="savedDreamsList" class="saved-dreams"></div>
+            </div>
+            <div id="dreamResult"></div>
+            <div class="action-buttons" id="dreamActions" style="display:none">
+                <button class="btn-mystic btn-share" data-type="dream">📸</button>
+                <button class="btn-mystic btn-pdf" data-type="dream">📄</button>
+                <button class="btn-mystic btn-share-social" data-type="dream">📱 Compartir</button>
+            </div>
+        </section>
+
+        <!-- Numerología con pestañas -->
+        <section id="numerologia" class="section">
+            <div class="section-title">🔢 Numerología Sagrada</div>
+            <p class="section-desc">Descubre el poder de los números en tu vida</p>
+            <div class="num-tabs">
+                <button class="num-tab active" data-numtab="personal">📊 Personal</button>
+                <button class="num-tab" data-numtab="espejo">🕒 Números Espejo</button>
+                <button class="num-tab" data-numtab="grabovoi">🔢 Números Grabovoi</button>
+            </div>
+            <div id="num-personal" class="num-content active">
+                <div class="user-input">
+                    <input class="mystic-input" id="numName" placeholder="👤 Tu nombre completo...">
+                    <button class="mic-btn-small" data-mic="numName">🎤</button>
+                    <input class="mystic-input" type="date" id="numDob">
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-mystic" id="calcNumerologiaBtn">🔢 Calcular Todo</button>
+                </div>
+                <div id="numerologiaResult"></div>
+                <div class="action-buttons" id="numerologiaActions" style="display:none">
+                    <button class="btn-mystic btn-ia" data-type="numerologia">🤖 IA</button>
+                    <button class="btn-mystic btn-share" data-type="numerologia">📸</button>
+                    <button class="btn-mystic btn-pdf" data-type="numerologia">📄</button>
+                    <button class="btn-mystic btn-share-social" data-type="numerologia">📱 Compartir</button>
+                </div>
+                <div class="ornament">✦ ✧ ✦</div>
+                <div class="section-title" style="font-size:1.1rem">❤️ Sinastría</div>
+                <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:20px">
+                    <div style="flex:1;min-width:200px">
+                        <p style="color:var(--gold);text-align:center">👤 Persona 1</p>
+                        <input class="mystic-input" id="synName1" placeholder="Nombre completo" style="width:100%">
+                        <button class="mic-btn-small" data-mic="synName1" style="margin-top:5px;width:100%">🎤</button>
+                        <input class="mystic-input" type="date" id="synDob1" style="width:100%;margin-top:8px">
+                    </div>
+                    <div style="flex:1;min-width:200px">
+                        <p style="color:var(--gold);text-align:center">👤 Persona 2</p>
+                        <input class="mystic-input" id="synName2" placeholder="Nombre completo" style="width:100%">
+                        <button class="mic-btn-small" data-mic="synName2" style="margin-top:5px;width:100%">🎤</button>
+                        <input class="mystic-input" type="date" id="synDob2" style="width:100%;margin-top:8px">
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-mystic" id="calcSynastryBtn">💞 Calcular Compatibilidad</button>
+                </div>
+                <div id="synastryResult"></div>
+                <div class="action-buttons" id="synastryActions" style="display:none">
+                    <button class="btn-mystic btn-ia" data-type="synastry">🤖 IA</button>
+                    <button class="btn-mystic btn-share" data-type="synastry">📸</button>
+                    <button class="btn-mystic btn-pdf" data-type="synastry">📄</button>
+                    <button class="btn-mystic btn-share-social" data-type="synastry">📱 Compartir</button>
+                </div>
+            </div>
+            <div id="num-espejo" class="num-content">
+                <p class="section-desc">Descubre el significado de las horas espejo y números repetidos</p>
+                <div class="user-input">
+                    <input class="mystic-input" id="mirrorNumber" placeholder="Ej: 11:11, 22:22, 1234...">
+                    <button class="btn-mystic" id="interpretMirrorBtn">🔮 Interpretar</button>
+                </div>
+                <div id="mirrorResult"></div>
+            </div>
+            <div id="num-grabovoi" class="num-content">
+                <p class="section-desc">Números de Grabovoi para sanación, prosperidad y amor</p>
+                <div class="grabovoi-grid">
+                    <div class="grabovoi-card" data-code="9187948181">💚 Salud<br><small>9187948181</small></div>
+                    <div class="grabovoi-card" data-code="5207418">💰 Prosperidad<br><small>5207418</small></div>
+                    <div class="grabovoi-card" data-code="8888888">❤️ Amor<br><small>8888888</small></div>
+                    <div class="grabovoi-card" data-code="1891012">✨ Propósito<br><small>1891012</small></div>
+                    <div class="grabovoi-card" data-code="318798914">🛡️ Protección<br><small>318798914</small></div>
+                    <div class="grabovoi-card" data-code="5197148">🧠 Claridad mental<br><small>5197148</small></div>
+                </div>
+                <div id="grabovoiInfo" class="grabovoi-info"></div>
+            </div>
+        </section>
+
+        <!-- Chat -->
+        <section id="chat" class="section">
+            <div class="section-title">💬 Chat Místico</div>
+            <p class="section-desc">El oráculo te responde con voz. Presiona Enter para enviar.</p>
+            <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;">
+                <label style="color: var(--gold);">🤖 Personalidad:</label>
+                <select id="personalitySelect" class="mystic-input" style="width: auto;">
+                    <option value="sabio">Sabio (consejero espiritual)</option>
+                    <option value="mistico">Místico (poético y enigmático)</option>
+                    <option value="bromista">Bromista (humor y sorpresa)</option>
+                    <option value="romantico">Romántico (amoroso y cálido)</option>
+                </select>
+            </div>
+            <div class="suggestions-container">
+                <button class="suggestion-btn" data-question="¿Qué me depara el amor hoy?">💖 Amor</button>
+                <button class="suggestion-btn" data-question="¿Cómo será mi semana laboral?">💼 Trabajo</button>
+                <button class="suggestion-btn" data-question="¿Qué debo saber para mi salud?">🍃 Salud</button>
+                <button class="suggestion-btn" data-question="¿Qué energía me rodea?">✨ Energía</button>
+                <button class="suggestion-btn" data-question="Dame un consejo espiritual">🕯️ Consejo</button>
+            </div>
+            <div class="chat-container" id="chatHistory">
+                <div class="chat-msg bot">✨ Soy el Oráculo Místico. Pregunta lo que desees...</div>
+            </div>
+            <div class="chat-input-row">
+                <input class="chat-input" id="chatInput" placeholder="Escribe o habla...">
+                <button class="mic-btn" id="chatMicBtn">🎤</button>
+                <button class="btn-mystic" id="sendChatBtn">Enviar</button>
+            </div>
+            <div style="text-align:center;margin-top:8px">
+                <button class="btn-mystic btn-stop" id="stopVoiceBtn">⏹ Detener Voz</button>
+            </div>
+        </section>
+
+        <!-- Notas -->
+        <section id="notas" class="section">
+            <div class="section-title">📓 Mis Notas Místicas</div>
+            <p class="section-desc">Escribe, guarda y consulta tus reflexiones</p>
+            <div style="max-width:700px;margin:0 auto">
+                <textarea class="note-editor" id="newNoteText" placeholder="✍️ Escribe tu nota aquí..."></textarea>
+                <div class="action-buttons">
+                    <button class="mic-btn-small" data-mic="newNoteText">🎤 Dictar</button>
+                    <button class="btn-mystic" id="addNoteBtn">💾 Guardar Nota</button>
+                </div>
+                <div class="notes-container" id="notesList"></div>
+                <div id="noNotes" style="text-align:center;color:var(--text-muted);margin-top:30px">No tienes notas guardadas.</div>
+            </div>
+        </section>
+
+        <!-- Historial -->
+        <section id="historial" class="section">
+            <div class="section-title">📜 Historial de Tiradas</div>
+            <p class="section-desc">Tus consultas anteriores guardadas</p>
+            <div class="historial-filters">
+                <input type="text" id="historySearch" placeholder="🔍 Buscar por carta, runa o pregunta..." class="mystic-input" style="width: 60%;">
+                <select id="historyTypeFilter" class="mystic-input" style="width: 30%;">
+                    <option value="all">Todos los tipos</option>
+                    <option value="tarot">Tarot</option>
+                    <option value="runa">Runas</option>
+                    <option value="tirada">Tiradas</option>
+                    <option value="daily">Carta del día</option>
+                </select>
+                <button id="clearHistoryBtn" class="btn-mystic btn-stop">🗑️ Borrar todo</button>
+            </div>
+            <div id="historialList" class="historial-container"></div>
+        </section>
+
+        <!-- Estadísticas -->
+        <section id="estadisticas" class="section">
+            <div class="section-title">📊 Estadísticas Personales</div>
+            <p class="section-desc">Descubre tus patrones y cartas más frecuentes</p>
+            <div class="stats-container">
+                <div class="stats-card">
+                    <h3>🎴 Top 5 cartas de Tarot</h3>
+                    <canvas id="tarotChart" width="300" height="200"></canvas>
+                </div>
+                <div class="stats-card">
+                    <h3>ᚱ Top 5 runas</h3>
+                    <canvas id="runasChart" width="300" height="200"></canvas>
+                </div>
+                <div class="stats-card">
+                    <h3>⚡ Tipos de tirada más usados</h3>
+                    <canvas id="tiradasChart" width="300" height="200"></canvas>
+                </div>
+                <div class="stats-card">
+                    <h3>📈 Resumen</h3>
+                    <div id="statsSummary"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').then(reg => {
+                console.log('Service Worker registrado');
+            }).catch(err => {
+                console.log('Error al registrar SW', err);
+            });
+        }
+    </script>
+</body>
+</html>
