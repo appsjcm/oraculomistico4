@@ -1,48 +1,148 @@
-// ================== app.js - PARTE 1/5 ==================
+// ================== app.js - ORÁCULO MÍSTICO (OPTIMIZADO) ==================
 // CONFIGURACIÓN INICIAL Y DATOS MEJORADOS
 
-const GH_MAYORES = 'https://raw.githubusercontent.com/appsjcm/oraculomistico/main/ama/';
-const GH_MENORES = 'https://raw.githubusercontent.com/appsjcm/oraculomistico/main/ame/';
-const MINOR_FILENAMES = {
-    wands: { 'As':'ameb01.png','2':'ameb02.png','3':'ameb03.png','4':'ameb04.png','5':'ameb05.png','6':'ameb6.png','7':'ameb7.png','8':'ameb8.png','9':'ameb9.png','10':'ameb10.png','Sota':'ameb11.png','Caballero':'ameb12.png','Reina':'ameb13.png','Rey':'ameb14.png' },
-    cups: { 'As':'amec1.png','2':'amec2.png','3':'amec3.png','4':'amec4.png','5':'amec5.png','6':'amec6.png','7':'amec7.png','8':'amec8.png','9':'amec9.png','10':'amec10.png','Sota':'amec11.png','Caballero':'amec12.png','Reina':'amec13.png','Rey':'amec14.png' },
-    swords: { 'As':'amee1.png','2':'amee2.png','3':'amee3.png','4':'amee4.png','5':'amee5.png','6':'amee6.png','7':'amee7.png','8':'amee8.png','9':'amee9.png','10':'amee10.png','Sota':'amee11.png','Caballero':'amee12.png','Reina':'amee13.png','Rey':'amee14.png' },
-    pents: { 'As':'ameo1.png','2':'ameo2.png','3':'ameo3.png','4':'ameo4.png','5':'ameo5.png','6':'ameo6.png','7':'ameo7.png','8':'ameo8.png','9':'ameo9.png','10':'ameo10.png','Sota':'ameo11.png','Caballero':'ameo12.png','Reina':'ameo13.png','Rey':'ameo14.png' }
+// ========== NUEVAS URLs DE IMÁGENES (ImgBB) ==========
+const CARD_IMAGES = {
+  // Arcanos Mayores (am00.png a am21.png)
+  'am00.png': 'https://i.ibb.co/3mb9TW0m/am00.png',
+  'am01.png': 'https://i.ibb.co/5x43k0hf/am01.png',
+  'am02.png': 'https://i.ibb.co/cKFjYWM8/am02.png',
+  'am03.png': 'https://i.ibb.co/ZRrPKNSk/am03.png',
+  'am04.png': 'https://i.ibb.co/nNX5dLfB/am04.png',
+  'am05.png': 'https://i.ibb.co/RnDRQRF/am05.png',
+  'am06.png': 'https://i.ibb.co/4R8ZHhzv/am06.png',
+  'am07.png': 'https://i.ibb.co/9mX9sCYm/am07.png',
+  'am08.png': 'https://i.ibb.co/BKqTJNRF/am08.png',
+  'am09.png': 'https://i.ibb.co/gMdsfJsb/am09.png',
+  'am10.png': 'https://i.ibb.co/rKpJCB6v/am10.png',
+  'am11.png': 'https://i.ibb.co/CKcJMdnQ/am11.png',
+  'am12.png': 'https://i.ibb.co/RTJn2XJ8/am12.png',
+  'am13.png': 'https://i.ibb.co/fbw6PsT/am13.png',
+  'am14.png': 'https://i.ibb.co/Mx2htkWy/am14.png',
+  'am15.png': 'https://i.ibb.co/W4PWtmDc/am15.png',
+  'am16.png': 'https://i.ibb.co/RkptP64J/am16.png',
+  'am17.png': 'https://i.ibb.co/1fPQYW7p/am17.png',
+  'am18.png': 'https://i.ibb.co/mQBCWxq/am18.png',
+  'am19.png': 'https://i.ibb.co/hFhjGNwV/am19.png',
+  'am20.png': 'https://i.ibb.co/Kz99GfHD/am20.png',
+  'am21.png': 'https://i.ibb.co/JR13pdT2/am21.png',
+
+  // Bastos (ameb01.png a ameb14.png)
+  'ameb01.png': 'https://i.ibb.co/vyVfhJC/ameb01.png',
+  'ameb02.png': 'https://i.ibb.co/Pv2sfp7Z/ameb02.png',
+  'ameb03.png': 'https://i.ibb.co/xKZLSY9V/ameb03.png',
+  'ameb04.png': 'https://i.ibb.co/356jXsBk/ameb04.png',
+  'ameb05.png': 'https://i.ibb.co/p6SmsXny/ameb05.png',
+  'ameb06.png': 'https://i.ibb.co/LzbHsz2G/ameb06.png',
+  'ameb07.png': 'https://i.ibb.co/h1tsVvJ2/ameb07.png',
+  'ameb08.png': 'https://i.ibb.co/XxXfQpz7/ameb08.png',
+  'ameb09.png': 'https://i.ibb.co/JjvX2VrK/ameb09.png',
+  'ameb10.png': 'https://i.ibb.co/Lh2JS2M3/ameb10.png',
+  'ameb11.png': 'https://i.ibb.co/84YdY5y6/ameb11.png',
+  'ameb12.png': 'https://i.ibb.co/r2SRQjSw/ameb12.png',
+  'ameb13.png': 'https://i.ibb.co/3mdPM0n7/ameb13.png',
+  'ameb14.png': 'https://i.ibb.co/ZzdbVSQy/ameb14.png',
+
+  // Copas (amec01.png a amec14.png)
+  'amec01.png': 'https://i.ibb.co/4Rq1LfWc/amec01.png',
+  'amec02.png': 'https://i.ibb.co/ksFmsN38/amec02.png',
+  'amec03.png': 'https://i.ibb.co/PRLtp1Z/amec03.png',
+  'amec04.png': 'https://i.ibb.co/Kph3Yh6C/amec04.png',
+  'amec05.png': 'https://i.ibb.co/FbBVmkhR/amec05.png',
+  'amec06.png': 'https://i.ibb.co/Kjf0HLKM/amec06.png',
+  'amec07.png': 'https://i.ibb.co/Vc1HxQMV/amec07.png',
+  'amec08.png': 'https://i.ibb.co/CKMgBG3W/amec08.png',
+  'amec09.png': 'https://i.ibb.co/n84QsVw3/amec09.png',
+  'amec10.png': 'https://i.ibb.co/1YWDNJg3/amec10.png',
+  'amec11.png': 'https://i.ibb.co/ZpZvYd2N/amec11.png',
+  'amec12.png': 'https://i.ibb.co/Z6dxNYsM/amec12.png',
+  'amec13.png': 'https://i.ibb.co/PzsnHzhp/amec13.png',
+  'amec14.png': 'https://i.ibb.co/nq6332HY/amec14.png',
+
+  // Espadas (amee01.png a amee14.png)
+  'amee01.png': 'https://i.ibb.co/tTtrY08w/amee01.png',
+  'amee02.png': 'https://i.ibb.co/Fbt7wkkC/amee02.png',
+  'amee03.png': 'https://i.ibb.co/QF5dDqnL/amee03.png',
+  'amee04.png': 'https://i.ibb.co/Q7MH4CB6/amee04.png',
+  'amee05.png': 'https://i.ibb.co/RkSTFVY2/amee05.png',
+  'amee06.png': 'https://i.ibb.co/0j72Wzrn/amee06.png',
+  'amee07.png': 'https://i.ibb.co/7NYr2q5H/amee07.png',
+  'amee08.png': 'https://i.ibb.co/23D6bfSK/amee08.png',
+  'amee09.png': 'https://i.ibb.co/9kx4L8sM/amee09.png',
+  'amee10.png': 'https://i.ibb.co/ZRfRTK9Q/amee10.png',
+  'amee11.png': 'https://i.ibb.co/SwzGd4yT/amee11.png',
+  'amee12.png': 'https://i.ibb.co/SDXK5sjn/amee12.png',
+  'amee13.png': 'https://i.ibb.co/N6BTNXyM/amee13.png',
+  'amee14.png': 'https://i.ibb.co/DfDGSM6W/amee14.png',
+
+  // Pentáculos (ameo01.png a ameo14.png)
+  'ameo01.png': 'https://i.ibb.co/bR8J8hrs/ameo01.png',
+  'ameo02.png': 'https://i.ibb.co/1JhTdKcX/ameo02.png',
+  'ameo03.png': 'https://i.ibb.co/JWptTXLV/ameo03.png',
+  'ameo04.png': 'https://i.ibb.co/nMYvjbVY/ameo04.png',
+  'ameo05.png': 'https://i.ibb.co/B2zgS1dj/ameo05.png',
+  'ameo06.png': 'https://i.ibb.co/nsqJBmK2/ameo06.png',
+  'ameo07.png': 'https://i.ibb.co/yc23DPCR/ameo07.png',
+  'ameo08.png': 'https://i.ibb.co/M0LZN9b/ameo08.png',
+  'ameo09.png': 'https://i.ibb.co/Mk1ptF6M/ameo09.png',
+  'ameo10.png': 'https://i.ibb.co/B5YrMH0j/ameo10.png',
+  'ameo11.png': 'https://i.ibb.co/0pXMKtD8/ameo11.png',
+  'ameo12.png': 'https://i.ibb.co/1fjMnwP2/ameo12.png',
+  'ameo13.png': 'https://i.ibb.co/0pZyTQxj/ameo13.png',
+  'ameo14.png': 'https://i.ibb.co/007S5tC/ameo14.png',
 };
-function imgObj(ghUrl, stName) { return { main: ghUrl, fallback: 'https://www.sacred-texts.com/tarot/pkt/img/' + stName }; }
-function getImgSrc(card) { return typeof card.img === 'string' ? card.img : card.img.main; }
+
+function getCardImageUrl(fileName) {
+  return CARD_IMAGES[fileName] || '';
+}
+
+// Función imgObj reemplazada
+function imgObj(ghUrl, stName) {
+  const fileName = ghUrl.split('/').pop();
+  return getCardImageUrl(fileName);
+}
+
+function getImgSrc(card) {
+  return typeof card.img === 'string' ? card.img : (card.img.main || '');
+}
 
 // ARCANOS MAYORES (22) - con descripciones ya extensas
 const MAJOR_ARCANA = [
-    { num:'0', name:'El Loco', emoji:'🃏', key:'Inicio, aventura, fe', img:imgObj(GH_MAYORES+'am0.png','ar00.jpg'), up:'El Loco representa el inicio de un viaje lleno de posibilidades. En amor: nuevas relaciones sin ataduras. Trabajo: proyectos innovadores. Salud: vitalidad renovada. Espiritualmente: confía en el universo.', rv:'Invertido: imprudencia, temor a lo nuevo. Evita riesgos necesarios. En amor: miedo al compromiso. Trabajo: acciones sin planificar. Salud: descuidos.', el:'Aire' },
-    { num:'I', name:'El Mago', emoji:'🎩', key:'Voluntad, poder, manifestación', img:imgObj(GH_MAYORES+'am1.png','ar01.jpg'), up:'Tienes todas las herramientas para crear tu realidad. Amor: atracción magnética. Trabajo: éxito emprendedor. Salud: recuperación rápida.', rv:'Invertido: manipulación, falta de dirección. En amor: relaciones tóxicas. Trabajo: mal uso del poder.', el:'Mercurio' },
-    { num:'II', name:'La Sacerdotisa', emoji:'🌙', key:'Intuición, misterio', img:imgObj(GH_MAYORES+'am2.png','ar02.jpg'), up:'Confía en tu voz interior. Amor: conexión espiritual. Trabajo: escucha antes de actuar. Salud: sanación emocional.', rv:'Invertida: secretos, bloqueo intuitivo.', el:'Luna' },
-    { num:'III', name:'La Emperatriz', emoji:'👑', key:'Fertilidad, abundancia', img:imgObj(GH_MAYORES+'am3.png','ar03.jpg'), up:'Creatividad y nutrición. Amor: embarazo o relación floreciente. Trabajo: proyectos fructíferos. Salud: bienestar físico.', rv:'Invertida: dependencia, falta de creatividad.', el:'Venus' },
-    { num:'IV', name:'El Emperador', emoji:'⚔️', key:'Autoridad, estructura', img:imgObj(GH_MAYORES+'am4.png','ar04.jpg'), up:'Estabilidad y liderazgo. Amor: compromiso serio. Trabajo: ascenso. Salud: fortaleza.', rv:'Invertido: tiranía, rigidez.', el:'Aries' },
-    { num:'V', name:'El Hierofante', emoji:'✝️', key:'Tradición, guía', img:imgObj(GH_MAYORES+'am5.png','ar05.jpg'), up:'Matrimonio, educación, valores. Amor: boda tradicional. Trabajo: mentoría. Salud: seguimiento médico.', rv:'Invertido: rebeldía, cuestionamiento de normas.', el:'Tauro' },
-    { num:'VI', name:'Los Amantes', emoji:'💕', key:'Amor, unión, elección', img:imgObj(GH_MAYORES+'am6.png','ar06.jpg'), up:'Decisiones del corazón. Amor: relación armoniosa. Trabajo: elegir entre opciones. Salud: equilibrio.', rv:'Invertidos: desacuerdos, mala comunicación.', el:'Géminis' },
-    { num:'VII', name:'El Carro', emoji:'🏆', key:'Victoria, determinación', img:imgObj(GH_MAYORES+'am7.png','ar07.jpg'), up:'Control y éxito. Amor: superar obstáculos. Trabajo: logros. Salud: fuerza de voluntad.', rv:'Invertido: falta de control, agresividad.', el:'Cáncer' },
-    { num:'VIII', name:'La Fuerza', emoji:'🦁', key:'Fortaleza, paciencia', img:imgObj(GH_MAYORES+'am8.png','ar08.jpg'), up:'Coraje interior. Amor: domar pasiones. Trabajo: liderazgo suave. Salud: recuperación.', rv:'Invertida: inseguridad, debilidad.', el:'Leo' },
-    { num:'IX', name:'El Ermitaño', emoji:'🏮', key:'Introspección, sabiduría', img:imgObj(GH_MAYORES+'am9.png','ar09.jpg'), up:'Retiro necesario. Amor: tiempo a solas. Trabajo: análisis. Salud: descanso.', rv:'Invertido: aislamiento excesivo.', el:'Virgo' },
-    { num:'X', name:'Rueda de la Fortuna', emoji:'☸️', key:'Destino, cambio', img:imgObj(GH_MAYORES+'am10.png','ar10.jpg'), up:'Buena suerte. Amor: giro inesperado. Trabajo: oportunidades. Salud: mejoría.', rv:'Invertida: mala racha, resistirse al cambio.', el:'Júpiter' },
-    { num:'XI', name:'La Justicia', emoji:'⚖️', key:'Equilibrio, verdad', img:imgObj(GH_MAYORES+'am11.png','ar11.jpg'), up:'Karma, decisiones justas. Amor: honestidad. Trabajo: resoluciones legales. Salud: balance.', rv:'Invertida: injusticia, mentiras.', el:'Libra' },
-    { num:'XII', name:'El Colgado', emoji:'🙃', key:'Sacrificio, perspectiva', img:imgObj(GH_MAYORES+'am12.png','ar12.jpg'), up:'Pausa voluntaria. Amor: dar espacio. Trabajo: esperar. Salud: cambio de hábitos.', rv:'Invertido: estancamiento, resistencia.', el:'Agua' },
-    { num:'XIII', name:'La Muerte', emoji:'💀', key:'Transformación, renacimiento', img:imgObj(GH_MAYORES+'am13.png','ar13.jpg'), up:'Fin de un ciclo. Amor: dejar ir. Trabajo: cierre. Salud: renovación.', rv:'Invertida: miedo al cambio.', el:'Escorpio' },
-    { num:'XIV', name:'La Templanza', emoji:'🏺', key:'Equilibrio, armonía', img:imgObj(GH_MAYORES+'am14.png','ar14.jpg'), up:'Moderación y paciencia. Amor: relación equilibrada. Trabajo: adaptación. Salud: recuperación.', rv:'Invertida: desequilibrio, extremos.', el:'Sagitario' },
-    { num:'XV', name:'El Diablo', emoji:'😈', key:'Ataduras, tentación', img:imgObj(GH_MAYORES+'am15.png','ar15.jpg'), up:'Adicciones, apegos. Amor: dependencia. Trabajo: obsesión por dinero. Salud: excesos.', rv:'Invertido: liberación, romper cadenas.', el:'Capricornio' },
-    { num:'XVI', name:'La Torre', emoji:'⚡', key:'Caos, revelación', img:imgObj(GH_MAYORES+'am16.png','ar16.jpg'), up:'Cambio repentino. Amor: ruptura. Trabajo: crisis. Salud: accidente necesario.', rv:'Invertida: evitación del cambio.', el:'Marte' },
-    { num:'XVII', name:'La Estrella', emoji:'⭐', key:'Esperanza, sanación', img:imgObj(GH_MAYORES+'am17.png','ar17.jpg'), up:'Optimismo. Amor: nuevas ilusiones. Trabajo: inspiración. Salud: recuperación.', rv:'Invertida: desesperanza.', el:'Acuario' },
-    { num:'XVIII', name:'La Luna', emoji:'🌙', key:'Ilusión, subconsciente', img:imgObj(GH_MAYORES+'am18.png','ar18.jpg'), up:'Intuición, sueños. Amor: confusiones. Trabajo: engaños. Salud: ansiedad.', rv:'Invertida: claridad, secretos revelados.', el:'Piscis' },
-    { num:'XIX', name:'El Sol', emoji:'☀️', key:'Éxito, alegría', img:imgObj(GH_MAYORES+'am19.png','ar19.jpg'), up:'Felicidad plena. Amor: matrimonio. Trabajo: éxito rotundo. Salud: energía.', rv:'Invertido: éxito retrasado.', el:'Sol' },
-    { num:'XX', name:'El Juicio', emoji:'📯', key:'Renacimiento, llamado', img:imgObj(GH_MAYORES+'am20.png','ar20.jpg'), up:'Despertar espiritual. Amor: reconciliación. Trabajo: oportunidad. Salud: diagnóstico certero.', rv:'Invertido: autocrítica excesiva.', el:'Fuego' },
-    { num:'XXI', name:'El Mundo', emoji:'🌍', key:'Completud, éxito', img:imgObj(GH_MAYORES+'am21.png','ar21.jpg'), up:'Culminación. Amor: unión completa. Trabajo: meta alcanzada. Salud: plenitud.', rv:'Invertido: falta de cierre.', el:'Saturno' }
+    { num:'0', name:'El Loco', emoji:'🃏', key:'Inicio, aventura, fe', img:imgObj('am00.png','ar00.jpg'), up:'El Loco representa el inicio de un viaje lleno de posibilidades. En amor: nuevas relaciones sin ataduras. Trabajo: proyectos innovadores. Salud: vitalidad renovada. Espiritualmente: confía en el universo.', rv:'Invertido: imprudencia, temor a lo nuevo. Evita riesgos necesarios. En amor: miedo al compromiso. Trabajo: acciones sin planificar. Salud: descuidos.', el:'Aire' },
+    { num:'I', name:'El Mago', emoji:'🎩', key:'Voluntad, poder, manifestación', img:imgObj('am01.png','ar01.jpg'), up:'Tienes todas las herramientas para crear tu realidad. Amor: atracción magnética. Trabajo: éxito emprendedor. Salud: recuperación rápida.', rv:'Invertido: manipulación, falta de dirección. En amor: relaciones tóxicas. Trabajo: mal uso del poder.', el:'Mercurio' },
+    { num:'II', name:'La Sacerdotisa', emoji:'🌙', key:'Intuición, misterio', img:imgObj('am02.png','ar02.jpg'), up:'Confía en tu voz interior. Amor: conexión espiritual. Trabajo: escucha antes de actuar. Salud: sanación emocional.', rv:'Invertida: secretos, bloqueo intuitivo.', el:'Luna' },
+    { num:'III', name:'La Emperatriz', emoji:'👑', key:'Fertilidad, abundancia', img:imgObj('am03.png','ar03.jpg'), up:'Creatividad y nutrición. Amor: embarazo o relación floreciente. Trabajo: proyectos fructíferos. Salud: bienestar físico.', rv:'Invertida: dependencia, falta de creatividad.', el:'Venus' },
+    { num:'IV', name:'El Emperador', emoji:'⚔️', key:'Autoridad, estructura', img:imgObj('am04.png','ar04.jpg'), up:'Estabilidad y liderazgo. Amor: compromiso serio. Trabajo: ascenso. Salud: fortaleza.', rv:'Invertido: tiranía, rigidez.', el:'Aries' },
+    { num:'V', name:'El Hierofante', emoji:'✝️', key:'Tradición, guía', img:imgObj('am05.png','ar05.jpg'), up:'Matrimonio, educación, valores. Amor: boda tradicional. Trabajo: mentoría. Salud: seguimiento médico.', rv:'Invertido: rebeldía, cuestionamiento de normas.', el:'Tauro' },
+    { num:'VI', name:'Los Amantes', emoji:'💕', key:'Amor, unión, elección', img:imgObj('am06.png','ar06.jpg'), up:'Decisiones del corazón. Amor: relación armoniosa. Trabajo: elegir entre opciones. Salud: equilibrio.', rv:'Invertidos: desacuerdos, mala comunicación.', el:'Géminis' },
+    { num:'VII', name:'El Carro', emoji:'🏆', key:'Victoria, determinación', img:imgObj('am07.png','ar07.jpg'), up:'Control y éxito. Amor: superar obstáculos. Trabajo: logros. Salud: fuerza de voluntad.', rv:'Invertido: falta de control, agresividad.', el:'Cáncer' },
+    { num:'VIII', name:'La Fuerza', emoji:'🦁', key:'Fortaleza, paciencia', img:imgObj('am08.png','ar08.jpg'), up:'Coraje interior. Amor: domar pasiones. Trabajo: liderazgo suave. Salud: recuperación.', rv:'Invertida: inseguridad, debilidad.', el:'Leo' },
+    { num:'IX', name:'El Ermitaño', emoji:'🏮', key:'Introspección, sabiduría', img:imgObj('am09.png','ar09.jpg'), up:'Retiro necesario. Amor: tiempo a solas. Trabajo: análisis. Salud: descanso.', rv:'Invertido: aislamiento excesivo.', el:'Virgo' },
+    { num:'X', name:'Rueda de la Fortuna', emoji:'☸️', key:'Destino, cambio', img:imgObj('am10.png','ar10.jpg'), up:'Buena suerte. Amor: giro inesperado. Trabajo: oportunidades. Salud: mejoría.', rv:'Invertida: mala racha, resistirse al cambio.', el:'Júpiter' },
+    { num:'XI', name:'La Justicia', emoji:'⚖️', key:'Equilibrio, verdad', img:imgObj('am11.png','ar11.jpg'), up:'Karma, decisiones justas. Amor: honestidad. Trabajo: resoluciones legales. Salud: balance.', rv:'Invertida: injusticia, mentiras.', el:'Libra' },
+    { num:'XII', name:'El Colgado', emoji:'🙃', key:'Sacrificio, perspectiva', img:imgObj('am12.png','ar12.jpg'), up:'Pausa voluntaria. Amor: dar espacio. Trabajo: esperar. Salud: cambio de hábitos.', rv:'Invertido: estancamiento, resistencia.', el:'Agua' },
+    { num:'XIII', name:'La Muerte', emoji:'💀', key:'Transformación, renacimiento', img:imgObj('am13.png','ar13.jpg'), up:'Fin de un ciclo. Amor: dejar ir. Trabajo: cierre. Salud: renovación.', rv:'Invertida: miedo al cambio.', el:'Escorpio' },
+    { num:'XIV', name:'La Templanza', emoji:'🏺', key:'Equilibrio, armonía', img:imgObj('am14.png','ar14.jpg'), up:'Moderación y paciencia. Amor: relación equilibrada. Trabajo: adaptación. Salud: recuperación.', rv:'Invertida: desequilibrio, extremos.', el:'Sagitario' },
+    { num:'XV', name:'El Diablo', emoji:'😈', key:'Ataduras, tentación', img:imgObj('am15.png','ar15.jpg'), up:'Adicciones, apegos. Amor: dependencia. Trabajo: obsesión por dinero. Salud: excesos.', rv:'Invertido: liberación, romper cadenas.', el:'Capricornio' },
+    { num:'XVI', name:'La Torre', emoji:'⚡', key:'Caos, revelación', img:imgObj('am16.png','ar16.jpg'), up:'Cambio repentino. Amor: ruptura. Trabajo: crisis. Salud: accidente necesario.', rv:'Invertida: evitación del cambio.', el:'Marte' },
+    { num:'XVII', name:'La Estrella', emoji:'⭐', key:'Esperanza, sanación', img:imgObj('am17.png','ar17.jpg'), up:'Optimismo. Amor: nuevas ilusiones. Trabajo: inspiración. Salud: recuperación.', rv:'Invertida: desesperanza.', el:'Acuario' },
+    { num:'XVIII', name:'La Luna', emoji:'🌙', key:'Ilusión, subconsciente', img:imgObj('am18.png','ar18.jpg'), up:'Intuición, sueños. Amor: confusiones. Trabajo: engaños. Salud: ansiedad.', rv:'Invertida: claridad, secretos revelados.', el:'Piscis' },
+    { num:'XIX', name:'El Sol', emoji:'☀️', key:'Éxito, alegría', img:imgObj('am19.png','ar19.jpg'), up:'Felicidad plena. Amor: matrimonio. Trabajo: éxito rotundo. Salud: energía.', rv:'Invertido: éxito retrasado.', el:'Sol' },
+    { num:'XX', name:'El Juicio', emoji:'📯', key:'Renacimiento, llamado', img:imgObj('am20.png','ar20.jpg'), up:'Despertar espiritual. Amor: reconciliación. Trabajo: oportunidad. Salud: diagnóstico certero.', rv:'Invertido: autocrítica excesiva.', el:'Fuego' },
+    { num:'XXI', name:'El Mundo', emoji:'🌍', key:'Completud, éxito', img:imgObj('am21.png','ar21.jpg'), up:'Culminación. Amor: unión completa. Trabajo: meta alcanzada. Salud: plenitud.', rv:'Invertido: falta de cierre.', el:'Saturno' }
 ];
 
-// ARCANOS MENORES (56) con descripciones ampliadas para amor, trabajo, salud, espiritualidad
+// ARCANOS MENORES (56) con descripciones ampliadas
 const MINOR_ARCANA = (() => {
     const suits = { wands: 'Bastos', cups: 'Copas', swords: 'Espadas', pents: 'Pentáculos' };
     const numbers = ['As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Sota', 'Caballero', 'Reina', 'Rey'];
     const res = [];
+    const fileMap = {
+        wands: { 'As':'ameb01.png','2':'ameb02.png','3':'ameb03.png','4':'ameb04.png','5':'ameb05.png','6':'ameb6.png','7':'ameb7.png','8':'ameb8.png','9':'ameb9.png','10':'ameb10.png','Sota':'ameb11.png','Caballero':'ameb12.png','Reina':'ameb13.png','Rey':'ameb14.png' },
+        cups: { 'As':'amec1.png','2':'amec2.png','3':'amec3.png','4':'amec4.png','5':'amec5.png','6':'amec6.png','7':'amec7.png','8':'amec8.png','9':'amec9.png','10':'amec10.png','Sota':'amec11.png','Caballero':'amec12.png','Reina':'amec13.png','Rey':'amec14.png' },
+        swords: { 'As':'amee1.png','2':'amee2.png','3':'amee3.png','4':'amee4.png','5':'amee5.png','6':'amee6.png','7':'amee7.png','8':'amee8.png','9':'amee9.png','10':'amee10.png','Sota':'amee11.png','Caballero':'amee12.png','Reina':'amee13.png','Rey':'amee14.png' },
+        pents: { 'As':'ameo1.png','2':'ameo2.png','3':'ameo3.png','4':'ameo4.png','5':'ameo5.png','6':'ameo6.png','7':'ameo7.png','8':'ameo8.png','9':'ameo9.png','10':'ameo10.png','Sota':'ameo11.png','Caballero':'ameo12.png','Reina':'ameo13.png','Rey':'ameo14.png' }
+    };
     const meanings = {
         wands: {
             As: { up: 'El As de Bastos es la chispa de la creatividad. En amor: nueva pasión, atracción intensa. Trabajo: inicio de un proyecto exitoso. Salud: energía renovada. Espiritualidad: descubrimiento de tu propósito.', rv: 'Invertido: falta de dirección, creatividad bloqueada. En amor: desinterés. Trabajo: proyectos estancados. Salud: agotamiento.' },
@@ -112,15 +212,12 @@ const MINOR_ARCANA = (() => {
     for (let s in suits) {
         for (let n of numbers) {
             let nameNum = n === 'As' ? 'As' : n;
-            let fileName = MINOR_FILENAMES[s][n];
+            let fileName = fileMap[s][n];
             if (!fileName) continue;
-            let ghUrl = GH_MENORES + fileName;
-            let stNum = n === 'As' ? '01' : (n === 'Sota' ? '11' : n === 'Caballero' ? '12' : n === 'Reina' ? '13' : n === 'Rey' ? '14' : (n < 10 ? '0' + n : n));
-            let stName = `${s}_${stNum}.jpg`;
             let meaning = meanings[s][n] || { up: 'Energía positiva', rv: 'Bloqueos' };
             res.push({
                 num: n, name: `${nameNum} de ${suits[s]}`, suitId: s, el: s === 'wands' ? 'Fuego' : s === 'cups' ? 'Agua' : s === 'swords' ? 'Aire' : 'Tierra',
-                key: suits[s], emoji: '🃏', img: imgObj(ghUrl, stName),
+                key: suits[s], emoji: '🃏', img: imgObj(fileName, ''),
                 up: meaning.up,
                 rv: meaning.rv
             });
@@ -130,7 +227,7 @@ const MINOR_ARCANA = (() => {
 })();
 const ALL_TAROT = [...MAJOR_ARCANA, ...MINOR_ARCANA];
 
-// RUNAS (24) con descripciones ampliadas
+// RUNAS (24) con descripciones ampliadas (sin cambios en las URLs, pero puedes reemplazar las imágenes si las tienes en ImgBB)
 const RUNAS = [
     { sym:'ᚠ', name:'Fehu', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Runic_letter_fehu_feoh_fe_f.svg/200px-Runic_letter_fehu_feoh_fe_f.svg.png', up:'Fehu: riqueza, prosperidad, abundancia material. Te invita a disfrutar de lo que has cosechado. En el amor: relaciones generosas. En el trabajo: éxito económico. En salud: vitalidad. Espiritualmente: la abundancia fluye cuando compartes.', rv:'Invertida: pérdidas, mala gestión, egoísmo. Revisa tus finanzas y actitud hacia el dinero. En el amor: desequilibrio en dar y recibir.' },
     { sym:'ᚢ', name:'Uruz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Runic_letter_uruz_ur_u.svg/200px-Runic_letter_uruz_ur_u.svg.png', up:'Uruz: fuerza vital, salud, poder. Energía bruta para superar obstáculos. En amor: pasión intensa. Trabajo: determinación. Salud: recuperación. Espiritualmente: conectar con tu fuerza interior.', rv:'Invertida: debilidad, agotamiento, falta de motivación. Necesitas descansar y recuperar energías.' },
@@ -178,9 +275,9 @@ let lastState = {};
 let historial = [];
 let tarotChart, runasChart, tiradasChart;
 let audioUnlocked = false;
-let savedDreams = [];// ================== app.js - PARTE 2/5 ==================
-// FUNCIONES AUXILIARES, MODALES, MICRÓFONOS, NOTAS
+let savedDreams = [];
 
+// ================== FUNCIONES AUXILIARES, MODALES, MICRÓFONOS, NOTAS ==================
 function toast(msg) {
     let t = document.createElement('div');
     t.className = 'toast';
@@ -242,16 +339,17 @@ function cardHTML(card, opts = {}) {
     let revClass = opts.reversed ? 'reversed' : '';
     let revBadge = opts.reversed ? '<div class="rev-badge">INV</div>' : '';
     let src = getImgSrc(card);
-    let fallbackSrc = (card.img && card.img.fallback) ? card.img.fallback : '';
-    let onerror = fallbackSrc ? `this.onerror=null;this.src='${fallbackSrc}';` : 'this.style.display="none";this.nextElementSibling.style.display="flex";';
-    return `<div class="real-card ${opts.big ? 'big' : ''} ${revClass}" onclick="openCardModal(${JSON.stringify(card).replace(/"/g, '&quot;')}, ${!!opts.reversed})">${revBadge}<img src="${src}" onerror="${onerror}"><div class="card-fallback" style="display:none">🃏<span class="fb-name">${card.name}</span></div><div class="card-name-label">${card.name}</div></div>`;
+    let onerror = 'this.onerror=null;this.style.display="none";this.nextElementSibling.style.display="flex";';
+    // Añadimos loading="lazy" y decoding="async"
+    return `<div class="real-card ${opts.big ? 'big' : ''} ${revClass}" onclick="openCardModal(${JSON.stringify(card).replace(/"/g, '&quot;')}, ${!!opts.reversed})">${revBadge}<img src="${src}" loading="lazy" decoding="async" onerror="${onerror}"><div class="card-fallback" style="display:none">🃏<span class="fb-name">${card.name}</span></div><div class="card-name-label">${card.name}</div></div>`;
 }
 
 function runeCardHTML(r) {
-    return `<div class="rune-card" onclick="openRunaModal(${JSON.stringify(r).replace(/"/g, '&quot;')})"><img src="${r.img}" onerror="this.style.display='none'"><div class="rune-sym">${r.sym}</div><div class="rune-name">${r.name}</div></div>`;
+    // También lazy loading para runas
+    return `<div class="rune-card" onclick="openRunaModal(${JSON.stringify(r).replace(/"/g, '&quot;')})"><img src="${r.img}" loading="lazy" decoding="async" onerror="this.style.display='none'"><div class="rune-sym">${r.sym}</div><div class="rune-name">${r.name}</div></div>`;
 }
 
-// MODAL DE CARTA CON IA
+// MODAL DE CARTA CON IA (sin cambios, pero conserva la función)
 window.openCardModal = function (card, rev) {
     let text = rev ? (card.rv || card.up) : (card.up);
     let modal = openModal(`
@@ -383,9 +481,9 @@ function addNoteFromEditor() {
     if (!text) return toast('Escribe algo');
     saveNote(text);
     document.getElementById('newNoteText').value = '';
-}// ================== app.js - PARTE 3/5 ==================
-// HISTORIAL, ESTADÍSTICAS, IA, PERSONALIDAD
+}
 
+// ================== HISTORIAL, ESTADÍSTICAS, IA, PERSONALIDAD ==================
 function loadHistory() {
     const stored = localStorage.getItem('oraculo_history');
     if (stored) historial = JSON.parse(stored);
@@ -536,18 +634,13 @@ async function getIA(type) {
         let text = typeof res === 'string' ? res : res.message?.content;
         container.innerHTML = `<div class="ia-interp"><p>${text.replace(/\n/g, '<br>')}</p></div>`;
         speakText(text);
-        // Guardar interpretación de IA en el historial (solo para tiradas y cartas sueltas)
-        if (type === 'tarot' && state.tarot) {
-            addToHistory('ia_tarot', { card: state.tarot.card, rev: state.tarot.rev, question: state.tarot.q, interpretation: text }, state.tarot.q);
-        } else if (type === 'runa' && state.runa) {
-            addToHistory('ia_runa', { runa: state.runa.r, rev: state.runa.rev, question: state.runa.q, interpretation: text }, state.runa.q);
-        } else if (type === 'tirada' && state.tirada && state.tirada.cfg) {
-            addToHistory('ia_tirada', { cfg: state.tirada.cfg, drawn: state.tirada.drawn, question: state.tirada.q, interpretation: text }, state.tirada.q);
-        }
+        if (type === 'tarot' && state.tarot) addToHistory('ia_tarot', { card: state.tarot.card, rev: state.tarot.rev, question: state.tarot.q, interpretation: text }, state.tarot.q);
+        else if (type === 'runa' && state.runa) addToHistory('ia_runa', { runa: state.runa.r, rev: state.runa.rev, question: state.runa.q, interpretation: text }, state.runa.q);
+        else if (type === 'tirada' && state.tirada && state.tirada.cfg) addToHistory('ia_tirada', { cfg: state.tirada.cfg, drawn: state.tirada.drawn, question: state.tirada.q, interpretation: text }, state.tirada.q);
     } catch (e) { container.innerHTML = `<div class="ia-interp">Error: ${e.message}</div>`; toast('Error de IA'); }
-}// ================== app.js - PARTE 4/5 ==================
-// CARTA DEL DÍA, TAROT, RUNAS, TIRADAS, LUNA, SUEÑOS, NUMEROLOGÍA, CHAT
+}
 
+// ================== CARTA DEL DÍA, TAROT, RUNAS, TIRADAS, LUNA, SUEÑOS, NUMEROLOGÍA, CHAT ==================
 const DAILY_KEY = 'oraculo_daily';
 function getDailyData() { const raw = localStorage.getItem(DAILY_KEY); if (!raw) return null; const data = JSON.parse(raw); if (data.date !== new Date().toDateString()) return null; return data; }
 function saveDailyData(card, rev, runa, rrev) { localStorage.setItem(DAILY_KEY, JSON.stringify({ date: new Date().toDateString(), card, rev, runa, rrev })); }
@@ -570,10 +663,7 @@ function drawTarot() {
     const newCard = document.querySelector('#tarotResult .real-card');
     if (newCard) { newCard.classList.add('animate-flip'); setTimeout(() => newCard.classList.remove('animate-flip'), 600); }
     addToHistory('tarot', { card, rev }, lastState.tarot.q);
-    // IA automática si está activada
-    if (document.getElementById('tarotAutoIA')?.checked) {
-        setTimeout(() => getIA('tarot'), 500);
-    }
+    if (document.getElementById('tarotAutoIA')?.checked) setTimeout(() => getIA('tarot'), 500);
 }
 
 function drawRune() {
@@ -585,9 +675,7 @@ function drawRune() {
     const newCard = document.querySelector('#runaResult .rune-card');
     if (newCard) { newCard.classList.add('animate-fade'); setTimeout(() => newCard.classList.remove('animate-fade'), 400); }
     addToHistory('runa', { r, rev }, lastState.runa.q);
-    if (document.getElementById('runasAutoIA')?.checked) {
-        setTimeout(() => getIA('runa'), 500);
-    }
+    if (document.getElementById('runasAutoIA')?.checked) setTimeout(() => getIA('runa'), 500);
 }
 
 function doSpread(spreadType) {
@@ -645,9 +733,9 @@ const mirrorMeanings = { '00:00':'Nuevo ciclo comienza.', '01:01':'Confía en tu
 function interpretMirror() { let input = document.getElementById('mirrorNumber').value.trim(); if (!input) return toast('Escribe una hora espejo o número repetido'); let meaning = mirrorMeanings[input] || mirrorMeanings[input.replace(':', '')] || 'Este número te invita a reflexionar. Presta atención a tus pensamientos y emociones.'; document.getElementById('mirrorResult').innerHTML = `<div class="result-area"><div class="result-title">🕒 Número Espejo: ${input}</div><div class="interp-card"><p>${meaning}</p></div></div>`; }
 function copyGrabovoi(code) { navigator.clipboard.writeText(code).then(() => { document.getElementById('grabovoiInfo').innerHTML = `<p>✅ Código ${code} copiado al portapapeles. Puedes usarlo para meditación o escribirlo.</p>`; setTimeout(() => { document.getElementById('grabovoiInfo').innerHTML = ''; }, 3000); }).catch(() => toast('No se pudo copiar')); }
 
-function sendChat() { let input = document.getElementById('chatInput'); let msg = input.value.trim(); if (!msg) return; let chatHistory = document.getElementById('chatHistory'); let userMsg = document.createElement('div'); userMsg.className = 'chat-msg user'; userMsg.innerText = msg; chatHistory.appendChild(userMsg); input.value = ''; let botMsg = document.createElement('div'); botMsg.className = 'chat-msg bot'; botMsg.innerText = '🤔 Pensando...'; chatHistory.appendChild(botMsg); chatHistory.scrollTop = chatHistory.scrollHeight; (async () => { try { const personality = document.getElementById('personalitySelect')?.value || 'sabio'; const personas = { sabio:'Eres un sabio consejero espiritual', mistico:'Eres un místico poético', bromista:'Eres un oráculo bromista', romantico:'Eres un oráculo romántico' }; let res = await puter.ai.chat([{ role: 'system', content: personas[personality] }, { role: 'user', content: msg }], { model: 'gpt-4o-mini' }); let text = typeof res === 'string' ? res : res.message?.content; botMsg.innerText = text; speakText(text); } catch(e) { botMsg.innerText = 'Error, intenta de nuevo.'; } })(); }// ================== app.js - PARTE 5/5 ==================
-// EXPORTACIÓN, RENDER, CONFIGURACIÓN, INICIALIZACIÓN
+function sendChat() { let input = document.getElementById('chatInput'); let msg = input.value.trim(); if (!msg) return; let chatHistory = document.getElementById('chatHistory'); let userMsg = document.createElement('div'); userMsg.className = 'chat-msg user'; userMsg.innerText = msg; chatHistory.appendChild(userMsg); input.value = ''; let botMsg = document.createElement('div'); botMsg.className = 'chat-msg bot'; botMsg.innerText = '🤔 Pensando...'; chatHistory.appendChild(botMsg); chatHistory.scrollTop = chatHistory.scrollHeight; (async () => { try { const personality = document.getElementById('personalitySelect')?.value || 'sabio'; const personas = { sabio:'Eres un sabio consejero espiritual', mistico:'Eres un místico poético', bromista:'Eres un oráculo bromista', romantico:'Eres un oráculo romántico' }; let res = await puter.ai.chat([{ role: 'system', content: personas[personality] }, { role: 'user', content: msg }], { model: 'gpt-4o-mini' }); let text = typeof res === 'string' ? res : res.message?.content; botMsg.innerText = text; speakText(text); } catch(e) { botMsg.innerText = 'Error, intenta de nuevo.'; } })(); }
 
+// ================== EXPORTACIÓN, RENDER, CONFIGURACIÓN, INICIALIZACIÓN ==================
 async function shareImg(type) {
     let el = document.getElementById(`${type}-export`);
     if (!el) return toast('No hay resultado para compartir');
@@ -750,21 +838,22 @@ function shareSocial(type, text) {
 }
 
 let totalCards = ALL_TAROT.length, loadedCards = 0;
-function preloadImages() {
-    ALL_TAROT.forEach(card => {
+function preloadImages(limit = 12) {
+    // Precarga solo las primeras 'limit' cartas para no saturar
+    ALL_TAROT.slice(0, limit).forEach(card => {
         let img = new Image();
         img.onload = img.onerror = () => {
             loadedCards++;
             let pct = Math.round((loadedCards/totalCards)*100);
             let el = document.getElementById('splashProgress');
-            if(el) el.textContent = `Cargando cartas del tarot... ${pct}%`;
+            if(el && pct <= 100) el.textContent = `Cargando cartas del tarot... ${pct}%`;
         };
         img.src = getImgSrc(card);
     });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    createStars(); preloadImages();
+    createStars(); preloadImages(); // solo 12 cartas
     setTimeout(() => { renderAll(); initMicrophones(); renderNotes(); calcMoonToday(); checkDailyButton(); loadHistory(); renderSavedDreams(); }, 800);
     let savedTheme = localStorage.getItem('oraculo_theme'); if (savedTheme) document.body.dataset.theme = savedTheme;
     setInterval(() => { document.getElementById('dateDisplay').innerText = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); }, 1000);
