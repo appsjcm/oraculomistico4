@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>🔮 Oráculo Místico · Tarot · Runas · Luna · Sueños · Numerología · Chat</title>
-    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="styles.css">
     <script src="https://js.puter.com/v2/"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -64,6 +63,13 @@
         <section id="tarot" class="section">
             <div class="section-title">🃏 Tarot Rider-Waite</div>
             <p class="section-desc">78 cartas originales con interpretaciones profundas</p>
+            <div class="auto-ia-toggle">
+                <span>🤖 IA automática al sacar carta</span>
+                <label class="switch">
+                    <input type="checkbox" id="tarotAutoIA">
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <div class="user-input">
                 <input class="mystic-input" id="tarotQ" placeholder="💬 Tu pregunta...">
                 <button class="mic-btn-small" data-mic="tarotQ">🎤</button>
@@ -90,6 +96,13 @@
         <section id="runas" class="section">
             <div class="section-title">ᚱ Oráculo de las Runas</div>
             <p class="section-desc">24 runas del Futhark Antiguo</p>
+            <div class="auto-ia-toggle">
+                <span>🤖 IA automática al sacar runa</span>
+                <label class="switch">
+                    <input type="checkbox" id="runasAutoIA">
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <div class="user-input">
                 <input class="mystic-input" id="runaQ" placeholder="🌿 Tu pregunta...">
                 <button class="mic-btn-small" data-mic="runaQ">🎤</button>
@@ -369,14 +382,14 @@
     </main>
     <script src="app.js"></script>
     <script>
-        // Fallback: ocultar splash después de 5 segundos por si hay error
+        // Fallback garantizado: ocultar splash después de 4 segundos
         setTimeout(() => {
             const splash = document.getElementById('splash-screen');
-            if (splash && !splash.classList.contains('hidden')) {
+            if (splash && splash.classList) {
                 splash.classList.add('hidden');
                 console.log('Splash ocultado por fallback');
             }
-        }, 5000);
+        }, 4000);
     </script>
 </body>
 </html>
