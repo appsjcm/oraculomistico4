@@ -268,8 +268,7 @@ function addNoteFromEditor() {
     if (!text) return toast('Escribe algo');
     saveNote(text);
     document.getElementById('newNoteText').value = '';
-}
-// ================== app.js - PARTE 2/2 ==================
+}// ================== app.js - PARTE 2/2 ==================
 // HISTORIAL, ESTADÍSTICAS, IA, TIRADAS, LUNA, SUEÑOS, NUMEROLOGÍA, CHAT, ETC.
 
 function loadHistory() {
