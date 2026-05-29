@@ -1,6 +1,5 @@
-// ================== app.js - PARTE 1/5 ==================
-// CONFIGURACIÓN INICIAL Y DATOS MEJORADOS
-
+// ================== app.js - VERSIÓN COMPLETA Y CORREGIDA ==================
+// CONFIGURACIÓN INICIAL
 const GH_MAYORES = 'https://raw.githubusercontent.com/appsjcm/oraculomistico/main/ama/';
 const GH_MENORES = 'https://raw.githubusercontent.com/appsjcm/oraculomistico/main/ame/';
 const MINOR_FILENAMES = {
@@ -12,84 +11,103 @@ const MINOR_FILENAMES = {
 function imgObj(ghUrl, stName) { return { main: ghUrl, fallback: 'https://www.sacred-texts.com/tarot/pkt/img/' + stName }; }
 function getImgSrc(card) { return typeof card.img === 'string' ? card.img : card.img.main; }
 
-// ARCANOS MAYORES (22) - con descripciones ya extensas, las dejamos como están
+// ================== ARCANOS MAYORES (22) COMPLETOS ==================
 const MAJOR_ARCANA = [
-    // ... (igual que en tu versión funcional, copia exactamente los 22 arcanos de tu app.js actual)
-    // Para no duplicar aquí, asumo que los tienes. Si no, pídeme que los incluya.
+    { num:'0', name:'El Loco', emoji:'🃏', key:'Inicio, aventura, fe', img:imgObj(GH_MAYORES+'am0.png','ar00.jpg'), up:'El Loco representa el inicio de un viaje lleno de posibilidades. En amor: nuevas relaciones sin ataduras. Trabajo: proyectos innovadores. Salud: vitalidad renovada. Espiritualmente: confía en el universo.', rv:'Invertido: imprudencia, temor a lo nuevo. Evita riesgos necesarios. En amor: miedo al compromiso. Trabajo: acciones sin planificar. Salud: descuidos.', el:'Aire' },
+    { num:'I', name:'El Mago', emoji:'🎩', key:'Voluntad, poder, manifestación', img:imgObj(GH_MAYORES+'am1.png','ar01.jpg'), up:'Tienes todas las herramientas para crear tu realidad. Amor: atracción magnética. Trabajo: éxito emprendedor. Salud: recuperación rápida.', rv:'Invertido: manipulación, falta de dirección. En amor: relaciones tóxicas. Trabajo: mal uso del poder.', el:'Mercurio' },
+    { num:'II', name:'La Sacerdotisa', emoji:'🌙', key:'Intuición, misterio', img:imgObj(GH_MAYORES+'am2.png','ar02.jpg'), up:'Confía en tu voz interior. Amor: conexión espiritual. Trabajo: escucha antes de actuar. Salud: sanación emocional.', rv:'Invertida: secretos, bloqueo intuitivo.', el:'Luna' },
+    { num:'III', name:'La Emperatriz', emoji:'👑', key:'Fertilidad, abundancia', img:imgObj(GH_MAYORES+'am3.png','ar03.jpg'), up:'Creatividad y nutrición. Amor: embarazo o relación floreciente. Trabajo: proyectos fructíferos. Salud: bienestar físico.', rv:'Invertida: dependencia, falta de creatividad.', el:'Venus' },
+    { num:'IV', name:'El Emperador', emoji:'⚔️', key:'Autoridad, estructura', img:imgObj(GH_MAYORES+'am4.png','ar04.jpg'), up:'Estabilidad y liderazgo. Amor: compromiso serio. Trabajo: ascenso. Salud: fortaleza.', rv:'Invertido: tiranía, rigidez.', el:'Aries' },
+    { num:'V', name:'El Hierofante', emoji:'✝️', key:'Tradición, guía', img:imgObj(GH_MAYORES+'am5.png','ar05.jpg'), up:'Matrimonio, educación, valores. Amor: boda tradicional. Trabajo: mentoría. Salud: seguimiento médico.', rv:'Invertido: rebeldía, cuestionamiento de normas.', el:'Tauro' },
+    { num:'VI', name:'Los Amantes', emoji:'💕', key:'Amor, unión, elección', img:imgObj(GH_MAYORES+'am6.png','ar06.jpg'), up:'Decisiones del corazón. Amor: relación armoniosa. Trabajo: elegir entre opciones. Salud: equilibrio.', rv:'Invertidos: desacuerdos, mala comunicación.', el:'Géminis' },
+    { num:'VII', name:'El Carro', emoji:'🏆', key:'Victoria, determinación', img:imgObj(GH_MAYORES+'am7.png','ar07.jpg'), up:'Control y éxito. Amor: superar obstáculos. Trabajo: logros. Salud: fuerza de voluntad.', rv:'Invertido: falta de control, agresividad.', el:'Cáncer' },
+    { num:'VIII', name:'La Fuerza', emoji:'🦁', key:'Fortaleza, paciencia', img:imgObj(GH_MAYORES+'am8.png','ar08.jpg'), up:'Coraje interior. Amor: domar pasiones. Trabajo: liderazgo suave. Salud: recuperación.', rv:'Invertida: inseguridad, debilidad.', el:'Leo' },
+    { num:'IX', name:'El Ermitaño', emoji:'🏮', key:'Introspección, sabiduría', img:imgObj(GH_MAYORES+'am9.png','ar09.jpg'), up:'Retiro necesario. Amor: tiempo a solas. Trabajo: análisis. Salud: descanso.', rv:'Invertido: aislamiento excesivo.', el:'Virgo' },
+    { num:'X', name:'Rueda de la Fortuna', emoji:'☸️', key:'Destino, cambio', img:imgObj(GH_MAYORES+'am10.png','ar10.jpg'), up:'Buena suerte. Amor: giro inesperado. Trabajo: oportunidades. Salud: mejoría.', rv:'Invertida: mala racha, resistirse al cambio.', el:'Júpiter' },
+    { num:'XI', name:'La Justicia', emoji:'⚖️', key:'Equilibrio, verdad', img:imgObj(GH_MAYORES+'am11.png','ar11.jpg'), up:'Karma, decisiones justas. Amor: honestidad. Trabajo: resoluciones legales. Salud: balance.', rv:'Invertida: injusticia, mentiras.', el:'Libra' },
+    { num:'XII', name:'El Colgado', emoji:'🙃', key:'Sacrificio, perspectiva', img:imgObj(GH_MAYORES+'am12.png','ar12.jpg'), up:'Pausa voluntaria. Amor: dar espacio. Trabajo: esperar. Salud: cambio de hábitos.', rv:'Invertido: estancamiento, resistencia.', el:'Agua' },
+    { num:'XIII', name:'La Muerte', emoji:'💀', key:'Transformación, renacimiento', img:imgObj(GH_MAYORES+'am13.png','ar13.jpg'), up:'Fin de un ciclo. Amor: dejar ir. Trabajo: cierre. Salud: renovación.', rv:'Invertida: miedo al cambio.', el:'Escorpio' },
+    { num:'XIV', name:'La Templanza', emoji:'🏺', key:'Equilibrio, armonía', img:imgObj(GH_MAYORES+'am14.png','ar14.jpg'), up:'Moderación y paciencia. Amor: relación equilibrada. Trabajo: adaptación. Salud: recuperación.', rv:'Invertida: desequilibrio, extremos.', el:'Sagitario' },
+    { num:'XV', name:'El Diablo', emoji:'😈', key:'Ataduras, tentación', img:imgObj(GH_MAYORES+'am15.png','ar15.jpg'), up:'Adicciones, apegos. Amor: dependencia. Trabajo: obsesión por dinero. Salud: excesos.', rv:'Invertido: liberación, romper cadenas.', el:'Capricornio' },
+    { num:'XVI', name:'La Torre', emoji:'⚡', key:'Caos, revelación', img:imgObj(GH_MAYORES+'am16.png','ar16.jpg'), up:'Cambio repentino. Amor: ruptura. Trabajo: crisis. Salud: accidente necesario.', rv:'Invertida: evitación del cambio.', el:'Marte' },
+    { num:'XVII', name:'La Estrella', emoji:'⭐', key:'Esperanza, sanación', img:imgObj(GH_MAYORES+'am17.png','ar17.jpg'), up:'Optimismo. Amor: nuevas ilusiones. Trabajo: inspiración. Salud: recuperación.', rv:'Invertida: desesperanza.', el:'Acuario' },
+    { num:'XVIII', name:'La Luna', emoji:'🌙', key:'Ilusión, subconsciente', img:imgObj(GH_MAYORES+'am18.png','ar18.jpg'), up:'Intuición, sueños. Amor: confusiones. Trabajo: engaños. Salud: ansiedad.', rv:'Invertida: claridad, secretos revelados.', el:'Piscis' },
+    { num:'XIX', name:'El Sol', emoji:'☀️', key:'Éxito, alegría', img:imgObj(GH_MAYORES+'am19.png','ar19.jpg'), up:'Felicidad plena. Amor: matrimonio. Trabajo: éxito rotundo. Salud: energía.', rv:'Invertido: éxito retrasado.', el:'Sol' },
+    { num:'XX', name:'El Juicio', emoji:'📯', key:'Renacimiento, llamado', img:imgObj(GH_MAYORES+'am20.png','ar20.jpg'), up:'Despertar espiritual. Amor: reconciliación. Trabajo: oportunidad. Salud: diagnóstico certero.', rv:'Invertido: autocrítica excesiva.', el:'Fuego' },
+    { num:'XXI', name:'El Mundo', emoji:'🌍', key:'Completud, éxito', img:imgObj(GH_MAYORES+'am21.png','ar21.jpg'), up:'Culminación. Amor: unión completa. Trabajo: meta alcanzada. Salud: plenitud.', rv:'Invertido: falta de cierre.', el:'Saturno' }
 ];
 
-// ARCANOS MENORES (56) con descripciones ampliadas para amor, trabajo, salud, espiritualidad
+// ================== ARCANOS MENORES (56) con descripciones ampliadas ==================
 const MINOR_ARCANA = (() => {
     const suits = { wands: 'Bastos', cups: 'Copas', swords: 'Espadas', pents: 'Pentáculos' };
     const numbers = ['As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Sota', 'Caballero', 'Reina', 'Rey'];
-    const res = [];
-    // Diccionario de significados detallados por palo y número
     const meanings = {
         wands: {
-            As: { up: 'El As de Bastos es la chispa de la creatividad. En amor: nueva pasión, atracción intensa. Trabajo: inicio de un proyecto exitoso. Salud: energía renovada. Espiritualidad: descubrimiento de tu propósito.', rv: 'Invertido: falta de dirección, creatividad bloqueada. En amor: desinterés. Trabajo: proyectos estancados. Salud: agotamiento.' },
-            '2': { up: 'Planificación y decisión. Amor: elegir entre dos opciones. Trabajo: sopesar pros y contras. Salud: equilibrio. Espiritualidad: discernimiento.', rv: 'Invertido: miedo a decidir, indecisión paralizante.' },
-            '3': { up: 'Expansión y colaboración. Amor: relación que avanza. Trabajo: trabajo en equipo exitoso. Salud: mejoría gradual.', rv: 'Invertido: conflictos de ego, falta de cooperación.' },
-            '4': { up: 'Estabilidad y celebración. Amor: relación segura. Trabajo: logros consolidados. Salud: recuperación.', rv: 'Invertido: estancamiento, falta de motivación.' },
-            '5': { up: 'Competencia y desafíos. Amor: rivalidad. Trabajo: lucha por el poder. Salud: estrés.', rv: 'Invertido: conflictos resueltos, aprender de la derrota.' },
-            '6': { up: 'Victoria y reconocimiento. Amor: triunfo amoroso. Trabajo: éxito público. Salud: buena forma.', rv: 'Invertido: orgullo herido, miedo al fracaso.' },
-            '7': { up: 'Valentía y perseverancia. Amor: superar obstáculos. Trabajo: defensa de tus ideas. Salud: fortaleza.', rv: 'Invertido: agotamiento, rendirse ante la adversidad.' },
-            '8': { up: 'Movimiento rápido. Amor: cambios repentinos. Trabajo: noticias urgentes. Salud: recuperación acelerada.', rv: 'Invertido: retrasos, falta de dirección.' },
-            '9': { up: 'Resistencia y protección. Amor: defender la relación. Trabajo: enfrentar críticas. Salud: sistema inmune fuerte.', rv: 'Invertido: vulnerabilidad, sentirse atacado.' },
-            '10': { up: 'Carga y responsabilidad. Amor: compromiso pesado. Trabajo: mucho trabajo. Salud: agotamiento.', rv: 'Invertido: liberación de cargas, delegar.' },
-            Sota: { up: 'Mensajero entusiasta. Amor: nuevas ilusiones. Trabajo: aprendiz creativo. Salud: buenas noticias.', rv: 'Invertido: inmadurez, falta de compromiso.' },
-            Caballero: { up: 'Acción impulsiva. Amor: declaración apasionada. Trabajo: iniciativa. Salud: energía explosiva.', rv: 'Invertido: impaciencia, actuar sin pensar.' },
-            Reina: { up: 'Confianza y calidez. Amor: apoyo incondicional. Trabajo: liderazgo femenino. Salud: bienestar.', rv: 'Invertido: dependencia emocional, celos.' },
-            Rey: { up: 'Liderazgo visionario. Amor: figura protectora. Trabajo: emprendedor exitoso. Salud: vitalidad.', rv: 'Invertido: autoritarismo, abuso de poder.' }
+            As: { up: 'El As de Bastos es la chispa de la creatividad. En amor: nueva pasión. Trabajo: inicio de proyecto exitoso. Salud: energía renovada.', rv: 'Invertido: falta de dirección, creatividad bloqueada.' },
+            '2': { up: 'Planificación y decisión. Amor: elegir entre dos opciones. Trabajo: sopesar pros y contras. Salud: equilibrio.', rv: 'Invertido: indecisión.' },
+            '3': { up: 'Expansión y colaboración. Amor: relación que avanza. Trabajo: trabajo en equipo exitoso.', rv: 'Invertido: conflictos de ego.' },
+            '4': { up: 'Estabilidad y celebración. Amor: relación segura. Trabajo: logros consolidados.', rv: 'Invertido: estancamiento.' },
+            '5': { up: 'Competencia y desafíos. Amor: rivalidad. Trabajo: lucha por el poder.', rv: 'Invertido: conflictos resueltos.' },
+            '6': { up: 'Victoria y reconocimiento. Amor: triunfo amoroso. Trabajo: éxito público.', rv: 'Invertido: orgullo herido.' },
+            '7': { up: 'Valentía y perseverancia. Amor: superar obstáculos. Trabajo: defender ideas.', rv: 'Invertido: agotamiento.' },
+            '8': { up: 'Movimiento rápido. Amor: cambios repentinos. Trabajo: noticias urgentes.', rv: 'Invertido: retrasos.' },
+            '9': { up: 'Resistencia y protección. Amor: defender la relación. Trabajo: enfrentar críticas.', rv: 'Invertido: vulnerabilidad.' },
+            '10': { up: 'Carga y responsabilidad. Amor: compromiso pesado. Trabajo: mucho trabajo.', rv: 'Invertido: liberación de cargas.' },
+            Sota: { up: 'Mensajero entusiasta. Amor: nuevas ilusiones. Trabajo: aprendiz creativo.', rv: 'Invertido: inmadurez.' },
+            Caballero: { up: 'Acción impulsiva. Amor: declaración apasionada. Trabajo: iniciativa.', rv: 'Invertido: impaciencia.' },
+            Reina: { up: 'Confianza y calidez. Amor: apoyo incondicional. Trabajo: liderazgo femenino.', rv: 'Invertido: dependencia emocional.' },
+            Rey: { up: 'Liderazgo visionario. Amor: figura protectora. Trabajo: emprendedor exitoso.', rv: 'Invertido: autoritarismo.' }
         },
         cups: {
-            As: { up: 'Amor puro y emociones. En amor: nuevo romance. Trabajo: proyecto creativo. Salud: sanación emocional. Espiritualidad: apertura del corazón.', rv: 'Invertido: bloqueo emocional, falta de amor propio.' },
-            '2': { up: 'Unión y atracción. Amor: conexión profunda. Trabajo: alianza exitosa. Salud: equilibrio.', rv: 'Invertido: desamor, ruptura.' },
-            '3': { up: 'Celebración y amistad. Amor: relaciones armoniosas. Trabajo: éxito en equipo. Salud: alegría.', rv: 'Invertido: excesos, fiesta vacía.' },
-            '4': { up: 'Apalancamiento emocional. Amor: necesidad de cambio. Trabajo: aburrimiento. Salud: monotonía.', rv: 'Invertido: despertar emocional, buscar nuevas experiencias.' },
-            '5': { up: 'Pérdida y duelo. Amor: ruptura. Trabajo: fracaso. Salud: tristeza.', rv: 'Invertido: aceptación, inicio de sanación.' },
-            '6': { up: 'Nostalgia y recuerdos. Amor: reencuentro. Trabajo: clientes antiguos. Salud: terapias de pasado.', rv: 'Invertido: vivir en el pasado, no avanzar.' },
-            '7': { up: 'Elección ilusoria. Amor: fantasías. Trabajo: muchas opciones confusas. Salud: ilusiones.', rv: 'Invertido: claridad, tomar decisión realista.' },
-            '8': { up: 'Abandono y cambio. Amor: dejar ir. Trabajo: renunciar a algo. Salud: soltar malos hábitos.', rv: 'Invertido: miedo a soltar, apego.' },
-            '9': { up: 'Deseo cumplido. Amor: sueño hecho realidad. Trabajo: ascenso deseado. Salud: plenitud.', rv: 'Invertido: insatisfacción, falsas ilusiones.' },
-            '10': { up: 'Felicidad plena. Amor: armonía total. Trabajo: éxito rotundo. Salud: bienestar completo.', rv: 'Invertido: ruptura familiar, desarmonía.' },
-            Sota: { up: 'Mensajero emocional. Amor: declaración de amor. Trabajo: buena noticia. Salud: recuperación.', rv: 'Invertido: noticias tristes, desamor.' },
-            Caballero: { up: 'Propuesta romántica. Amor: invitación a salir. Trabajo: oferta tentadora. Salud: mejora.', rv: 'Invertido: rechazo, oferta retirada.' },
-            Reina: { up: 'Intuición y compasión. Amor: consejera amorosa. Trabajo: apoyo emocional. Salud: sanación.', rv: 'Invertido: drama emocional, manipulación.' },
-            Rey: { up: 'Control emocional. Amor: pareja estable. Trabajo: líder empático. Salud: equilibrio emocional.', rv: 'Invertido: frialdad, represión emocional.' }
+            As: { up: 'Amor puro y emociones. En amor: nuevo romance. Trabajo: proyecto creativo. Salud: sanación emocional.', rv: 'Invertido: bloqueo emocional.' },
+            '2': { up: 'Unión y atracción. Amor: conexión profunda. Trabajo: alianza exitosa.', rv: 'Invertido: desamor.' },
+            '3': { up: 'Celebración y amistad. Amor: relaciones armoniosas. Trabajo: éxito en equipo.', rv: 'Invertido: excesos.' },
+            '4': { up: 'Apalancamiento emocional. Amor: necesidad de cambio. Trabajo: aburrimiento.', rv: 'Invertido: despertar emocional.' },
+            '5': { up: 'Pérdida y duelo. Amor: ruptura. Trabajo: fracaso.', rv: 'Invertido: aceptación.' },
+            '6': { up: 'Nostalgia y recuerdos. Amor: reencuentro. Trabajo: clientes antiguos.', rv: 'Invertido: vivir en el pasado.' },
+            '7': { up: 'Elección ilusoria. Amor: fantasías. Trabajo: opciones confusas.', rv: 'Invertido: claridad.' },
+            '8': { up: 'Abandono y cambio. Amor: dejar ir. Trabajo: renunciar.', rv: 'Invertido: miedo a soltar.' },
+            '9': { up: 'Deseo cumplido. Amor: sueño hecho realidad. Trabajo: ascenso deseado.', rv: 'Invertido: insatisfacción.' },
+            '10': { up: 'Felicidad plena. Amor: armonía total. Trabajo: éxito rotundo.', rv: 'Invertido: ruptura familiar.' },
+            Sota: { up: 'Mensajero emocional. Amor: declaración de amor. Trabajo: buena noticia.', rv: 'Invertido: noticias tristes.' },
+            Caballero: { up: 'Propuesta romántica. Amor: invitación a salir. Trabajo: oferta tentadora.', rv: 'Invertido: rechazo.' },
+            Reina: { up: 'Intuición y compasión. Amor: consejera amorosa. Trabajo: apoyo emocional.', rv: 'Invertido: drama emocional.' },
+            Rey: { up: 'Control emocional. Amor: pareja estable. Trabajo: líder empático.', rv: 'Invertido: frialdad.' }
         },
         swords: {
-            As: { up: 'Claridad mental. Amor: comunicación honesta. Trabajo: idea brillante. Salud: diagnóstico certero. Espiritualidad: verdad.', rv: 'Invertido: confusión, mentiras.' },
-            '2': { up: 'Indecisión y bloqueo. Amor: no saber qué hacer. Trabajo: estancamiento. Salud: estrés mental.', rv: 'Invertido: liberación, toma de decisión.' },
-            '3': { up: 'Dolor y traición. Amor: desamor. Trabajo: fracaso. Salud: enfermedad.', rv: 'Invertido: superación del dolor.' },
-            '4': { up: 'Descanso y recuperación. Amor: tiempo a solas. Trabajo: pausa necesaria. Salud: reposo.', rv: 'Invertido: insomnio, estrés.' },
-            '5': { up: 'Conflicto y derrota. Amor: discusión. Trabajo: competencia desleal. Salud: tensión.', rv: 'Invertido: reconciliación, dejar el orgullo.' },
-            '6': { up: 'Superación y ayuda. Amor: dejar atrás. Trabajo: cambio de ambiente. Salud: mejora.', rv: 'Invertido: estancamiento, no avanzar.' },
-            '7': { up: 'Engaño y astucia. Amor: mentiras. Trabajo: estrategia. Salud: diagnóstico falso.', rv: 'Invertido: verdad revelada, confesar.' },
-            '8': { up: 'Sensación de estar atrapado. Amor: relación asfixiante. Trabajo: bloqueo. Salud: ansiedad.', rv: 'Invertido: liberación, encontrar salida.' },
-            '9': { up: 'Angustia y pesadillas. Amor: preocupación. Trabajo: miedo al fracaso. Salud: insomnio.', rv: 'Invertido: superar miedos.' },
-            '10': { up: 'Final doloroso. Amor: ruptura definitiva. Trabajo: fin de ciclo. Salud: colapso.', rv: 'Invertido: renacer tras el final.' },
-            Sota: { up: 'Vigilancia y espionaje. Amor: curiosidad. Trabajo: investigación. Salud: chequeo.', rv: 'Invertido: chismes, mala información.' },
-            Caballero: { up: 'Impulso mental. Amor: declaración racional. Trabajo: ataque verbal. Salud: crisis nerviosa.', rv: 'Invertido: perder la razón, ira.' },
-            Reina: { up: 'Intelecto y honestidad. Amor: comunicación clara. Trabajo: liderazgo justo. Salud: mente lúcida.', rv: 'Invertido: crueldad, mentiras.' },
-            Rey: { up: 'Autoridad intelectual. Amor: pareja racional. Trabajo: juez o abogado. Salud: control mental.', rv: 'Invertido: tiranía, abuso de poder mental.' }
+            As: { up: 'Claridad mental. Amor: comunicación honesta. Trabajo: idea brillante. Salud: diagnóstico certero.', rv: 'Invertido: confusión.' },
+            '2': { up: 'Indecisión y bloqueo. Amor: no saber qué hacer. Trabajo: estancamiento.', rv: 'Invertido: liberación.' },
+            '3': { up: 'Dolor y traición. Amor: desamor. Trabajo: fracaso.', rv: 'Invertido: superación.' },
+            '4': { up: 'Descanso y recuperación. Amor: tiempo a solas. Trabajo: pausa.', rv: 'Invertido: insomnio.' },
+            '5': { up: 'Conflicto y derrota. Amor: discusión. Trabajo: competencia desleal.', rv: 'Invertido: reconciliación.' },
+            '6': { up: 'Superación y ayuda. Amor: dejar atrás. Trabajo: cambio de ambiente.', rv: 'Invertido: estancamiento.' },
+            '7': { up: 'Engaño y astucia. Amor: mentiras. Trabajo: estrategia.', rv: 'Invertido: verdad revelada.' },
+            '8': { up: 'Sensación de estar atrapado. Amor: relación asfixiante. Trabajo: bloqueo.', rv: 'Invertido: liberación.' },
+            '9': { up: 'Angustia y pesadillas. Amor: preocupación. Trabajo: miedo.', rv: 'Invertido: superar miedos.' },
+            '10': { up: 'Final doloroso. Amor: ruptura definitiva. Trabajo: fin de ciclo.', rv: 'Invertido: renacer.' },
+            Sota: { up: 'Vigilancia y espionaje. Amor: curiosidad. Trabajo: investigación.', rv: 'Invertido: chismes.' },
+            Caballero: { up: 'Impulso mental. Amor: declaración racional. Trabajo: ataque verbal.', rv: 'Invertido: perder la razón.' },
+            Reina: { up: 'Intelecto y honestidad. Amor: comunicación clara. Trabajo: liderazgo justo.', rv: 'Invertido: crueldad.' },
+            Rey: { up: 'Autoridad intelectual. Amor: pareja racional. Trabajo: juez o abogado.', rv: 'Invertido: tiranía.' }
         },
         pents: {
-            As: { up: 'Abundancia material. Amor: relación sólida. Trabajo: nueva fuente de ingresos. Salud: bienestar físico. Espiritualidad: conexión con la tierra.', rv: 'Invertido: pérdida económica, avaricia.' },
-            '2': { up: 'Equilibrio financiero. Amor: dar y recibir. Trabajo: multitarea. Salud: equilibrio.', rv: 'Invertido: desorden financiero.' },
-            '3': { up: 'Trabajo en equipo. Amor: construir juntos. Trabajo: colaboración. Salud: recuperación.', rv: 'Invertido: falta de cooperación.' },
-            '4': { up: 'Apego material. Amor: posesividad. Trabajo: acumular. Salud: rigidez.', rv: 'Invertido: desprendimiento, generosidad.' },
-            '5': { up: 'Pérdida económica. Amor: sentirse desprotegido. Trabajo: crisis. Salud: carencia.', rv: 'Invertido: recuperación, aprender de la pérdida.' },
-            '6': { up: 'Generosidad y ayuda. Amor: dar sin esperar. Trabajo: caridad. Salud: donación.', rv: 'Invertido: egoísmo, no recibir ayuda.' },
-            '7': { up: 'Evaluación de inversión. Amor: pensar en el futuro. Trabajo: planificar. Salud: paciencia.', rv: 'Invertido: impaciencia, malas inversiones.' },
-            '8': { up: 'Maestría y trabajo. Amor: construir relación. Trabajo: aprendizaje. Salud: constancia.', rv: 'Invertido: trabajo mal hecho, falta de enfoque.' },
-            '9': { up: 'Autosuficiencia. Amor: independencia económica. Trabajo: éxito solitario. Salud: autocuidado.', rv: 'Invertido: soledad no deseada, dependencia.' },
-            '10': { up: 'Riqueza y legado. Amor: familia estable. Trabajo: éxito total. Salud: plenitud.', rv: 'Invertido: pérdida de herencia, desorden.' },
-            Sota: { up: 'Estudiante aplicado. Amor: nuevo interés. Trabajo: prácticas. Salud: aprendizaje.', rv: 'Invertido: pereza, no aprovechar oportunidades.' },
-            Caballero: { up: 'Trabajo duro. Amor: constancia. Trabajo: movimiento laboral. Salud: ejercicio.', rv: 'Invertido: vagancia, procrastinación.' },
-            Reina: { up: 'Generosidad y conexión con la naturaleza. Amor: cuidar. Trabajo: buena administradora. Salud: bienestar.', rv: 'Invertido: materialismo excesivo, avaricia.' },
-            Rey: { up: 'Éxito financiero. Amor: proveedor. Trabajo: empresario. Salud: vitalidad.', rv: 'Invertido: codicia, corrupción.' }
+            As: { up: 'Abundancia material. Amor: relación sólida. Trabajo: nueva fuente de ingresos. Salud: bienestar físico.', rv: 'Invertido: pérdida económica.' },
+            '2': { up: 'Equilibrio financiero. Amor: dar y recibir. Trabajo: multitarea.', rv: 'Invertido: desorden financiero.' },
+            '3': { up: 'Trabajo en equipo. Amor: construir juntos. Trabajo: colaboración.', rv: 'Invertido: falta de cooperación.' },
+            '4': { up: 'Apego material. Amor: posesividad. Trabajo: acumular.', rv: 'Invertido: desprendimiento.' },
+            '5': { up: 'Pérdida económica. Amor: sentirse desprotegido. Trabajo: crisis.', rv: 'Invertido: recuperación.' },
+            '6': { up: 'Generosidad y ayuda. Amor: dar sin esperar. Trabajo: caridad.', rv: 'Invertido: egoísmo.' },
+            '7': { up: 'Evaluación de inversión. Amor: pensar en el futuro. Trabajo: planificar.', rv: 'Invertido: impaciencia.' },
+            '8': { up: 'Maestría y trabajo. Amor: construir relación. Trabajo: aprendizaje.', rv: 'Invertido: trabajo mal hecho.' },
+            '9': { up: 'Autosuficiencia. Amor: independencia económica. Trabajo: éxito solitario.', rv: 'Invertido: soledad no deseada.' },
+            '10': { up: 'Riqueza y legado. Amor: familia estable. Trabajo: éxito total.', rv: 'Invertido: pérdida de herencia.' },
+            Sota: { up: 'Estudiante aplicado. Amor: nuevo interés. Trabajo: prácticas.', rv: 'Invertido: pereza.' },
+            Caballero: { up: 'Trabajo duro. Amor: constancia. Trabajo: movimiento laboral.', rv: 'Invertido: vagancia.' },
+            Reina: { up: 'Generosidad y conexión con la naturaleza. Amor: cuidar. Trabajo: buena administradora.', rv: 'Invertido: materialismo excesivo.' },
+            Rey: { up: 'Éxito financiero. Amor: proveedor. Trabajo: empresario.', rv: 'Invertido: codicia.' }
         }
     };
+    const res = [];
     for (let s in suits) {
         for (let n of numbers) {
             let nameNum = n === 'As' ? 'As' : n;
@@ -98,7 +116,7 @@ const MINOR_ARCANA = (() => {
             let ghUrl = GH_MENORES + fileName;
             let stNum = n === 'As' ? '01' : (n === 'Sota' ? '11' : n === 'Caballero' ? '12' : n === 'Reina' ? '13' : n === 'Rey' ? '14' : (n < 10 ? '0' + n : n));
             let stName = `${s}_${stNum}.jpg`;
-            let meaning = meanings[s][n] || meanings[s][nameNum] || { up: 'Energía positiva', rv: 'Bloqueos' };
+            let meaning = meanings[s][n] || { up: 'Energía positiva', rv: 'Bloqueos' };
             res.push({
                 num: n, name: `${nameNum} de ${suits[s]}`, suitId: s, el: s === 'wands' ? 'Fuego' : s === 'cups' ? 'Agua' : s === 'swords' ? 'Aire' : 'Tierra',
                 key: suits[s], emoji: '🃏', img: imgObj(ghUrl, stName),
@@ -111,44 +129,43 @@ const MINOR_ARCANA = (() => {
 })();
 const ALL_TAROT = [...MAJOR_ARCANA, ...MINOR_ARCANA];
 
-// RUNAS (24) con descripciones ampliadas
+// ================== RUNAS (24) ==================
 const RUNAS = [
-    { sym:'ᚠ', name:'Fehu', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Runic_letter_fehu_feoh_fe_f.svg/200px-Runic_letter_fehu_feoh_fe_f.svg.png', up:'Fehu: riqueza, prosperidad, abundancia material. Te invita a disfrutar de lo que has cosechado. En el amor: relaciones generosas. En el trabajo: éxito económico. En salud: vitalidad. Espiritualmente: la abundancia fluye cuando compartes.', rv:'Invertida: pérdidas, mala gestión, egoísmo. Revisa tus finanzas y actitud hacia el dinero. En el amor: desequilibrio en dar y recibir.' },
-    { sym:'ᚢ', name:'Uruz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Runic_letter_uruz_ur_u.svg/200px-Runic_letter_uruz_ur_u.svg.png', up:'Uruz: fuerza vital, salud, poder. Energía bruta para superar obstáculos. En amor: pasión intensa. Trabajo: determinación. Salud: recuperación. Espiritualmente: conectar con tu fuerza interior.', rv:'Invertida: debilidad, agotamiento, falta de motivación. Necesitas descansar y recuperar energías.' },
-    { sym:'ᚦ', name:'Thurisaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Runic_letter_thurisaz_thurs_thorn.svg/200px-Runic_letter_thurisaz_thurs_thorn.svg.png', up:'Thurisaz: protección, conflicto necesario, defensa. Es la runa del martillo de Thor. En amor: discusiones que limpian. Trabajo: enfrentar desafíos. Salud: intervención agresiva pero curativa.', rv:'Invertida: vulnerabilidad, traición, advertencia. Evita confrontaciones innecesarias.' },
-    { sym:'ᚨ', name:'Ansuz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Runic_letter_ansuz_aesc_a.svg/200px-Runic_letter_ansuz_aesc_a.svg.png', up:'Ansuz: comunicación, sabiduría, consejo. Mensajes importantes, aprendizaje. En amor: diálogo sincero. Trabajo: reuniones exitosas. Salud: diagnóstico claro.', rv:'Invertida: malentendidos, engaño, falta de comunicación. Verifica la información.' },
-    { sym:'ᚱ', name:'Raidho', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Runic_letter_raido_rad_reid_r.svg/200px-Runic_letter_raido_rad_reid_r.svg.png', up:'Raidho: viaje, movimiento, evolución. Cambios físicos o de perspectiva. En amor: viajar juntos. Trabajo: desplazamientos. Salud: rehabilitación.', rv:'Invertida: retrasos, estancamiento, viajes cancelados. Paciencia.' },
-    { sym:'ᚲ', name:'Kenaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Runic_letter_kaun_k.svg/200px-Runic_letter_kaun_k.svg.png', up:'Kenaz: conocimiento, creatividad, pasión. Luz que ilumina lo oscuro. En amor: pasión renovada. Trabajo: ideas brillantes. Salud: diagnóstico que cura.', rv:'Invertida: oscuridad, bloqueo creativo, enfermedad. Enciende de nuevo tu luz interior.' },
-    { sym:'ᚷ', name:'Gebo', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Runic_letter_gebo_gyfu_g.svg/200px-Runic_letter_gebo_gyfu_g.svg.png', up:'Gebo: regalo, asociación, generosidad. Equilibrio en el intercambio. En amor: matrimonio o unión. Trabajo: sociedades justas. Salud: donaciones.', rv:'No tiene reverso.' },
-    { sym:'ᚹ', name:'Wunjo', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Runic_letter_wunjo_wynn_w.svg/200px-Runic_letter_wunjo_wynn_w.svg.png', up:'Wunjo: alegría, armonía, bienestar. Felicidad compartida. En amor: relaciones felices. Trabajo: éxito y buen ambiente. Salud: plenitud.', rv:'Invertida: tristeza, desarmonía, crisis. Busca la causa de tu infelicidad.' },
-    { sym:'ᚺ', name:'Hagalaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Runic_letter_hagalaz_haegl_h.svg/200px-Runic_letter_hagalaz_haegl_h.svg.png', up:'Hagalaz: cambio disruptivo, caos necesario. Fuerza de la naturaleza. En amor: ruptura inesperada. Trabajo: crisis que limpia. Salud: enfermedad repentina.', rv:'No tiene reverso.' },
-    { sym:'ᚾ', name:'Nauthiz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Runic_letter_naudiz_nyd_naud_n.svg/200px-Runic_letter_naudiz_nyd_naud_n.svg.png', up:'Nauthiz: necesidad, resistencia, aprendizaje a través del dolor. En amor: relaciones que enseñan. Trabajo: presión que forma. Salud: dolencias que requieren atención.', rv:'Invertida: restricciones, victimismo. Cambia de actitud.' },
-    { sym:'ᛁ', name:'Isa', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Runic_letter_isaz_is_iss_i.svg/200px-Runic_letter_isaz_is_iss_i.svg.png', up:'Isa: inmovilidad, congelamiento, introspección. Todo se detiene. En amor: relaciones frías. Trabajo: proyectos paralizados. Salud: reposo necesario.', rv:'No tiene reverso.' },
-    { sym:'ᛃ', name:'Jera', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Runic_letter_jera_j.svg/200px-Runic_letter_jera_j.svg.png', up:'Jera: cosecha, resultados, ciclos. Recompensa tras el esfuerzo. En amor: relaciones que maduran. Trabajo: éxito tras trabajo. Salud: recuperación gradual.', rv:'No tiene reverso.' },
-    { sym:'ᛇ', name:'Eihwaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Runic_letter_iwaz_eoh.svg/200px-Runic_letter_iwaz_eoh.svg.png', up:'Eihwaz: resistencia, conexión espiritual, iniciación. Puente entre mundos. En amor: relaciones que superan pruebas. Trabajo: perseverancia. Salud: fortaleza.', rv:'Invertida: confusión, debilidad, ruptura. Reconecta con tu propósito.' },
-    { sym:'ᛈ', name:'Perthro', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Runic_letter_pertho_peorth_p.svg/200px-Runic_letter_pertho_peorth_p.svg.png', up:'Perthro: misterio, destino, revelación. Lo desconocido. En amor: secretos que salen a la luz. Trabajo: sorpresas. Salud: diagnóstico inesperado.', rv:'Invertida: secretos, mala suerte. Investiga más.' },
-    { sym:'ᛉ', name:'Algiz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Runic_letter_algiz.svg/200px-Runic_letter_algiz.svg.png', up:'Algiz: protección, defensa, oportunidad. Escudo contra el mal. En amor: relaciones seguras. Trabajo: apoyo de superiores. Salud: sistema inmune fuerte.', rv:'Invertida: vulnerabilidad, peligro. Extremar precauciones.' },
-    { sym:'ᛊ', name:'Sowilo', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Runic_letter_sowilo_s.svg/200px-Runic_letter_sowilo_s.svg.png', up:'Sowilo: sol, éxito, energía, claridad. Ilumina tu camino. En amor: relaciones radiantes. Trabajo: éxito rotundo. Salud: vitalidad plena.', rv:'No tiene reverso.' },
-    { sym:'ᛏ', name:'Tiwaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Runic_letter_tiwaz_tir_tyr_t.svg/200px-Runic_letter_tiwaz_tir_tyr_t.svg.png', up:'Tiwaz: victoria, justicia, sacrificio. Honor y liderazgo. En amor: relaciones basadas en el honor. Trabajo: éxito competitivo. Salud: fuerza de voluntad.', rv:'Invertida: derrota, injusticia. Recupera el honor.' },
-    { sym:'ᛒ', name:'Berkano', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Runic_letter_berkanan_beorc_bjarkan_b.svg/200px-Runic_letter_berkanan_beorc_bjarkan_b.svg.png', up:'Berkano: crecimiento, fertilidad, nuevos comienzos. Runa de la madre tierra. En amor: embarazo, nuevos proyectos familiares. Trabajo: crecimiento. Salud: renacimiento.', rv:'Invertida: estancamiento, problemas familiares. Nutre lo que quieres que crezca.' },
-    { sym:'ᛖ', name:'Ehwaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Runic_letter_ehwaz_eh_e.svg/200px-Runic_letter_ehwaz_eh_e.svg.png', up:'Ehwaz: progreso, confianza, trabajo en equipo. Movimiento suave. En amor: relaciones armoniosas. Trabajo: colaboración. Salud: mejoría gradual.', rv:'Invertida: obstáculos, falta de armonía. Revisa con quién caminas.' },
-    { sym:'ᛗ', name:'Mannaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Runic_letter_mannaz_man_m.svg/200px-Runic_letter_mannaz_man_m.svg.png', up:'Mannaz: humanidad, comunidad, ayuda mutua. Tu papel en el grupo. En amor: apoyo de la pareja. Trabajo: trabajo en equipo. Salud: apoyo social.', rv:'Invertida: aislamiento, egoísmo. Ábrete a los demás.' },
-    { sym:'ᛚ', name:'Laguz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Runic_letter_laukaz_lagu_logr_l.svg/200px-Runic_letter_laukaz_lagu_logr_l.svg.png', up:'Laguz: intuición, flujo, sanación emocional. Déjate llevar. En amor: conexión profunda. Trabajo: fluir con los cambios. Salud: terapias alternativas.', rv:'Invertida: confusión, miedo al cambio. Recupera la calma.' },
-    { sym:'ᛜ', name:'Ingwaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Runic_letter_ingwaz.svg/200px-Runic_letter_ingwaz.svg.png', up:'Ingwaz: potencial, gestación, logro. Algo está gestándose. En amor: relación en potencia. Trabajo: proyecto en desarrollo. Salud: proceso de curación.', rv:'No tiene reverso.' },
-    { sym:'ᛞ', name:'Dagaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Runic_letter_dagaz_daeg_d.svg/200px-Runic_letter_dagaz_daeg_d.svg.png', up:'Dagaz: día, despertar, transformación, esperanza. Cambio hacia la luz. En amor: reconciliación. Trabajo: cambios positivos. Salud: curación repentina.', rv:'No tiene reverso.' },
-    { sym:'ᛟ', name:'Othala', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Runic_letter_othalan_ethel_o.svg/200px-Runic_letter_othalan_ethel_o.svg.png', up:'Othala: herencia, hogar, tradición. Lo que recibes de tus antepasados. En amor: relaciones estables. Trabajo: negocios familiares. Salud: enfermedades hereditarias.', rv:'Invertida: pérdida, desarraigo. Valora lo que tienes.' }
+    { sym:'ᚠ', name:'Fehu', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Runic_letter_fehu_feoh_fe_f.svg/200px-Runic_letter_fehu_feoh_fe_f.svg.png', up:'Fehu: riqueza, prosperidad, abundancia material. En el amor: relaciones generosas. En el trabajo: éxito económico. Salud: vitalidad.', rv:'Invertida: pérdidas, mala gestión. Revisa tus finanzas.' },
+    { sym:'ᚢ', name:'Uruz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Runic_letter_uruz_ur_u.svg/200px-Runic_letter_uruz_ur_u.svg.png', up:'Uruz: fuerza vital, salud, poder. Energía para superar obstáculos. Amor: pasión intensa. Trabajo: determinación.', rv:'Invertida: debilidad, agotamiento. Necesitas descansar.' },
+    { sym:'ᚦ', name:'Thurisaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Runic_letter_thurisaz_thurs_thorn.svg/200px-Runic_letter_thurisaz_thurs_thorn.svg.png', up:'Thurisaz: protección, conflicto necesario. Amor: discusiones que limpian. Trabajo: enfrentar desafíos.', rv:'Invertida: vulnerabilidad, advertencia. Evita confrontaciones.' },
+    { sym:'ᚨ', name:'Ansuz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Runic_letter_ansuz_aesc_a.svg/200px-Runic_letter_ansuz_aesc_a.svg.png', up:'Ansuz: comunicación, sabiduría. Mensajes importantes. Amor: diálogo sincero. Trabajo: reuniones exitosas.', rv:'Invertida: malentendidos, engaño. Verifica la información.' },
+    { sym:'ᚱ', name:'Raidho', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Runic_letter_raido_rad_reid_r.svg/200px-Runic_letter_raido_rad_reid_r.svg.png', up:'Raidho: viaje, movimiento. Cambios de perspectiva. Amor: viajar juntos. Trabajo: desplazamientos.', rv:'Invertida: retrasos, estancamiento. Paciencia.' },
+    { sym:'ᚲ', name:'Kenaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Runic_letter_kaun_k.svg/200px-Runic_letter_kaun_k.svg.png', up:'Kenaz: conocimiento, creatividad, pasión. Luz que ilumina. Amor: pasión renovada. Trabajo: ideas brillantes.', rv:'Invertida: oscuridad, bloqueo. Enciende tu luz interior.' },
+    { sym:'ᚷ', name:'Gebo', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Runic_letter_gebo_gyfu_g.svg/200px-Runic_letter_gebo_gyfu_g.svg.png', up:'Gebo: regalo, asociación, generosidad. Amor: matrimonio. Trabajo: sociedades justas. Salud: donaciones.', rv:'No tiene reverso.' },
+    { sym:'ᚹ', name:'Wunjo', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Runic_letter_wunjo_wynn_w.svg/200px-Runic_letter_wunjo_wynn_w.svg.png', up:'Wunjo: alegría, armonía. Felicidad compartida. Amor: relaciones felices. Trabajo: éxito y buen ambiente.', rv:'Invertida: tristeza, desarmonía.' },
+    { sym:'ᚺ', name:'Hagalaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Runic_letter_hagalaz_haegl_h.svg/200px-Runic_letter_hagalaz_haegl_h.svg.png', up:'Hagalaz: cambio disruptivo, caos necesario. Amor: ruptura inesperada. Trabajo: crisis que limpia.', rv:'No tiene reverso.' },
+    { sym:'ᚾ', name:'Nauthiz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Runic_letter_naudiz_nyd_naud_n.svg/200px-Runic_letter_naudiz_nyd_naud_n.svg.png', up:'Nauthiz: necesidad, resistencia, aprendizaje. Amor: relaciones que enseñan. Trabajo: presión que forma.', rv:'Invertida: restricciones, victimismo.' },
+    { sym:'ᛁ', name:'Isa', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Runic_letter_isaz_is_iss_i.svg/200px-Runic_letter_isaz_is_iss_i.svg.png', up:'Isa: inmovilidad, congelamiento. Todo se detiene. Amor: relaciones frías. Trabajo: proyectos paralizados.', rv:'No tiene reverso.' },
+    { sym:'ᛃ', name:'Jera', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Runic_letter_jera_j.svg/200px-Runic_letter_jera_j.svg.png', up:'Jera: cosecha, resultados, ciclos. Amor: relaciones que maduran. Trabajo: éxito tras trabajo.', rv:'No tiene reverso.' },
+    { sym:'ᛇ', name:'Eihwaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Runic_letter_iwaz_eoh.svg/200px-Runic_letter_iwaz_eoh.svg.png', up:'Eihwaz: resistencia, conexión espiritual. Amor: relaciones que superan pruebas. Trabajo: perseverancia.', rv:'Invertida: confusión, debilidad.' },
+    { sym:'ᛈ', name:'Perthro', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Runic_letter_pertho_peorth_p.svg/200px-Runic_letter_pertho_peorth_p.svg.png', up:'Perthro: misterio, destino, revelación. Amor: secretos que salen a la luz. Trabajo: sorpresas.', rv:'Invertida: secretos, mala suerte.' },
+    { sym:'ᛉ', name:'Algiz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Runic_letter_algiz.svg/200px-Runic_letter_algiz.svg.png', up:'Algiz: protección, defensa, oportunidad. Amor: relaciones seguras. Trabajo: apoyo de superiores.', rv:'Invertida: vulnerabilidad, peligro.' },
+    { sym:'ᛊ', name:'Sowilo', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Runic_letter_sowilo_s.svg/200px-Runic_letter_sowilo_s.svg.png', up:'Sowilo: sol, éxito, energía. Ilumina tu camino. Amor: relaciones radiantes. Trabajo: éxito rotundo.', rv:'No tiene reverso.' },
+    { sym:'ᛏ', name:'Tiwaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Runic_letter_tiwaz_tir_tyr_t.svg/200px-Runic_letter_tiwaz_tir_tyr_t.svg.png', up:'Tiwaz: victoria, justicia, sacrificio. Amor: relaciones basadas en honor. Trabajo: éxito competitivo.', rv:'Invertida: derrota, injusticia.' },
+    { sym:'ᛒ', name:'Berkano', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Runic_letter_berkanan_beorc_bjarkan_b.svg/200px-Runic_letter_berkanan_beorc_bjarkan_b.svg.png', up:'Berkano: crecimiento, fertilidad, nuevos comienzos. Amor: embarazo. Trabajo: crecimiento de negocio.', rv:'Invertida: estancamiento, problemas familiares.' },
+    { sym:'ᛖ', name:'Ehwaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Runic_letter_ehwaz_eh_e.svg/200px-Runic_letter_ehwaz_eh_e.svg.png', up:'Ehwaz: progreso, confianza, trabajo en equipo. Amor: relaciones armoniosas. Trabajo: colaboración.', rv:'Invertida: obstáculos, falta de armonía.' },
+    { sym:'ᛗ', name:'Mannaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Runic_letter_mannaz_man_m.svg/200px-Runic_letter_mannaz_man_m.svg.png', up:'Mannaz: humanidad, comunidad, ayuda mutua. Amor: apoyo de la pareja. Trabajo: trabajo en equipo.', rv:'Invertida: aislamiento, egoísmo.' },
+    { sym:'ᛚ', name:'Laguz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Runic_letter_laukaz_lagu_logr_l.svg/200px-Runic_letter_laukaz_lagu_logr_l.svg.png', up:'Laguz: intuición, flujo, sanación emocional. Amor: conexión profunda. Trabajo: fluir con los cambios.', rv:'Invertida: confusión, miedo al cambio.' },
+    { sym:'ᛜ', name:'Ingwaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Runic_letter_ingwaz.svg/200px-Runic_letter_ingwaz.svg.png', up:'Ingwaz: potencial, gestación, logro. Algo está gestándose. Amor: relación en potencia.', rv:'No tiene reverso.' },
+    { sym:'ᛞ', name:'Dagaz', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Runic_letter_dagaz_daeg_d.svg/200px-Runic_letter_dagaz_daeg_d.svg.png', up:'Dagaz: día, despertar, transformación. Cambio hacia la luz. Amor: reconciliación.', rv:'No tiene reverso.' },
+    { sym:'ᛟ', name:'Othala', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Runic_letter_othalan_ethel_o.svg/200px-Runic_letter_othalan_ethel_o.svg.png', up:'Othala: herencia, hogar, tradición. Amor: relaciones estables. Trabajo: negocios familiares.', rv:'Invertida: pérdida, desarraigo.' }
 ];
 
-// FASES LUNARES (sin cambios)
 const MOON_PHASES = [
-    { sym:'🌑', name:'Luna Nueva', meaning:'Nuevos comienzos. Siembra intenciones. Es momento de introspección y de plantar las semillas de tus deseos.', ritual:'Escribe 10 deseos en un papel y guárdalos hasta la próxima luna llena.', affirmation:'Soy un nuevo comienzo.', el:'Agua' },
-    { sym:'🌒', name:'Luna Creciente', meaning:'Acción y crecimiento. Las energías comienzan a moverse.', ritual:'Visualiza tus metas como si ya se hubieran cumplido.', affirmation:'Mis sueños se hacen realidad.', el:'Fuego' },
-    { sym:'🌓', name:'Cuarto Creciente', meaning:'Decisiones y desafíos. La fuerza de voluntad aumenta.', ritual:'Medita frente a un espejo para conectar con tu poder interior.', affirmation:'Supero cualquier desafío.', el:'Fuego' },
-    { sym:'🌔', name:'Gibosa Creciente', meaning:'Refinamiento. Ajusta los detalles de lo que has empezado.', ritual:'Revisa tu agenda y corrige lo que no fluye.', affirmation:'Perfecciono mi camino.', el:'Tierra' },
-    { sym:'🌕', name:'Luna Llena', meaning:'Culminación y poder. Las cosechas están listas.', ritual:'Carga tus cristales bajo la luz de la luna llena.', affirmation:'Soy poderoso y completo.', el:'Agua' },
-    { sym:'🌖', name:'Gibosa Menguante', meaning:'Gratitud y entrega. Agradece lo recibido y comparte.', ritual:'Escribe 10 cosas por las que estás agradecido.', affirmation:'Doy gracias y comparto mi luz.', el:'Tierra' },
-    { sym:'🌗', name:'Cuarto Menguante', meaning:'Liberación y perdón. Deja ir rencores y ataduras.', ritual:'Quema en un papel lo que deseas soltar.', affirmation:'Libero con amor todo lo que me pesa.', el:'Aire' },
-    { sym:'🌘', name:'Luna Menguante', meaning:'Descanso e integración. Recoge tus energías.', ritual:'Baño de sal marina para limpiar y restaurar.', affirmation:'Descanso y me restauro para un nuevo ciclo.', el:'Agua' }
+    { sym:'🌑', name:'Luna Nueva', meaning:'Nuevos comienzos. Siembra intenciones.', ritual:'Escribe 10 deseos.', affirmation:'Soy un nuevo comienzo.', el:'Agua' },
+    { sym:'🌒', name:'Luna Creciente', meaning:'Acción y crecimiento.', ritual:'Visualiza tus metas.', affirmation:'Mis sueños se hacen realidad.', el:'Fuego' },
+    { sym:'🌓', name:'Cuarto Creciente', meaning:'Decisiones y desafíos.', ritual:'Medita frente a un espejo.', affirmation:'Supero cualquier desafío.', el:'Fuego' },
+    { sym:'🌔', name:'Gibosa Creciente', meaning:'Refinamiento.', ritual:'Revisa tu agenda.', affirmation:'Perfecciono mi camino.', el:'Tierra' },
+    { sym:'🌕', name:'Luna Llena', meaning:'Culminación y poder.', ritual:'Carga tus cristales.', affirmation:'Soy poderoso y completo.', el:'Agua' },
+    { sym:'🌖', name:'Gibosa Menguante', meaning:'Gratitud y entrega.', ritual:'Escribe 10 gratitudes.', affirmation:'Doy gracias.', el:'Tierra' },
+    { sym:'🌗', name:'Cuarto Menguante', meaning:'Liberación y perdón.', ritual:'Quema lo que sueltas.', affirmation:'Libero con amor.', el:'Aire' },
+    { sym:'🌘', name:'Luna Menguante', meaning:'Descanso e integración.', ritual:'Baño de sal marina.', affirmation:'Descanso y me restauro.', el:'Agua' }
 ];
 
 // ================== VARIABLES GLOBALES ==================
@@ -159,78 +176,16 @@ let lastState = {};
 let historial = [];
 let tarotChart, runasChart, tiradasChart;
 let audioUnlocked = false;
-let savedDreams = [];// ================== app.js - PARTE 2/5 ==================
-// FUNCIONES AUXILIARES, MODALES, MICRÓFONOS, NOTAS
+let savedDreams = [];
 
-function toast(msg) {
-    let t = document.createElement('div');
-    t.className = 'toast';
-    t.innerText = msg;
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 3000);
-}
-
-function unlockAudio() {
-    if (audioUnlocked) return;
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (AudioContext) {
-        const context = new AudioContext();
-        context.resume().then(() => {
-            audioUnlocked = true;
-            console.log('Audio desbloqueado');
-        }).catch(e => console.log('Error desbloqueando audio:', e));
-    } else {
-        audioUnlocked = true;
-    }
-}
-
-function speakText(text) {
-    if (!window.speechSynthesis) return;
-    if (window.speechSynthesis.getVoices().length === 0) {
-        window.speechSynthesis.addEventListener('voiceschanged', () => speakText(text), { once: true });
-        return;
-    }
-    window.speechSynthesis.cancel();
-    let u = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g, ''));
-    u.lang = 'es-ES';
-    u.rate = voiceSpeed;
-    let voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('es'));
-    if (selectedVoiceName) u.voice = voices.find(v => v.name === selectedVoiceName);
-    else if (voices.length) u.voice = voices[0];
-    window.speechSynthesis.speak(u);
-}
-
+// ================== FUNCIONES AUXILIARES ==================
+function toast(msg) { let t = document.createElement('div'); t.className = 'toast'; t.innerText = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3000); }
+function unlockAudio() { if (audioUnlocked) return; const AudioContext = window.AudioContext || window.webkitAudioContext; if (AudioContext) { const context = new AudioContext(); context.resume().then(() => { audioUnlocked = true; console.log('Audio desbloqueado'); }).catch(e => console.log('Error desbloqueando audio:', e)); } else { audioUnlocked = true; } }
+function speakText(text) { if (!window.speechSynthesis) return; if (window.speechSynthesis.getVoices().length === 0) { window.speechSynthesis.addEventListener('voiceschanged', () => speakText(text), { once: true }); return; } window.speechSynthesis.cancel(); let u = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g, '')); u.lang = 'es-ES'; u.rate = voiceSpeed; let voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('es')); if (selectedVoiceName) u.voice = voices.find(v => v.name === selectedVoiceName); else if (voices.length) u.voice = voices[0]; window.speechSynthesis.speak(u); }
 const TTS = { speak: speakText, stop: () => window.speechSynthesis?.cancel() };
-
-function openModal(html) {
-    let ov = document.createElement('div');
-    ov.className = 'modal-overlay';
-    let box = document.createElement('div');
-    box.className = 'modal-box';
-    box.innerHTML = html;
-    let close = document.createElement('button');
-    close.className = 'modal-close';
-    close.innerHTML = '✕';
-    close.onclick = () => ov.remove();
-    ov.onclick = e => { if (e.target === ov) ov.remove(); };
-    box.appendChild(close);
-    ov.appendChild(box);
-    document.body.appendChild(ov);
-    return ov;
-}
-
-function cardHTML(card, opts = {}) {
-    let revClass = opts.reversed ? 'reversed' : '';
-    let revBadge = opts.reversed ? '<div class="rev-badge">INV</div>' : '';
-    let src = getImgSrc(card);
-    let fallbackSrc = (card.img && card.img.fallback) ? card.img.fallback : '';
-    let onerror = fallbackSrc ? `this.onerror=null;this.src='${fallbackSrc}';` : 'this.style.display="none";this.nextElementSibling.style.display="flex";';
-    return `<div class="real-card ${opts.big ? 'big' : ''} ${revClass}" onclick="openCardModal(${JSON.stringify(card).replace(/"/g, '&quot;')}, ${!!opts.reversed})">${revBadge}<img src="${src}" onerror="${onerror}"><div class="card-fallback" style="display:none">🃏<span class="fb-name">${card.name}</span></div><div class="card-name-label">${card.name}</div></div>`;
-}
-
-function runeCardHTML(r) {
-    return `<div class="rune-card" onclick="openRunaModal(${JSON.stringify(r).replace(/"/g, '&quot;')})"><img src="${r.img}" onerror="this.style.display='none'"><div class="rune-sym">${r.sym}</div><div class="rune-name">${r.name}</div></div>`;
-}
+function openModal(html) { let ov = document.createElement('div'); ov.className = 'modal-overlay'; let box = document.createElement('div'); box.className = 'modal-box'; box.innerHTML = html; let close = document.createElement('button'); close.className = 'modal-close'; close.innerHTML = '✕'; close.onclick = () => ov.remove(); ov.onclick = e => { if (e.target === ov) ov.remove(); }; box.appendChild(close); ov.appendChild(box); document.body.appendChild(ov); return ov; }
+function cardHTML(card, opts = {}) { let revClass = opts.reversed ? 'reversed' : ''; let revBadge = opts.reversed ? '<div class="rev-badge">INV</div>' : ''; let src = getImgSrc(card); let fallbackSrc = (card.img && card.img.fallback) ? card.img.fallback : ''; let onerror = fallbackSrc ? `this.onerror=null;this.src='${fallbackSrc}';` : 'this.style.display="none";this.nextElementSibling.style.display="flex";'; return `<div class="real-card ${opts.big ? 'big' : ''} ${revClass}" onclick="openCardModal(${JSON.stringify(card).replace(/"/g, '&quot;')}, ${!!opts.reversed})">${revBadge}<img src="${src}" onerror="${onerror}"><div class="card-fallback" style="display:none">🃏<span class="fb-name">${card.name}</span></div><div class="card-name-label">${card.name}</div></div>`; }
+function runeCardHTML(r) { return `<div class="rune-card" onclick="openRunaModal(${JSON.stringify(r).replace(/"/g, '&quot;')})"><img src="${r.img}" onerror="this.style.display='none'"><div class="rune-sym">${r.sym}</div><div class="rune-name">${r.name}</div></div>`; }
 
 // MODAL DE CARTA CON IA
 window.openCardModal = function (card, rev) {
@@ -244,7 +199,7 @@ window.openCardModal = function (card, rev) {
     `);
     document.getElementById('saveNoteBtn')?.addEventListener('click', () => { saveNote(`${card.name}: ${text}`); modal.remove(); });
     document.getElementById('modalIaBtn')?.addEventListener('click', async () => {
-        const prompt = `Interpreta en profundidad la carta del tarot ${card.name} (${rev ? 'en posición invertida' : 'en posición derecha'}). Explica su simbolismo, su mensaje para el amor, el trabajo, la salud y el crecimiento espiritual. Da consejos prácticos. Extensión: 400 palabras.`;
+        const prompt = `Interpreta en profundidad la carta del tarot ${card.name} (${rev ? 'en posición invertida' : 'en posición derecha'}). Explica su simbolismo, su mensaje para el amor, el trabajo, la salud y el crecimiento espiritual. Extensión: 400 palabras.`;
         document.getElementById('modalIaBtn').disabled = true;
         document.getElementById('modalIaBtn').innerText = '🤖 Consultando...';
         try {
@@ -256,15 +211,10 @@ window.openCardModal = function (card, rev) {
             iaDiv.innerHTML = `<h3>🤖 Interpretación de la IA</h3><p>${respuesta.replace(/\n/g, '<br>')}</p>`;
             document.querySelector('.modal-box .interp-card').after(iaDiv);
             speakText(respuesta);
-        } catch(e) {
-            toast('Error al consultar la IA');
-        } finally {
-            document.getElementById('modalIaBtn').disabled = false;
-            document.getElementById('modalIaBtn').innerText = '🔮 Consultar a la IA sobre esta carta';
-        }
+        } catch(e) { toast('Error al consultar la IA'); }
+        finally { document.getElementById('modalIaBtn').disabled = false; document.getElementById('modalIaBtn').innerText = '🔮 Consultar a la IA sobre esta carta'; }
     });
 };
-
 window.openRunaModal = function (r, rev = false) {
     let text = rev ? (r.rv || r.up) : r.up;
     let modal = openModal(`
@@ -287,322 +237,48 @@ window.openRunaModal = function (r, rev = false) {
             iaDiv.innerHTML = `<h3>🤖 Interpretación de la IA</h3><p>${respuesta.replace(/\n/g, '<br>')}</p>`;
             document.querySelector('.modal-box .interp-card').after(iaDiv);
             speakText(respuesta);
-        } catch(e) {
-            toast('Error al consultar la IA');
-        } finally {
-            document.getElementById('modalIaBtnRuna').disabled = false;
-            document.getElementById('modalIaBtnRuna').innerText = '🔮 Consultar a la IA sobre esta runa';
-        }
+        } catch(e) { toast('Error al consultar la IA'); }
+        finally { document.getElementById('modalIaBtnRuna').disabled = false; document.getElementById('modalIaBtnRuna').innerText = '🔮 Consultar a la IA sobre esta runa'; }
     });
 };
 
-function initMicrophones() {
-    document.querySelectorAll('[data-mic]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            let targetId = btn.getAttribute('data-mic');
-            let input = document.getElementById(targetId);
-            if (!input) return;
-            if (window.SpeechRecognition || window.webkitSpeechRecognition) {
-                let rec = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-                rec.lang = 'es-ES';
-                rec.interimResults = false;
-                rec.onstart = () => btn.classList.add('listening');
-                rec.onresult = e => {
-                    input.value = e.results[0][0].transcript;
-                    btn.classList.remove('listening');
-                };
-                rec.onerror = () => btn.classList.remove('listening');
-                rec.start();
-                if (currentRec) currentRec.stop();
-                currentRec = rec;
-            } else toast('Dictado no soportado');
-        });
-    });
-}
+function initMicrophones() { document.querySelectorAll('[data-mic]').forEach(btn => { btn.addEventListener('click', () => { let targetId = btn.getAttribute('data-mic'); let input = document.getElementById(targetId); if (!input) return; if (window.SpeechRecognition || window.webkitSpeechRecognition) { let rec = new (window.SpeechRecognition || window.webkitSpeechRecognition)(); rec.lang = 'es-ES'; rec.interimResults = false; rec.onstart = () => btn.classList.add('listening'); rec.onresult = e => { input.value = e.results[0][0].transcript; btn.classList.remove('listening'); }; rec.onerror = () => btn.classList.remove('listening'); rec.start(); if (currentRec) currentRec.stop(); currentRec = rec; } else toast('Dictado no soportado'); }); }); }
 
 // ================== NOTAS ==================
 function getNotes() { return JSON.parse(localStorage.getItem('oraculo_notes') || '[]'); }
-function saveNote(content) {
-    let notes = getNotes();
-    notes.push({ date: new Date().toISOString(), content });
-    localStorage.setItem('oraculo_notes', JSON.stringify(notes));
-    renderNotes();
-    toast('Nota guardada');
-}
-function renderNotes() {
-    let notes = getNotes();
-    let container = document.getElementById('notesList');
-    let noNotes = document.getElementById('noNotes');
-    if (notes.length === 0) {
-        if (noNotes) noNotes.style.display = 'block';
-        container.innerHTML = '';
-        return;
-    }
-    if (noNotes) noNotes.style.display = 'none';
-    container.innerHTML = notes.map((n, i) => `<div class="note-card" onclick="openNoteModal(${i})"><div class="note-date">${new Date(n.date).toLocaleString()}</div><div class="note-preview">${n.content.substring(0, 80)}...</div></div>`).join('');
-}
-window.openNoteModal = function (idx) {
-    let note = getNotes()[idx];
-    let modal = openModal(`<textarea id="editNote" class="note-editor">${note.content}</textarea><div class="action-buttons"><button class="btn-mystic btn-save" id="updateNote">Actualizar</button><button class="btn-mystic" id="deleteNote" style="background:#f87171;">Eliminar</button></div>`);
-    document.getElementById('updateNote')?.addEventListener('click', () => {
-        let newContent = document.getElementById('editNote').value;
-        let notes = getNotes();
-        notes[idx].content = newContent;
-        notes[idx].date = new Date().toISOString();
-        localStorage.setItem('oraculo_notes', JSON.stringify(notes));
-        renderNotes();
-        modal.remove();
-    });
-    document.getElementById('deleteNote')?.addEventListener('click', () => {
-        let notes = getNotes();
-        notes.splice(idx, 1);
-        localStorage.setItem('oraculo_notes', JSON.stringify(notes));
-        renderNotes();
-        modal.remove();
-    });
-};
-function addNoteFromEditor() {
-    let text = document.getElementById('newNoteText').value.trim();
-    if (!text) return toast('Escribe algo');
-    saveNote(text);
-    document.getElementById('newNoteText').value = '';
-}// ================== app.js - PARTE 3/5 ==================
-// HISTORIAL, ESTADÍSTICAS, IA, PERSONALIDAD
+function saveNote(content) { let notes = getNotes(); notes.push({ date: new Date().toISOString(), content }); localStorage.setItem('oraculo_notes', JSON.stringify(notes)); renderNotes(); toast('Nota guardada'); }
+function renderNotes() { let notes = getNotes(); let container = document.getElementById('notesList'); let noNotes = document.getElementById('noNotes'); if (notes.length === 0) { if (noNotes) noNotes.style.display = 'block'; container.innerHTML = ''; return; } if (noNotes) noNotes.style.display = 'none'; container.innerHTML = notes.map((n, i) => `<div class="note-card" onclick="openNoteModal(${i})"><div class="note-date">${new Date(n.date).toLocaleString()}</div><div class="note-preview">${n.content.substring(0, 80)}...</div></div>`).join(''); }
+window.openNoteModal = function (idx) { let note = getNotes()[idx]; let modal = openModal(`<textarea id="editNote" class="note-editor">${note.content}</textarea><div class="action-buttons"><button class="btn-mystic btn-save" id="updateNote">Actualizar</button><button class="btn-mystic" id="deleteNote" style="background:#f87171;">Eliminar</button></div>`); document.getElementById('updateNote')?.addEventListener('click', () => { let newContent = document.getElementById('editNote').value; let notes = getNotes(); notes[idx].content = newContent; notes[idx].date = new Date().toISOString(); localStorage.setItem('oraculo_notes', JSON.stringify(notes)); renderNotes(); modal.remove(); }); document.getElementById('deleteNote')?.addEventListener('click', () => { let notes = getNotes(); notes.splice(idx, 1); localStorage.setItem('oraculo_notes', JSON.stringify(notes)); renderNotes(); modal.remove(); }); };
+function addNoteFromEditor() { let text = document.getElementById('newNoteText').value.trim(); if (!text) return toast('Escribe algo'); saveNote(text); document.getElementById('newNoteText').value = ''; }
 
-function loadHistory() {
-    const stored = localStorage.getItem('oraculo_history');
-    if (stored) historial = JSON.parse(stored);
-    renderHistory();
-}
+// ================== HISTORIAL Y ESTADÍSTICAS ==================
+function loadHistory() { const stored = localStorage.getItem('oraculo_history'); if (stored) historial = JSON.parse(stored); renderHistory(); }
 function saveHistory() { localStorage.setItem('oraculo_history', JSON.stringify(historial)); }
-function addToHistory(type, data, question) {
-    const entry = { id: Date.now(), date: new Date().toISOString(), type, question: question || '', data };
-    historial.unshift(entry);
-    if (historial.length > 50) historial.pop();
-    saveHistory();
-    renderHistory();
-}
-function renderHistory() {
-    const container = document.getElementById('historialList');
-    if (!container) return;
-    const searchTerm = document.getElementById('historySearch')?.value.toLowerCase() || '';
-    const typeFilter = document.getElementById('historyTypeFilter')?.value || 'all';
-    let filtered = historial.filter(entry => {
-        if (typeFilter !== 'all' && entry.type !== typeFilter) return false;
-        if (searchTerm) {
-            const questionMatch = entry.question?.toLowerCase().includes(searchTerm);
-            let dataMatch = false;
-            if (entry.type === 'tarot') dataMatch = entry.data.card.name.toLowerCase().includes(searchTerm);
-            if (entry.type === 'runa') dataMatch = entry.data.r.name.toLowerCase().includes(searchTerm);
-            if (entry.type === 'tirada' && entry.data.cfg) dataMatch = entry.data.cfg.name.toLowerCase().includes(searchTerm);
-            if (entry.type === 'daily') dataMatch = entry.data.card.name.toLowerCase().includes(searchTerm) || entry.data.runa.name.toLowerCase().includes(searchTerm);
-            if (!questionMatch && !dataMatch) return false;
-        }
-        return true;
-    });
-    if (filtered.length === 0) {
-        container.innerHTML = '<p style="text-align:center;color:var(--text-muted)">No hay tiradas que coincidan.</p>';
-        return;
-    }
-    container.innerHTML = filtered.map(entry => `
-        <div class="historial-item" data-id="${entry.id}">
-            <div class="historial-date">${new Date(entry.date).toLocaleString()}</div>
-            <div class="historial-type">${entry.type === 'tarot' ? '🃏 TAROT' : entry.type === 'runa' ? 'ᚱ RUNA' : entry.type === 'tirada' ? '⚡ TIRADA' : '☀️ DIARIA'}</div>
-            ${entry.question ? `<div class="historial-question">"${escapeHtml(entry.question)}"</div>` : ''}
-            <div class="historial-summary">${getSummary(entry)}</div>
-        </div>
-    `).join('');
-    document.querySelectorAll('.historial-item').forEach(el => {
-        el.addEventListener('click', () => {
-            const id = parseInt(el.dataset.id);
-            const entry = historial.find(e => e.id === id);
-            if (entry) showHistoryDetail(entry);
-        });
-    });
-}
-function getSummary(entry) {
-    if (entry.type === 'tarot') return `Carta: ${entry.data.card.name} ${entry.data.rev ? '(Inv)' : ''}`;
-    if (entry.type === 'runa') return `Runa: ${entry.data.r.name} ${entry.data.rev ? '(Inv)' : ''}`;
-    if (entry.type === 'tirada') return entry.data.cfg ? `Tirada: ${entry.data.cfg.name} (${entry.data.drawn.length} cartas)` : `Tirada de runas (${entry.data.runes.length})`;
-    if (entry.type === 'daily') return `Carta: ${entry.data.card.name}, Runa: ${entry.data.runa.name}`;
-    return '';
-}
-function showHistoryDetail(entry) {
-    let html = `<h2 style="color:var(--gold)">Detalle de la consulta</h2><p><strong>Fecha:</strong> ${new Date(entry.date).toLocaleString()}</p><p><strong>Tipo:</strong> ${entry.type}</p>`;
-    if (entry.question) html += `<p><strong>Pregunta:</strong> "${entry.question}"</p>`;
-    if (entry.type === 'tarot') {
-        const card = entry.data.card, rev = entry.data.rev;
-        html += `<div>${cardHTML(card, { big: true, reversed: rev })}</div><div class="interp-card"><p>${rev ? card.rv : card.up}</p></div>`;
-    } else if (entry.type === 'runa') {
-        const r = entry.data.r, rev = entry.data.rev;
-        html += `<div style="transform:${rev ? 'rotate(180deg)' : 'none'}">${runeCardHTML(r)}</div><div class="interp-card"><p>${rev && r.rv ? r.rv : r.up}</p></div>`;
-    } else if (entry.type === 'tirada') {
-        if (entry.data.cfg) {
-            html += `<p><strong>Tirada:</strong> ${entry.data.cfg.name}</p>`;
-            entry.data.drawn.forEach(x => html += `<div><strong>${x.pos}:</strong> ${x.c.name} ${x.rev ? '(Inv)' : ''}</div>`);
-        } else if (entry.data.runes) entry.data.runes.forEach((x,i) => html += `<div><strong>Posición ${i+1}:</strong> ${x.r.name} ${x.rev ? '(Inv)' : ''}</div>`);
-    } else if (entry.type === 'daily') html += `<div>${cardHTML(entry.data.card, { big: true, reversed: entry.data.rev })}</div><div>${runeCardHTML(entry.data.runa)}</div>`;
-    openModal(html);
-}
+function addToHistory(type, data, question) { const entry = { id: Date.now(), date: new Date().toISOString(), type, question: question || '', data }; historial.unshift(entry); if (historial.length > 50) historial.pop(); saveHistory(); renderHistory(); }
+function renderHistory() { const container = document.getElementById('historialList'); if (!container) return; const searchTerm = document.getElementById('historySearch')?.value.toLowerCase() || ''; const typeFilter = document.getElementById('historyTypeFilter')?.value || 'all'; let filtered = historial.filter(entry => { if (typeFilter !== 'all' && entry.type !== typeFilter) return false; if (searchTerm) { const questionMatch = entry.question?.toLowerCase().includes(searchTerm); let dataMatch = false; if (entry.type === 'tarot') dataMatch = entry.data.card.name.toLowerCase().includes(searchTerm); if (entry.type === 'runa') dataMatch = entry.data.r.name.toLowerCase().includes(searchTerm); if (entry.type === 'tirada' && entry.data.cfg) dataMatch = entry.data.cfg.name.toLowerCase().includes(searchTerm); if (entry.type === 'daily') dataMatch = entry.data.card.name.toLowerCase().includes(searchTerm) || entry.data.runa.name.toLowerCase().includes(searchTerm); if (!questionMatch && !dataMatch) return false; } return true; }); if (filtered.length === 0) { container.innerHTML = '<p style="text-align:center;color:var(--text-muted)">No hay tiradas que coincidan.</p>'; return; } container.innerHTML = filtered.map(entry => `<div class="historial-item" data-id="${entry.id}"><div class="historial-date">${new Date(entry.date).toLocaleString()}</div><div class="historial-type">${entry.type === 'tarot' ? '🃏 TAROT' : entry.type === 'runa' ? 'ᚱ RUNA' : entry.type === 'tirada' ? '⚡ TIRADA' : '☀️ DIARIA'}</div>${entry.question ? `<div class="historial-question">"${escapeHtml(entry.question)}"</div>` : ''}<div class="historial-summary">${getSummary(entry)}</div></div>`).join(''); document.querySelectorAll('.historial-item').forEach(el => { el.addEventListener('click', () => { const id = parseInt(el.dataset.id); const entry = historial.find(e => e.id === id); if (entry) showHistoryDetail(entry); }); }); }
+function getSummary(entry) { if (entry.type === 'tarot') return `Carta: ${entry.data.card.name} ${entry.data.rev ? '(Inv)' : ''}`; if (entry.type === 'runa') return `Runa: ${entry.data.r.name} ${entry.data.rev ? '(Inv)' : ''}`; if (entry.type === 'tirada') return entry.data.cfg ? `Tirada: ${entry.data.cfg.name} (${entry.data.drawn.length} cartas)` : `Tirada de runas (${entry.data.runes.length})`; if (entry.type === 'daily') return `Carta: ${entry.data.card.name}, Runa: ${entry.data.runa.name}`; return ''; }
+function showHistoryDetail(entry) { let html = `<h2 style="color:var(--gold)">Detalle de la consulta</h2><p><strong>Fecha:</strong> ${new Date(entry.date).toLocaleString()}</p><p><strong>Tipo:</strong> ${entry.type}</p>`; if (entry.question) html += `<p><strong>Pregunta:</strong> "${entry.question}"</p>`; if (entry.type === 'tarot') { const card = entry.data.card, rev = entry.data.rev; html += `<div>${cardHTML(card, { big: true, reversed: rev })}</div><div class="interp-card"><p>${rev ? card.rv : card.up}</p></div>`; } else if (entry.type === 'runa') { const r = entry.data.r, rev = entry.data.rev; html += `<div style="transform:${rev ? 'rotate(180deg)' : 'none'}">${runeCardHTML(r)}</div><div class="interp-card"><p>${rev && r.rv ? r.rv : r.up}</p></div>`; } else if (entry.type === 'tirada') { if (entry.data.cfg) { html += `<p><strong>Tirada:</strong> ${entry.data.cfg.name}</p>`; entry.data.drawn.forEach(x => html += `<div><strong>${x.pos}:</strong> ${x.c.name} ${x.rev ? '(Inv)' : ''}</div>`); } else if (entry.data.runes) entry.data.runes.forEach((x,i) => html += `<div><strong>Posición ${i+1}:</strong> ${x.r.name} ${x.rev ? '(Inv)' : ''}</div>`); } } else if (entry.type === 'daily') html += `<div>${cardHTML(entry.data.card, { big: true, reversed: entry.data.rev })}</div><div>${runeCardHTML(entry.data.runa)}</div>`; openModal(html); }
 function escapeHtml(str) { return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
 
-function computeStats() {
-    const stats = { tarot: {}, runas: {}, tiradas: {} };
-    historial.forEach(entry => {
-        if (entry.type === 'tarot') {
-            const cardName = entry.data.card.name;
-            stats.tarot[cardName] = (stats.tarot[cardName] || 0) + 1;
-        } else if (entry.type === 'runa') {
-            const runaName = entry.data.r.name;
-            stats.runas[runaName] = (stats.runas[runaName] || 0) + 1;
-        } else if (entry.type === 'tirada' && entry.data.cfg) {
-            const tiradaName = entry.data.cfg.name;
-            stats.tiradas[tiradaName] = (stats.tiradas[tiradaName] || 0) + 1;
-        }
-    });
-    return stats;
-}
-function updateStatsCharts() {
-    const stats = computeStats();
-    const tarotSorted = Object.entries(stats.tarot).sort((a,b) => b[1] - a[1]).slice(0,5);
-    if (tarotChart) tarotChart.destroy();
-    const tarotCtx = document.getElementById('tarotChart')?.getContext('2d');
-    if (tarotCtx) {
-        tarotChart = new Chart(tarotCtx, { type: 'bar', data: { labels: tarotSorted.map(i=>i[0]), datasets: [{ label: 'Veces', data: tarotSorted.map(i=>i[1]), backgroundColor: 'rgba(255,215,0,0.6)', borderColor: '#FFD700', borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: true } });
-    }
-    const runasSorted = Object.entries(stats.runas).sort((a,b) => b[1] - a[1]).slice(0,5);
-    if (runasChart) runasChart.destroy();
-    const runasCtx = document.getElementById('runasChart')?.getContext('2d');
-    if (runasCtx) {
-        runasChart = new Chart(runasCtx, { type: 'bar', data: { labels: runasSorted.map(i=>i[0]), datasets: [{ label: 'Veces', data: runasSorted.map(i=>i[1]), backgroundColor: 'rgba(192,192,192,0.6)', borderColor: '#C0C0C0', borderWidth: 1 }] } });
-    }
-    const tiradasSorted = Object.entries(stats.tiradas).sort((a,b) => b[1] - a[1]).slice(0,5);
-    if (tiradasChart) tiradasChart.destroy();
-    const tiradasCtx = document.getElementById('tiradasChart')?.getContext('2d');
-    if (tiradasCtx) {
-        tiradasChart = new Chart(tiradasCtx, { type: 'pie', data: { labels: tiradasSorted.map(i=>i[0]), datasets: [{ data: tiradasSorted.map(i=>i[1]), backgroundColor: ['#FFD700','#C0C0C0','#B8860B','#FF69B4','#7B2FBE'] }] } });
-    }
-    const totalTiradas = historial.length;
-    const totalTarot = Object.values(stats.tarot).reduce((a,b)=>a+b,0);
-    const totalRunas = Object.values(stats.runas).reduce((a,b)=>a+b,0);
-    document.getElementById('statsSummary').innerHTML = `<p>📊 Total de consultas: <strong>${totalTiradas}</strong></p><p>🃏 Cartas de Tarot: <strong>${totalTarot}</strong></p><p>ᚱ Runas: <strong>${totalRunas}</strong></p><p>⚡ Tiradas especiales: <strong>${Object.values(stats.tiradas).reduce((a,b)=>a+b,0)}</strong></p>`;
-}
+function computeStats() { const stats = { tarot: {}, runas: {}, tiradas: {} }; historial.forEach(entry => { if (entry.type === 'tarot') { const cardName = entry.data.card.name; stats.tarot[cardName] = (stats.tarot[cardName] || 0) + 1; } else if (entry.type === 'runa') { const runaName = entry.data.r.name; stats.runas[runaName] = (stats.runas[runaName] || 0) + 1; } else if (entry.type === 'tirada' && entry.data.cfg) { const tiradaName = entry.data.cfg.name; stats.tiradas[tiradaName] = (stats.tiradas[tiradaName] || 0) + 1; } }); return stats; }
+function updateStatsCharts() { const stats = computeStats(); const tarotSorted = Object.entries(stats.tarot).sort((a,b) => b[1] - a[1]).slice(0,5); if (tarotChart) tarotChart.destroy(); const tarotCtx = document.getElementById('tarotChart')?.getContext('2d'); if (tarotCtx) { tarotChart = new Chart(tarotCtx, { type: 'bar', data: { labels: tarotSorted.map(i=>i[0]), datasets: [{ label: 'Veces', data: tarotSorted.map(i=>i[1]), backgroundColor: 'rgba(255,215,0,0.6)', borderColor: '#FFD700', borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: true } }); } const runasSorted = Object.entries(stats.runas).sort((a,b) => b[1] - a[1]).slice(0,5); if (runasChart) runasChart.destroy(); const runasCtx = document.getElementById('runasChart')?.getContext('2d'); if (runasCtx) { runasChart = new Chart(runasCtx, { type: 'bar', data: { labels: runasSorted.map(i=>i[0]), datasets: [{ label: 'Veces', data: runasSorted.map(i=>i[1]), backgroundColor: 'rgba(192,192,192,0.6)', borderColor: '#C0C0C0', borderWidth: 1 }] } }); } const tiradasSorted = Object.entries(stats.tiradas).sort((a,b) => b[1] - a[1]).slice(0,5); if (tiradasChart) tiradasChart.destroy(); const tiradasCtx = document.getElementById('tiradasChart')?.getContext('2d'); if (tiradasCtx) { tiradasChart = new Chart(tiradasCtx, { type: 'pie', data: { labels: tiradasSorted.map(i=>i[0]), datasets: [{ data: tiradasSorted.map(i=>i[1]), backgroundColor: ['#FFD700','#C0C0C0','#B8860B','#FF69B4','#7B2FBE'] }] } }); } const totalTiradas = historial.length; const totalTarot = Object.values(stats.tarot).reduce((a,b)=>a+b,0); const totalRunas = Object.values(stats.runas).reduce((a,b)=>a+b,0); document.getElementById('statsSummary').innerHTML = `<p>📊 Total de consultas: <strong>${totalTiradas}</strong></p><p>🃏 Cartas de Tarot: <strong>${totalTarot}</strong></p><p>ᚱ Runas: <strong>${totalRunas}</strong></p><p>⚡ Tiradas especiales: <strong>${Object.values(stats.tiradas).reduce((a,b)=>a+b,0)}</strong></p>`; }
 
-function getPersonalityPrompt(basePrompt) {
-    const personality = document.getElementById('personalitySelect')?.value || 'sabio';
-    const personas = { sabio: 'Eres un sabio consejero espiritual, hablas con serenidad y profundidad.', mistico: 'Eres un místico poético, hablas con metáforas y lenguaje enigmático.', bromista: 'Eres un oráculo bromista, con humor y sorpresas.', romantico: 'Eres un oráculo romántico, cálido y amoroso.' };
-    return `${personas[personality]}\n\n${basePrompt}`;
-}
+function getPersonalityPrompt(basePrompt) { const personality = document.getElementById('personalitySelect')?.value || 'sabio'; const personas = { sabio: 'Eres un sabio consejero espiritual.', mistico: 'Eres un místico poético.', bromista: 'Eres un oráculo bromista.', romantico: 'Eres un oráculo romántico.' }; return `${personas[personality]}\n\n${basePrompt}`; }
 
-async function getIA(type) {
-    let container = document.getElementById(`${type}IAResult`);
-    if (!container) return;
-    container.innerHTML = '<div class="loading"><div class="loading-spinner"></div> El oráculo teje su respuesta...</div>';
-    let prompt = '', state = lastState;
-    if (type === 'daily' && state.daily) prompt = `Hoy la carta del tarot es ${state.daily.card.name} (${state.daily.rev ? 'invertida' : 'derecha'}) y la runa ${state.daily.runa.name} (${state.daily.rrev ? 'invertida' : 'derecha'}). Da una interpretación profunda de 350 palabras para el día de hoy.`;
-    else if (type === 'tarot' && state.tarot) prompt = `Interpreta la carta ${state.tarot.card.name} (${state.tarot.rev ? 'invertida' : 'derecha'}) en respuesta a: "${state.tarot.q}". Lectura detallada de 400 palabras.`;
-    else if (type === 'runa' && state.runa) prompt = `Interpreta la runa ${state.runa.r.name} (${state.runa.rev ? 'invertida' : 'derecha'}) para: "${state.runa.q}". Mensaje de 300 palabras.`;
-    else if (type === 'tirada' && state.tirada) {
-        if (state.tirada.type === 'chakras') prompt = `Tirada de 7 chakras: ${state.tirada.drawn.map((d,i)=>`${d.c.name} (${d.rev?'inv':'der'}) en chakra ${d.pos}`).join(', ')}. Interpretación incisiva de 400 palabras.`;
-        else if (state.tirada.cfg) prompt = `Tirada ${state.tirada.cfg.name}: ${state.tirada.drawn.map(d=>`${d.c.name} (${d.rev?'inv':'der'}) en ${d.pos}`).join(', ')}. Pregunta: "${state.tirada.q}". Lectura de 400 palabras.`;
-        else prompt = `Runas: ${state.tirada.runes.map(r=>`${r.r.name} (${r.rev?'inv':'der'})`).join(', ')}. Pregunta: "${state.tirada.q}". 350 palabras.`;
-    }
-    else if (type === 'dream' && state.dream) prompt = `Sueño: "${state.dream.txt}". Interpretación junguiana extensa de 350 palabras.`;
-    else if (type === 'luna' && state.luna) prompt = `Fase lunar: ${state.luna.phase.name}. Significado: ${state.luna.phase.meaning}. Interpretación espiritual de 300 palabras.`;
-    else if (type === 'numerologia' && state.num) prompt = `Número de vida ${state.num.lifePath}, expresión ${state.num.expression}. Análisis profundo de 400 palabras.`;
-    else if (type === 'synastry' && state.syn) prompt = `Compatibilidad entre ${state.syn.n1} (${state.syn.lp1}) y ${state.syn.n2} (${state.syn.lp2}). Análisis de 350 palabras.`;
-    else { container.innerHTML = '<p>Realiza una consulta primero.</p>'; return; }
-    prompt = getPersonalityPrompt(prompt);
-    try {
-        await new Promise(r => { if (window.puter?.ai) r(); else setTimeout(r, 1500); });
-        let res = await puter.ai.chat(prompt, { model: 'gpt-4o-mini' });
-        let text = typeof res === 'string' ? res : res.message?.content;
-        container.innerHTML = `<div class="ia-interp"><p>${text.replace(/\n/g, '<br>')}</p></div>`;
-        speakText(text);
-        // Guardar interpretación de IA en el historial (solo para tiradas y cartas sueltas)
-        if (type === 'tarot' && state.tarot) {
-            addToHistory('ia_tarot', { card: state.tarot.card, rev: state.tarot.rev, question: state.tarot.q, interpretation: text }, state.tarot.q);
-        } else if (type === 'runa' && state.runa) {
-            addToHistory('ia_runa', { runa: state.runa.r, rev: state.runa.rev, question: state.runa.q, interpretation: text }, state.runa.q);
-        } else if (type === 'tirada' && state.tirada && state.tirada.cfg) {
-            addToHistory('ia_tirada', { cfg: state.tirada.cfg, drawn: state.tirada.drawn, question: state.tirada.q, interpretation: text }, state.tirada.q);
-        }
-    } catch (e) { container.innerHTML = `<div class="ia-interp">Error: ${e.message}</div>`; toast('Error de IA'); }
-}// ================== app.js - PARTE 4/5 ==================
-// CARTA DEL DÍA, TAROT, RUNAS, TIRADAS, LUNA, SUEÑOS, NUMEROLOGÍA
+async function getIA(type) { let container = document.getElementById(`${type}IAResult`); if (!container) return; container.innerHTML = '<div class="loading"><div class="loading-spinner"></div> El oráculo teje su respuesta...</div>'; let prompt = '', state = lastState; if (type === 'daily' && state.daily) prompt = `Hoy la carta del tarot es ${state.daily.card.name} (${state.daily.rev ? 'invertida' : 'derecha'}) y la runa ${state.daily.runa.name} (${state.daily.rrev ? 'invertida' : 'derecha'}). Da una interpretación profunda de 350 palabras para el día de hoy.`; else if (type === 'tarot' && state.tarot) prompt = `Interpreta la carta ${state.tarot.card.name} (${state.tarot.rev ? 'invertida' : 'derecha'}) en respuesta a: "${state.tarot.q}". Lectura detallada de 400 palabras.`; else if (type === 'runa' && state.runa) prompt = `Interpreta la runa ${state.runa.r.name} (${state.runa.rev ? 'invertida' : 'derecha'}) para: "${state.runa.q}". Mensaje de 300 palabras.`; else if (type === 'tirada' && state.tirada) { if (state.tirada.type === 'chakras') prompt = `Tirada de 7 chakras: ${state.tirada.drawn.map((d,i)=>`${d.c.name} (${d.rev?'inv':'der'}) en chakra ${d.pos}`).join(', ')}. Interpretación incisiva de 400 palabras.`; else if (state.tirada.cfg) prompt = `Tirada ${state.tirada.cfg.name}: ${state.tirada.drawn.map(d=>`${d.c.name} (${d.rev?'inv':'der'}) en ${d.pos}`).join(', ')}. Pregunta: "${state.tirada.q}". Lectura de 400 palabras.`; else prompt = `Runas: ${state.tirada.runes.map(r=>`${r.r.name} (${r.rev?'inv':'der'})`).join(', ')}. Pregunta: "${state.tirada.q}". 350 palabras.`; } else if (type === 'dream' && state.dream) prompt = `Sueño: "${state.dream.txt}". Interpretación junguiana extensa de 350 palabras.`; else if (type === 'luna' && state.luna) prompt = `Fase lunar: ${state.luna.phase.name}. Significado: ${state.luna.phase.meaning}. Interpretación espiritual de 300 palabras.`; else if (type === 'numerologia' && state.num) prompt = `Número de vida ${state.num.lifePath}, expresión ${state.num.expression}. Análisis profundo de 400 palabras.`; else if (type === 'synastry' && state.syn) prompt = `Compatibilidad entre ${state.syn.n1} (${state.syn.lp1}) y ${state.syn.n2} (${state.syn.lp2}). Análisis de 350 palabras.`; else { container.innerHTML = '<p>Realiza una consulta primero.</p>'; return; } prompt = getPersonalityPrompt(prompt); try { await new Promise(r => { if (window.puter?.ai) r(); else setTimeout(r, 1500); }); let res = await puter.ai.chat(prompt, { model: 'gpt-4o-mini' }); let text = typeof res === 'string' ? res : res.message?.content; container.innerHTML = `<div class="ia-interp"><p>${text.replace(/\n/g, '<br>')}</p></div>`; speakText(text); if (type === 'tarot' && state.tarot) { addToHistory('ia_tarot', { card: state.tarot.card, rev: state.tarot.rev, question: state.tarot.q, interpretation: text }, state.tarot.q); } else if (type === 'runa' && state.runa) { addToHistory('ia_runa', { runa: state.runa.r, rev: state.runa.rev, question: state.runa.q, interpretation: text }, state.runa.q); } else if (type === 'tirada' && state.tirada && state.tirada.cfg) { addToHistory('ia_tirada', { cfg: state.tirada.cfg, drawn: state.tirada.drawn, question: state.tirada.q, interpretation: text }, state.tirada.q); } } catch (e) { container.innerHTML = `<div class="ia-interp">Error: ${e.message}</div>`; toast('Error de IA'); } }
 
+// ================== CARTA DEL DÍA, TAROT, RUNAS, TIRADAS ==================
 const DAILY_KEY = 'oraculo_daily';
 function getDailyData() { const raw = localStorage.getItem(DAILY_KEY); if (!raw) return null; const data = JSON.parse(raw); if (data.date !== new Date().toDateString()) return null; return data; }
 function saveDailyData(card, rev, runa, rrev) { localStorage.setItem(DAILY_KEY, JSON.stringify({ date: new Date().toDateString(), card, rev, runa, rrev })); }
 function checkDailyButton() { const btn = document.getElementById('dailyDrawBtn'); const data = getDailyData(); if (data) { btn.disabled = true; btn.textContent = '🔒 Ya has revelado tu carta hoy'; showDailyResult(data); } else { btn.disabled = false; btn.textContent = '🌟 Revelar Mi Carta y Runa del Día'; } }
-function showDailyResult(data) {
-    lastState.daily = data;
-    document.getElementById('dailyCardDisplay').innerHTML = `<div style="display:flex;gap:30px;justify-content:center;flex-wrap:wrap"><div>🃏 Tarot<br>${cardHTML(data.card,{big:true,reversed:data.rev})}</div><div>ᚱ Runa<br><div style="transform:${data.rrev?'rotate(180deg)':'none'}">${runeCardHTML(data.runa)}</div></div></div>`;
-    document.getElementById('dailyResult').innerHTML = `<div class="result-area" id="daily-export"><div class="result-title">🌟 Mensaje del Día</div><div class="interp-card"><h3>${data.card.name} ${data.rev?'(Invertida)':''}</h3><p>${data.rev?data.card.rv:data.card.up}</p></div><div class="interp-card"><h3>${data.runa.name} ${data.rrev&&data.runa.rv&&data.runa.rv!=='No tiene reverso.'?'(Invertida)':''}</h3><p>${data.rrev&&data.runa.rv&&data.runa.rv!=='No tiene reverso.'?data.runa.rv:data.runa.up}</p></div><div id="dailyIAResult"></div></div>`;
-    document.getElementById('dailyActions').style.display = 'flex';
-    addToHistory('daily', { card: data.card, rev: data.rev, runa: data.runa, rrev: data.rrev }, '');
-}
+function showDailyResult(data) { lastState.daily = data; document.getElementById('dailyCardDisplay').innerHTML = `<div style="display:flex;gap:30px;justify-content:center;flex-wrap:wrap"><div>🃏 Tarot<br>${cardHTML(data.card,{big:true,reversed:data.rev})}</div><div>ᚱ Runa<br><div style="transform:${data.rrev?'rotate(180deg)':'none'}">${runeCardHTML(data.runa)}</div></div></div>`; document.getElementById('dailyResult').innerHTML = `<div class="result-area" id="daily-export"><div class="result-title">🌟 Mensaje del Día</div><div class="interp-card"><h3>${data.card.name} ${data.rev?'(Invertida)':''}</h3><p>${data.rev?data.card.rv:data.card.up}</p></div><div class="interp-card"><h3>${data.runa.name} ${data.rrev&&data.runa.rv&&data.runa.rv!=='No tiene reverso.'?'(Invertida)':''}</h3><p>${data.rrev&&data.runa.rv&&data.runa.rv!=='No tiene reverso.'?data.runa.rv:data.runa.up}</p></div><div id="dailyIAResult"></div></div>`; document.getElementById('dailyActions').style.display = 'flex'; addToHistory('daily', { card: data.card, rev: data.rev, runa: data.runa, rrev: data.rrev }, ''); }
 function drawDailyCard() { if (getDailyData()) { toast('🔒 Ya has revelado tu carta hoy. Vuelve mañana.'); return; } const card = ALL_TAROT[Math.floor(Math.random() * ALL_TAROT.length)]; const rev = Math.random() < 0.25; const runa = RUNAS[Math.floor(Math.random() * RUNAS.length)]; const rrev = Math.random() < 0.25; saveDailyData(card, rev, runa, rrev); checkDailyButton(); }
 
-function drawTarot() {
-    let card = ALL_TAROT[Math.floor(Math.random() * ALL_TAROT.length)];
-    let rev = Math.random() < 0.25;
-    lastState.tarot = { card, rev, q: document.getElementById('tarotQ').value };
-    document.getElementById('tarotResult').innerHTML = `<div class="result-area" id="tarot-export"><div class="result-title">🎴 Tu Carta</div>${lastState.tarot.q ? `<p>"${lastState.tarot.q}"</p>` : ''}<div style="display:flex;justify-content:center">${cardHTML(card, { big: true, reversed: rev })}</div><div class="interp-card"><h3>${card.name} ${rev ? '(Invertida)' : ''}</h3><p>${rev ? card.rv : card.up}</p></div><div id="tarotIAResult"></div></div>`;
-    document.getElementById('tarotActions').style.display = 'flex';
-    const newCard = document.querySelector('#tarotResult .real-card');
-    if (newCard) { newCard.classList.add('animate-flip'); setTimeout(() => newCard.classList.remove('animate-flip'), 600); }
-    addToHistory('tarot', { card, rev }, lastState.tarot.q);
-    // IA automática si está activada
-    if (document.getElementById('tarotAutoIA')?.checked) {
-        setTimeout(() => getIA('tarot'), 500);
-    }
-}
+function drawTarot() { let card = ALL_TAROT[Math.floor(Math.random() * ALL_TAROT.length)]; let rev = Math.random() < 0.25; lastState.tarot = { card, rev, q: document.getElementById('tarotQ').value }; document.getElementById('tarotResult').innerHTML = `<div class="result-area" id="tarot-export"><div class="result-title">🎴 Tu Carta</div>${lastState.tarot.q ? `<p>"${lastState.tarot.q}"</p>` : ''}<div style="display:flex;justify-content:center">${cardHTML(card, { big: true, reversed: rev })}</div><div class="interp-card"><h3>${card.name} ${rev ? '(Invertida)' : ''}</h3><p>${rev ? card.rv : card.up}</p></div><div id="tarotIAResult"></div></div>`; document.getElementById('tarotActions').style.display = 'flex'; const newCard = document.querySelector('#tarotResult .real-card'); if (newCard) { newCard.classList.add('animate-flip'); setTimeout(() => newCard.classList.remove('animate-flip'), 600); } addToHistory('tarot', { card, rev }, lastState.tarot.q); }
+function drawRune() { let r = RUNAS[Math.floor(Math.random() * RUNAS.length)]; let rev = Math.random() < 0.25; lastState.runa = { r, rev, q: document.getElementById('runaQ').value }; document.getElementById('runaResult').innerHTML = `<div class="result-area" id="runa-export"><div class="result-title">ᚱ Tu Runa</div>${lastState.runa.q ? `<p>"${lastState.runa.q}"</p>` : ''}<div style="display:flex;justify-content:center;transform:${rev ? 'rotate(180deg)' : 'none'}">${runeCardHTML(r)}</div><div class="interp-card"><h3>${r.name} ${rev ? '(Invertida)' : ''}</h3><p>${rev && r.rv ? r.rv : r.up}</p></div><div id="runaIAResult"></div></div>`; document.getElementById('runaActions').style.display = 'flex'; const newCard = document.querySelector('#runaResult .rune-card'); if (newCard) { newCard.classList.add('animate-fade'); setTimeout(() => newCard.classList.remove('animate-fade'), 400); } addToHistory('runa', { r, rev }, lastState.runa.q); }
 
-function drawRune() {
-    let r = RUNAS[Math.floor(Math.random() * RUNAS.length)];
-    let rev = Math.random() < 0.25;
-    lastState.runa = { r, rev, q: document.getElementById('runaQ').value };
-    document.getElementById('runaResult').innerHTML = `<div class="result-area" id="runa-export"><div class="result-title">ᚱ Tu Runa</div>${lastState.runa.q ? `<p>"${lastState.runa.q}"</p>` : ''}<div style="display:flex;justify-content:center;transform:${rev ? 'rotate(180deg)' : 'none'}">${runeCardHTML(r)}</div><div class="interp-card"><h3>${r.name} ${rev ? '(Invertida)' : ''}</h3><p>${rev && r.rv ? r.rv : r.up}</p></div><div id="runaIAResult"></div></div>`;
-    document.getElementById('runaActions').style.display = 'flex';
-    const newCard = document.querySelector('#runaResult .rune-card');
-    if (newCard) { newCard.classList.add('animate-fade'); setTimeout(() => newCard.classList.remove('animate-fade'), 400); }
-    addToHistory('runa', { r, rev }, lastState.runa.q);
-    if (document.getElementById('runasAutoIA')?.checked) {
-        setTimeout(() => getIA('runa'), 500);
-    }
-}
-
-function doSpread(spreadType) {
-    const cfgMap = {
-        celtic: { n:10, pos:['Situación','Desafío','Base','Pasado','Corona','Futuro','Tú','Influencias','Esperanzas','Resultado'], name:'Cruz Celta' },
-        ppf: { n:3, pos:['Pasado','Presente','Futuro'], name:'Pasado-Presente-Futuro' },
-        love: { n:5, pos:['Tú','Otra persona','Conexión','Desafíos','Potencial'], name:'Amor' },
-        yesno: { n:1, pos:['Respuesta'], name:'Sí o No' },
-        week: { n:7, pos:['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'], name:'Semana' },
-        chakras: { n:7, pos:['Raíz','Sacral','Plexo Solar','Corazón','Garganta','Tercer Ojo','Corona'], name:'7 Chakras' },
-        horseshoe: { n:7, pos:['Pasado','Situación','Futuro','Oculto','Influencia','Qué hacer','Resultado'], name:'Herradura' },
-        star: { n:5, pos:['Espíritu','Agua','Fuego','Tierra','Aire'], name:'Estrella' },
-        pyramid: { n:6, pos:['Base','Cuerpo','Mente','Emoción','Espíritu','Culminación'], name:'Pirámide' },
-        elements: { n:5, pos:['Tierra','Agua','Fuego','Aire','Espíritu'], name:'5 Elementos' },
-        zodiac: { n:12, pos:['Aries','Tauro','Géminis','Cáncer','Leo','Virgo','Libra','Escorpio','Sagitario','Capricornio','Acuario','Piscis'], name:'12 Zodiacales' }
-    };
-    let cfg = cfgMap[spreadType];
-    if (!cfg) return;
-    let q = document.getElementById('tiradaQ').value;
-    let drawn = [];
-    for (let i=0; i<cfg.n; i++) { let card = ALL_TAROT[Math.floor(Math.random() * ALL_TAROT.length)]; let rev = Math.random() < 0.25; drawn.push({ c: card, rev, pos: cfg.pos[i] }); }
-    lastState.tirada = { cfg, drawn, q, type: spreadType === 'chakras' ? 'chakras' : 'tarot' };
-    let yn = '';
-    if (spreadType === 'yesno') { let yesCards = ['El Sol','La Estrella','El Mundo','El Mago','Los Amantes','El Carro','La Fuerza']; let isYes = yesCards.some(n => drawn[0].c.name.includes(n)) && !drawn[0].rev; yn = `<div style="text-align:center;font-size:2.8rem;color:${isYes?'#4ade80':'#f87171'}">${isYes?'✅ SÍ':'🔴 NO'}</div>`; }
-    let html = `<div class="result-area" id="tirada-export"><div class="result-title">⚡ ${cfg.name}</div>${q?`<p>"${q}"</p>`:''}${yn}<div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:20px 0">${drawn.map(x=>`<div style="text-align:center"><div style="font-size:0.52rem;color:var(--gold);">${x.pos}</div>${cardHTML(x.c,{reversed:x.rev})}</div>`).join('')}</div>${drawn.map(x=>`<div class="interp-card"><h3>${x.pos}: ${x.c.name} ${x.rev?'(Inv.)':''}</h3><p>${x.rev?x.c.rv:x.c.up}</p></div>`).join('')}<div id="tiradaIAResult"></div></div>`;
-    document.getElementById('tiradaResult').innerHTML = html;
-    document.getElementById('tiradaActions').style.display = 'flex';
-    const firstCard = document.querySelector('#tiradaResult .real-card');
-    if (firstCard) { firstCard.classList.add('animate-flip'); setTimeout(() => firstCard.classList.remove('animate-flip'), 600); }
-    addToHistory('tirada', { cfg, drawn }, q);
-}
-
+function doSpread(spreadType) { const cfgMap = { celtic: { n:10, pos:['Situación','Desafío','Base','Pasado','Corona','Futuro','Tú','Influencias','Esperanzas','Resultado'], name:'Cruz Celta' }, ppf: { n:3, pos:['Pasado','Presente','Futuro'], name:'Pasado-Presente-Futuro' }, love: { n:5, pos:['Tú','Otra persona','Conexión','Desafíos','Potencial'], name:'Amor' }, yesno: { n:1, pos:['Respuesta'], name:'Sí o No' }, week: { n:7, pos:['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'], name:'Semana' }, chakras: { n:7, pos:['Raíz','Sacral','Plexo Solar','Corazón','Garganta','Tercer Ojo','Corona'], name:'7 Chakras' }, horseshoe: { n:7, pos:['Pasado','Situación','Futuro','Oculto','Influencia','Qué hacer','Resultado'], name:'Herradura' }, star: { n:5, pos:['Espíritu','Agua','Fuego','Tierra','Aire'], name:'Estrella' }, pyramid: { n:6, pos:['Base','Cuerpo','Mente','Emoción','Espíritu','Culminación'], name:'Pirámide' }, elements: { n:5, pos:['Tierra','Agua','Fuego','Aire','Espíritu'], name:'5 Elementos' }, zodiac: { n:12, pos:['Aries','Tauro','Géminis','Cáncer','Leo','Virgo','Libra','Escorpio','Sagitario','Capricornio','Acuario','Piscis'], name:'12 Zodiacales' } }; let cfg = cfgMap[spreadType]; if (!cfg) return; let q = document.getElementById('tiradaQ').value; let drawn = []; for (let i=0; i<cfg.n; i++) { let card = ALL_TAROT[Math.floor(Math.random() * ALL_TAROT.length)]; let rev = Math.random() < 0.25; drawn.push({ c: card, rev, pos: cfg.pos[i] }); } lastState.tirada = { cfg, drawn, q, type: spreadType === 'chakras' ? 'chakras' : 'tarot' }; let yn = ''; if (spreadType === 'yesno') { let yesCards = ['El Sol','La Estrella','El Mundo','El Mago','Los Amantes','El Carro','La Fuerza']; let isYes = yesCards.some(n => drawn[0].c.name.includes(n)) && !drawn[0].rev; yn = `<div style="text-align:center;font-size:2.8rem;color:${isYes?'#4ade80':'#f87171'}">${isYes?'✅ SÍ':'🔴 NO'}</div>`; } let html = `<div class="result-area" id="tirada-export"><div class="result-title">⚡ ${cfg.name}</div>${q?`<p>"${q}"</p>`:''}${yn}<div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:20px 0">${drawn.map(x=>`<div style="text-align:center"><div style="font-size:0.52rem;color:var(--gold);">${x.pos}</div>${cardHTML(x.c,{reversed:x.rev})}</div>`).join('')}</div>${drawn.map(x=>`<div class="interp-card"><h3>${x.pos}: ${x.c.name} ${x.rev?'(Inv.)':''}</h3><p>${x.rev?x.c.rv:x.c.up}</p></div>`).join('')}<div id="tiradaIAResult"></div></div>`; document.getElementById('tiradaResult').innerHTML = html; document.getElementById('tiradaActions').style.display = 'flex'; const firstCard = document.querySelector('#tiradaResult .real-card'); if (firstCard) { firstCard.classList.add('animate-flip'); setTimeout(() => firstCard.classList.remove('animate-flip'), 600); } addToHistory('tirada', { cfg, drawn }, q); }
 function drawThreeRunes() { let runes = []; for(let i=0;i<3;i++) { let r=RUNAS[Math.floor(Math.random()*RUNAS.length)]; let rev=Math.random()<0.25; runes.push({r,rev}); } let q = document.getElementById('tiradaQ').value; lastState.tirada = { runes, q, type: 'runes' }; let html = `<div class="result-area" id="tirada-export"><div class="result-title">ᚱ Tirada de 3 Runas</div>${q?`<p>"${q}"</p>`:''}<div style="display:flex;gap:20px;justify-content:center">${runes.map((x,i)=>`<div><div>${i===0?'Pasado':i===1?'Presente':'Futuro'}</div><div style="transform:${x.rev?'rotate(180deg)':'none'}">${runeCardHTML(x.r)}</div></div>`).join('')}</div>${runes.map((x,i)=>`<div class="interp-card"><h3>${i===0?'Pasado':i===1?'Presente':'Futuro'}: ${x.r.name} ${x.rev?'(Inv.)':''}</h3><p>${x.rev&&x.r.rv?x.r.rv:x.r.up}</p></div>`).join('')}<div id="tiradaIAResult"></div></div>`; document.getElementById('tiradaResult').innerHTML = html; document.getElementById('tiradaActions').style.display = 'flex'; addToHistory('tirada', { runes }, q); }
 function drawFiveRunes() { let runes = []; for(let i=0;i<5;i++) { let r=RUNAS[Math.floor(Math.random()*RUNAS.length)]; let rev=Math.random()<0.25; runes.push({r,rev}); } let q = document.getElementById('tiradaQ').value; lastState.tirada = { runes, q, type: 'runes' }; let pos = ['Pasado','Presente','Futuro','Consejo','Resultado']; let html = `<div class="result-area" id="tirada-export"><div class="result-title">ᚱ Tirada de 5 Runas</div>${q?`<p>"${q}"</p>`:''}<div style="display:flex;gap:20px;justify-content:center">${runes.map((x,i)=>`<div><div>${pos[i]}</div><div style="transform:${x.rev?'rotate(180deg)':'none'}">${runeCardHTML(x.r)}</div></div>`).join('')}</div>${runes.map((x,i)=>`<div class="interp-card"><h3>${pos[i]}: ${x.r.name} ${x.rev?'(Inv.)':''}</h3><p>${x.rev&&x.r.rv?x.r.rv:x.r.up}</p></div>`).join('')}<div id="tiradaIAResult"></div></div>`; document.getElementById('tiradaResult').innerHTML = html; document.getElementById('tiradaActions').style.display = 'flex'; addToHistory('tirada', { runes }, q); }
 function drawSevenRunes() { let runes = []; for(let i=0;i<7;i++) { let r=RUNAS[Math.floor(Math.random()*RUNAS.length)]; let rev=Math.random()<0.25; runes.push({r,rev}); } let q = document.getElementById('tiradaQ').value; lastState.tirada = { runes, q, type: 'runes' }; let pos = ['Pasado','Base','Presente','Futuro','Consejo','Influencia','Resultado']; let html = `<div class="result-area" id="tirada-export"><div class="result-title">ᚱ Tirada de 7 Runas</div>${q?`<p>"${q}"</p>`:''}<div style="display:flex;gap:20px;justify-content:center">${runes.map((x,i)=>`<div><div>${pos[i]}</div><div style="transform:${x.rev?'rotate(180deg)':'none'}">${runeCardHTML(x.r)}</div></div>`).join('')}</div>${runes.map((x,i)=>`<div class="interp-card"><h3>${pos[i]}: ${x.r.name} ${x.rev?'(Inv.)':''}</h3><p>${x.rev&&x.r.rv?x.r.rv:x.r.up}</p></div>`).join('')}<div id="tiradaIAResult"></div></div>`; document.getElementById('tiradaResult').innerHTML = html; document.getElementById('tiradaActions').style.display = 'flex'; addToHistory('tirada', { runes }, q); }
@@ -612,8 +288,8 @@ function calcMoonForDate() { let dateInput = document.getElementById('moonDate')
 function calcMoonToday() { let phase = getMoonPhaseForDate(new Date()); lastState.luna = { phase }; document.getElementById('moonToday').innerHTML = `<div class="result-area" id="luna-export"><div class="result-title">🌙 Fase Lunar de Hoy</div><div style="text-align:center;font-size:4rem">${phase.sym}</div><div style="text-align:center;color:var(--gold);font-size:1.3rem;">${phase.name}</div><div class="interp-card"><p>${phase.meaning}</p><p><strong>Elemento:</strong> ${phase.el}</p><p>🕯️ ${phase.ritual}</p><p><em>${phase.affirmation}</em></p></div><div id="lunaIAResult"></div></div>`; document.getElementById('lunaActions').style.display = 'flex'; }
 function drawMoon() { let phase = MOON_PHASES[Math.floor(Math.random() * MOON_PHASES.length)]; lastState.luna = { phase }; document.getElementById('lunaResult').innerHTML = `<div class="result-area" id="luna-export"><div class="result-title">🌕 Consulta Lunar Aleatoria</div><div style="text-align:center;font-size:3rem">${phase.sym}</div><div style="text-align:center;color:var(--gold);">${phase.name}</div><div class="interp-card"><p>${phase.meaning}</p><p>🕯️ ${phase.ritual}</p><p><em>${phase.affirmation}</em></p></div><div id="lunaIAResult"></div></div>`; document.getElementById('lunaActions').style.display = 'flex'; }
 
-const dreamSymbols = { 'agua': 'Emociones, fluidez, inconsciente.', 'fuego': 'Pasión, transformación, energía.', 'volar': 'Libertad, ambición, expansión.', 'caída': 'Ansiedad, inseguridad, miedo al fracaso.', 'muerte': 'Cambio profundo, renacimiento, transformación.', 'casa': 'Tu mente, vida interior, seguridad.', 'dientes': 'Preocupación por imagen, comunicación.', 'serpiente': 'Sabiduría, peligro oculto, transformación.', 'gato': 'Intuición, independencia, misterio.', 'perro': 'Lealtad, amistad, protección.', 'escuela': 'Aprendizaje, evaluación, crecimiento.', 'boda': 'Unión, compromiso, integración.', 'dinero': 'Valor personal, seguridad, abundancia.' };
-function searchSymbol() { let input = document.getElementById('symbolSearch').value.toLowerCase(); let resultDiv = document.getElementById('symbolResult'); if (!input) { resultDiv.innerHTML = ''; return; } let found = Object.entries(dreamSymbols).filter(([key]) => key.includes(input) || input.includes(key)); if (found.length > 0) { resultDiv.innerHTML = found.map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`).join(''); } else { resultDiv.innerHTML = '<p>No se encontró ese símbolo. Describe tu sueño con detalle para una interpretación personalizada.</p>'; } }
+const dreamSymbols = { 'agua': 'Emociones, fluidez.', 'fuego': 'Pasión, transformación.', 'volar': 'Libertad, ambición.', 'caída': 'Ansiedad, inseguridad.', 'muerte': 'Cambio profundo.', 'casa': 'Tu mente.', 'dientes': 'Preocupación por imagen.', 'serpiente': 'Sabiduría, peligro oculto.', 'gato': 'Intuición.', 'perro': 'Lealtad.', 'escuela': 'Aprendizaje.', 'boda': 'Unión.', 'dinero': 'Valor personal.' };
+function searchSymbol() { let input = document.getElementById('symbolSearch').value.toLowerCase(); let resultDiv = document.getElementById('symbolResult'); if (!input) { resultDiv.innerHTML = ''; return; } let found = Object.entries(dreamSymbols).filter(([key]) => key.includes(input) || input.includes(key)); if (found.length > 0) { resultDiv.innerHTML = found.map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`).join(''); } else { resultDiv.innerHTML = '<p>No se encontró ese símbolo.</p>'; } }
 function saveDream() { let text = document.getElementById('dreamText').value.trim(); if (!text) return toast('Escribe un sueño'); savedDreams = JSON.parse(localStorage.getItem('saved_dreams') || '[]'); savedDreams.unshift({ date: new Date().toISOString(), text }); if (savedDreams.length > 20) savedDreams.pop(); localStorage.setItem('saved_dreams', JSON.stringify(savedDreams)); renderSavedDreams(); toast('Sueño guardado'); }
 function renderSavedDreams() { savedDreams = JSON.parse(localStorage.getItem('saved_dreams') || '[]'); const container = document.getElementById('savedDreamsList'); if (!container) return; if (savedDreams.length === 0) { container.innerHTML = '<p class="section-desc">No hay sueños guardados aún.</p>'; return; } container.innerHTML = savedDreams.map((d, i) => `<div class="saved-dream-item" data-index="${i}">${new Date(d.date).toLocaleDateString()}: ${d.text.substring(0, 60)}...</div>`).join(''); document.querySelectorAll('.saved-dream-item').forEach(el => { el.addEventListener('click', () => { const idx = parseInt(el.dataset.index); document.getElementById('dreamText').value = savedDreams[idx].text; toast('Sueño cargado'); }); }); }
 function interpretDream() { let txt = document.getElementById('dreamText').value.trim(); if (!txt) return toast('Describe tu sueño'); lastState.dream = { txt }; document.getElementById('dreamResult').innerHTML = `<div class="result-area" id="dream-export"><div class="result-title">💭 Interpretación</div><div class="interp-card"><p>Tu sueño refleja procesos internos. La IA te dará una visión más profunda.</p></div><div id="dreamIAResult"></div></div>`; document.getElementById('dreamActions').style.display = 'flex'; }
@@ -624,11 +300,69 @@ function nameToNumber(name) { if (!name) return 0; let clean = name.toUpperCase(
 function calcNumerologia() { let name = document.getElementById('numName').value || 'Consultante'; let dob = document.getElementById('numDob').value; let lifePath = '', expression = ''; if (dob) { let nums = dob.replace(/-/g, '').split('').map(Number); lifePath = reduceToSingle(nums.reduce((a,b)=>a+b,0)); } if (name) expression = nameToNumber(name); const lifeDesc = { 1:'Líder nato, independiente.',2:'Diplomático, cooperador.',3:'Creativo, comunicador.',4:'Constructor, disciplinado.',5:'Aventurero, libre.',6:'Cuidador, responsable.',7:'Sabio, analítico.',8:'Poderoso, exitoso.',9:'Humanitario, compasivo.',11:'Maestro inspirador.',22:'Maestro constructor.',33:'Maestro sanador.' }; let html = `<div class="result-area" id="numerologia-export"><div class="result-title">🔢 Numerología de ${name}</div>${lifePath ? `<div style="text-align:center"><span style="font-size:4rem;color:var(--gold);">${lifePath}</span><p>Camino de Vida</p></div><div class="num-details"><h3>✨ Tu misión</h3><p>${lifeDesc[lifePath] || ''}</p><h3>❤️ Salud</h3><p>Número Grabovoi: 9187948181</p><h3>💼 Trabajo y Economía</h3><p>Número: 5207418</p><h3>💑 Pareja</h3><p>Número: 8888888</p><div class="grabovoi-badge">🔢 Números de Grabovoi: <strong>9187948181</strong> (salud), <strong>5207418</strong> (dinero), <strong>8888888</strong> (amor), <strong>1891012</strong> (propósito).</div></div>` : ''}${expression ? `<div><span style="font-size:2rem;">${expression}</span><p>Expresión</p><p>Talento para ${expression===1?'liderar':expression===2?'mediar':expression===3?'crear':expression===4?'organizar':expression===5?'aventurar':expression===6?'cuidar':expression===7?'analizar':expression===8?'dirigir':expression===9?'servir':'inspirar'}</p></div>` : ''}</div>`; document.getElementById('numerologiaResult').innerHTML = html; lastState.num = { lifePath, expression }; document.getElementById('numerologiaActions').style.display = 'flex'; }
 function calcSynastry() { let n1 = document.getElementById('synName1').value || 'Persona 1', d1 = document.getElementById('synDob1').value, n2 = document.getElementById('synName2').value || 'Persona 2', d2 = document.getElementById('synDob2').value; if (!d1 || !d2) return toast('Ingresa ambas fechas'); let lp1 = reduceToSingle(d1.replace(/-/g, '').split('').map(Number).reduce((a,b)=>a+b,0)); let lp2 = reduceToSingle(d2.replace(/-/g, '').split('').map(Number).reduce((a,b)=>a+b,0)); let e1 = nameToNumber(n1), e2 = nameToNumber(n2); let diff = Math.abs(lp1 - lp2); let compat = diff === 0 ? 'Almas gemelas ✨' : diff <= 2 ? 'Muy alta 💞' : diff <= 4 ? 'Buena 💕' : diff <= 6 ? 'Media 💫' : 'Kármica 🔮'; let html = `<div class="result-area" id="synastry-export"><div class="result-title">❤️ ${n1} y ${n2}</div><div style="display:flex;justify-content:center;gap:40px"><div><strong>${n1}</strong><br><span style="font-size:2.5rem;color:var(--gold);">${lp1}</span>${e1 ? `<br>Expresión ${e1}` : ''}</div><div><strong>${n2}</strong><br><span style="font-size:2.5rem;color:var(--gold);">${lp2}</span>${e2 ? `<br>Expresión ${e2}` : ''}</div></div><p style="text-align:center">Compatibilidad: <strong>${compat}</strong></p><div class="num-details"><h3>💞 Interpretación</h3><p>Diferencia de ${diff}. ${diff === 0 ? 'Almas gemelas.' : diff <= 2 ? 'Muy alta.' : diff <= 4 ? 'Buena.' : diff <= 6 ? 'Media.' : 'Kármica.'}</p></div><div id="synastryIAResult"></div></div>`; document.getElementById('synastryResult').innerHTML = html; lastState.syn = { n1, n2, lp1, lp2 }; document.getElementById('synastryActions').style.display = 'flex'; }
 
-const mirrorMeanings = { '00:00':'Nuevo ciclo comienza.', '01:01':'Confía en tu intuición.', '02:02':'Alianza y cooperación.', '03:03':'Expresión creativa.', '04:04':'Estructura y orden.', '05:05':'Cambio positivo.', '06:06':'Amor y armonía.', '07:07':'Espiritualidad.', '08:08':'Abundancia.', '09:09':'Cierre de ciclos.', '10:10':'Nuevos comienzos.', '11:11':'Portal de manifestación.', '12:12':'Alineación divina.', '13:13':'Transformación.', '14:14':'Adaptación.', '15:15':'Libertad.', '16:16':'Introspección.', '17:17':'Fe y optimismo.', '18:18':'Manifestación.', '19:19':'Culminación.', '20:20':'Equilibrio.', '21:21':'Éxito asegurado.', '22:22':'Maestro constructor.', '23:23':'Protección espiritual.', '111':'Pensamiento positivo.', '222':'Confianza.', '333':'Presencia de maestros.', '444':'Protección.', '555':'Cambio radical.', '666':'Equilibrio.', '777':'Buena suerte.', '888':'Abundancia infinita.', '999':'Cierre completo.' };
-function interpretMirror() { let input = document.getElementById('mirrorNumber').value.trim(); if (!input) return toast('Escribe una hora espejo o número repetido'); let meaning = mirrorMeanings[input] || mirrorMeanings[input.replace(':', '')] || 'Este número te invita a reflexionar. Presta atención a tus pensamientos y emociones.'; document.getElementById('mirrorResult').innerHTML = `<div class="result-area"><div class="result-title">🕒 Número Espejo: ${input}</div><div class="interp-card"><p>${meaning}</p></div></div>`; }
-function copyGrabovoi(code) { navigator.clipboard.writeText(code).then(() => { document.getElementById('grabovoiInfo').innerHTML = `<p>✅ Código ${code} copiado al portapapeles. Puedes usarlo para meditación o escribirlo.</p>`; setTimeout(() => { document.getElementById('grabovoiInfo').innerHTML = ''; }, 3000); }).catch(() => toast('No se pudo copiar')); }
+const mirrorMeanings = { '00:00':'Nuevo ciclo', '11:11':'Manifestación', '22:22':'Maestro constructor', '111':'Pensamiento positivo', '222':'Confianza', '333':'Maestros ascendidos', '444':'Protección', '555':'Cambio radical', '666':'Equilibrio', '777':'Buena suerte', '888':'Abundancia', '999':'Cierre de ciclo' };
+function interpretMirror() { let input = document.getElementById('mirrorNumber').value.trim(); if (!input) return toast('Escribe una hora espejo'); let meaning = mirrorMeanings[input] || mirrorMeanings[input.replace(':', '')] || 'Reflexiona sobre este número.'; document.getElementById('mirrorResult').innerHTML = `<div class="result-area"><div class="result-title">🕒 Número Espejo: ${input}</div><div class="interp-card"><p>${meaning}</p></div></div>`; }
+function copyGrabovoi(code) { navigator.clipboard.writeText(code).then(() => { document.getElementById('grabovoiInfo').innerHTML = `<p>✅ Código ${code} copiado</p>`; setTimeout(() => { document.getElementById('grabovoiInfo').innerHTML = ''; }, 3000); }).catch(() => toast('No se pudo copiar')); }
 
-function sendChat() { let input = document.getElementById('chatInput'); let msg = input.value.trim(); if (!msg) return; let chatHistory = document.getElementById('chatHistory'); let userMsg = document.createElement('div'); userMsg.className = 'chat-msg user'; userMsg.innerText = msg; chatHistory.appendChild(userMsg); input.value = ''; let botMsg = document.createElement('div'); botMsg.className = 'chat-msg bot'; botMsg.innerText = '🤔 Pensando...'; chatHistory.appendChild(botMsg); chatHistory.scrollTop = chatHistory.scrollHeight; (async () => { try { const personality = document.getElementById('personalitySelect')?.value || 'sabio'; const personas = { sabio:'Eres un sabio consejero espiritual', mistico:'Eres un místico poético', bromista:'Eres un oráculo bromista', romantico:'Eres un oráculo romántico' }; let res = await puter.ai.chat([{ role: 'system', content: personas[personality] }, { role: 'user', content: msg }], { model: 'gpt-4o-mini' }); let text = typeof res === 'string' ? res : res.message?.content; botMsg.innerText = text; speakText(text); } catch(e) { botMsg.innerText = 'Error, intenta de nuevo.'; } })(); }const CACHE_NAME = 'oraculo-v1';
-const urlsToCache = [ '/', '/index.html', '/styles.css', '/app.js', '/manifest.json' ];
-self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))); });
-self.addEventListener('fetch', event => { event.respondWith(caches.match(event.request).then(response => response || fetch(event.request))); });
+function sendChat() { let input = document.getElementById('chatInput'); let msg = input.value.trim(); if (!msg) return; let chatHistory = document.getElementById('chatHistory'); let userMsg = document.createElement('div'); userMsg.className = 'chat-msg user'; userMsg.innerText = msg; chatHistory.appendChild(userMsg); input.value = ''; let botMsg = document.createElement('div'); botMsg.className = 'chat-msg bot'; botMsg.innerText = '🤔 Pensando...'; chatHistory.appendChild(botMsg); chatHistory.scrollTop = chatHistory.scrollHeight; (async () => { try { const personality = document.getElementById('personalitySelect')?.value || 'sabio'; const personas = { sabio:'Eres un sabio consejero espiritual', mistico:'Eres un místico poético', bromista:'Eres un oráculo bromista', romantico:'Eres un oráculo romántico' }; let res = await puter.ai.chat([{ role: 'system', content: personas[personality] }, { role: 'user', content: msg }], { model: 'gpt-4o-mini' }); let text = typeof res === 'string' ? res : res.message?.content; botMsg.innerText = text; speakText(text); } catch(e) { botMsg.innerText = 'Error, intenta de nuevo.'; } })(); }
+
+async function shareImg(type) { let el = document.getElementById(`${type}-export`); if (!el) return toast('No hay resultado'); toast('📸 Generando imagen...'); try { const canvas = await html2canvas(el, { backgroundColor: '#ffffff', scale: 2, useCORS: true, logging: false }); const a = document.createElement('a'); a.download = `oraculo-${type}-${Date.now()}.jpg`; a.href = canvas.toDataURL('image/jpeg', 0.93); a.click(); toast('✅ Imagen guardada'); } catch (e) { toast('Error al generar imagen'); } }
+async function exportPDF(type) { let el = document.getElementById(`${type}-export`); if (!el) return toast('No hay resultado'); toast('📄 Generando PDF...'); const { jsPDF } = window.jspdf; const pdf = new jsPDF('p', 'mm', 'a4'); try { const canvas = await html2canvas(el, { backgroundColor: '#ffffff', scale: 2, useCORS: true, logging: false }); const imgData = canvas.toDataURL('image/jpeg', 1.0); const imgWidth = 210; const pageHeight = 297; const imgHeight = (canvas.height * imgWidth) / canvas.width; let heightLeft = imgHeight; let position = 0; pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; while (heightLeft > 0) { position = heightLeft - imgHeight; pdf.addPage(); pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight); heightLeft -= pageHeight; } pdf.save(`oraculo-${type}-${Date.now()}.pdf`); toast('✅ PDF generado'); } catch (e) { toast('Error al generar PDF: ' + e.message); } }
+
+function renderAll() { document.getElementById('majorGrid').innerHTML = MAJOR_ARCANA.map(c=>cardHTML(c)).join(''); document.getElementById('minorGrid').innerHTML = MINOR_ARCANA.map(c=>cardHTML(c)).join(''); document.getElementById('runasGrid').innerHTML = RUNAS.map(r=>runeCardHTML(r)).join(''); }
+
+function showWelcomeModal() { if (localStorage.getItem('oraculo_user')) return; let ov = document.createElement('div'); ov.className = 'welcome-modal'; ov.innerHTML = `<div class="welcome-box"><h2>✨ Bienvenido al Oráculo</h2><p>Inicia sesión con Google para guardar tus datos</p><button class="btn-mystic" id="googleLoginBtn" style="background:#4285f4;">🔵 Iniciar sesión con Google</button><div style="margin:15px 0;">— o —</div><input class="mystic-input" id="wName" placeholder="Tu nombre"><input class="mystic-input" type="date" id="wDob"><button class="btn-mystic" id="wSaveBtn">🔮 Continuar como invitado</button></div>`; document.body.appendChild(ov); document.getElementById('googleLoginBtn')?.addEventListener('click', async () => { if (window.puter?.auth) { try { await window.puter.auth.signInWithGoogle(); const user = await window.puter.auth.getUser(); if (user && user.username) { localStorage.setItem('oraculo_user', JSON.stringify({ name: user.username, dob: '' })); toast(`¡Bienvenido, ${user.username}!`); ov.remove(); } } catch(e) { toast('Error al iniciar sesión con Google'); } } else { toast('Puter Auth no disponible. Usa invitado.'); } }); document.getElementById('wSaveBtn').addEventListener('click', () => { let name = document.getElementById('wName').value || 'Viajero'; let dob = document.getElementById('wDob').value; localStorage.setItem('oraculo_user', JSON.stringify({ name, dob })); ov.remove(); toast(`¡Bienvenido, ${name}!`); }); }
+
+function openSettings() { let voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('es')); let opts = voices.map((v,i) => `<option value="${i}" ${v.name===selectedVoiceName?'selected':''}>${v.name}</option>`).join(''); let html = `<h2>⚙️ Configuración</h2><div><h3>Tema</h3><button class="btn-mystic" onclick="document.body.dataset.theme='dark';localStorage.setItem('oraculo_theme','dark')">🌙 Oscuro</button><button class="btn-mystic" onclick="document.body.dataset.theme='light';localStorage.setItem('oraculo_theme','light')">☀️ Claro</button></div><div><h3>Voz</h3><select id="voiceSelect">${opts}</select></div><div><h3>Velocidad: <span id="speedVal">${voiceSpeed}</span>x</h3><input type="range" min="0.5" max="2" step="0.25" value="${voiceSpeed}" id="speedRange"></div><button class="btn-mystic btn-stop" onclick="localStorage.clear();location.reload()">Borrar datos</button>`; let modal = openModal(html); document.getElementById('voiceSelect')?.addEventListener('change', e => { selectedVoiceName = voices[e.target.value]?.name; }); document.getElementById('speedRange')?.addEventListener('input', e => { voiceSpeed = parseFloat(e.target.value); document.getElementById('speedVal').innerText = voiceSpeed; }); }
+
+function createStars() { const container = document.getElementById('starsContainer'); for (let i=0; i<140; i++) { const s = document.createElement('div'); s.className = 'star'; const z = Math.random() * 3 + 1; s.style.cssText = `width:${z}px;height:${z}px;left:${Math.random()*100}vw;top:${Math.random()*100}vh;--dur:${Math.random()*4+2}s;--op:${Math.random()*0.8+0.2};animation-delay:${Math.random()*5}s`; container.appendChild(s); } }
+
+function shareSocial(type, text) { window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank'); }
+
+let totalCards = ALL_TAROT.length, loadedCards = 0;
+function preloadImages() { ALL_TAROT.forEach(card => { let img = new Image(); img.onload = img.onerror = () => { loadedCards++; let pct = Math.round((loadedCards/totalCards)*100); let el = document.getElementById('splashProgress'); if(el) el.textContent = `Cargando cartas del tarot... ${pct}%`; }; img.src = getImgSrc(card); }); }
+
+document.addEventListener('DOMContentLoaded', () => {
+    createStars(); preloadImages();
+    setTimeout(() => { renderAll(); initMicrophones(); renderNotes(); calcMoonToday(); checkDailyButton(); loadHistory(); renderSavedDreams(); }, 800);
+    let savedTheme = localStorage.getItem('oraculo_theme'); if (savedTheme) document.body.dataset.theme = savedTheme;
+    setInterval(() => { document.getElementById('dateDisplay').innerText = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); }, 1000);
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', function() { document.querySelectorAll('.section').forEach(s=>s.classList.remove('active')); document.getElementById(this.dataset.section).classList.add('active'); document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active')); this.classList.add('active'); }));
+    document.getElementById('drawTarotBtn')?.addEventListener('click', drawTarot);
+    document.getElementById('drawRuneBtn')?.addEventListener('click', drawRune);
+    document.getElementById('dailyDrawBtn')?.addEventListener('click', drawDailyCard);
+    document.getElementById('interpretDreamBtn')?.addEventListener('click', interpretDream);
+    document.getElementById('dreamIABtn')?.addEventListener('click', dreamIA);
+    document.getElementById('saveDreamBtn')?.addEventListener('click', saveDream);
+    document.getElementById('calcNumerologiaBtn')?.addEventListener('click', calcNumerologia);
+    document.getElementById('calcSynastryBtn')?.addEventListener('click', calcSynastry);
+    document.getElementById('sendChatBtn')?.addEventListener('click', sendChat);
+    document.getElementById('calcMoonBtn')?.addEventListener('click', calcMoonToday);
+    document.getElementById('calcMoonCustomBtn')?.addEventListener('click', calcMoonForDate);
+    document.getElementById('drawMoonBtn')?.addEventListener('click', drawMoon);
+    document.getElementById('addNoteBtn')?.addEventListener('click', addNoteFromEditor);
+    document.getElementById('stopVoiceBtn')?.addEventListener('click', () => TTS.stop());
+    document.getElementById('settingsBtn')?.addEventListener('click', openSettings);
+    document.getElementById('clearHistoryBtn')?.addEventListener('click', () => { if(confirm('¿Borrar todo el historial?')){ historial=[]; saveHistory(); renderHistory(); toast('Historial borrado'); } });
+    document.getElementById('interpretMirrorBtn')?.addEventListener('click', interpretMirror);
+    document.getElementById('symbolSearch')?.addEventListener('input', searchSymbol);
+    document.querySelectorAll('.grabovoi-card').forEach(card => { card.addEventListener('click', () => { const code = card.dataset.code; if (code) copyGrabovoi(code); }); });
+    document.querySelectorAll('.num-tab').forEach(tab => { tab.addEventListener('click', () => { document.querySelectorAll('.num-tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); const target = tab.dataset.numtab; document.querySelectorAll('.num-content').forEach(c=>c.classList.remove('active')); document.getElementById(`num-${target}`).classList.add('active'); }); });
+    document.querySelectorAll('.btn-ia').forEach(btn => btn.addEventListener('click', e => getIA(btn.dataset.type)));
+    document.querySelectorAll('.btn-share').forEach(btn => btn.addEventListener('click', e => shareImg(btn.dataset.type)));
+    document.querySelectorAll('.btn-pdf').forEach(btn => btn.addEventListener('click', e => exportPDF(btn.dataset.type)));
+    document.querySelectorAll('.btn-share-social').forEach(btn => { btn.addEventListener('click', () => { const type = btn.dataset.type; let text = ''; if (type === 'tarot' && lastState.tarot) { const card = lastState.tarot.card, rev = lastState.tarot.rev; text = `🔮 Mi tirada de Tarot: ${card.name} (${rev?'Invertida':'Derecha'}). ${rev?card.rv:card.up}`; } else if (type === 'runa' && lastState.runa) { const r = lastState.runa.r, rev = lastState.runa.rev; text = `ᚱ Mi runa: ${r.name} (${rev?'Invertida':'Derecha'}). ${rev&&r.rv?r.rv:r.up}`; } else if (type === 'daily' && lastState.daily) { const data = lastState.daily; text = `☀️ Mi carta del día: ${data.card.name} (${data.rev?'Invertida':'Derecha'}) y runa ${data.runa.name}.`; } else if (type === 'tirada' && lastState.tirada && lastState.tirada.cfg) { text = `⚡ Mi tirada de ${lastState.tirada.cfg.name}: ${lastState.tirada.drawn.map(d=>`${d.c.name} (${d.rev?'Inv':'Der'})`).join(', ')}`; } else if (type === 'luna' && lastState.luna) { text = `🌙 Mi consulta lunar: ${lastState.luna.phase.name}.`; } else if (type === 'dream' && lastState.dream) { text = `💭 Mi sueño: "${lastState.dream.txt}".`; } else if (type === 'numerologia' && lastState.num) { text = `🔢 Mi número de vida: ${lastState.num.lifePath}, expresión: ${lastState.num.expression}.`; } else if (type === 'synastry' && lastState.syn) { text = `❤️ Compatibilidad entre ${lastState.syn.n1} (${lastState.syn.lp1}) y ${lastState.syn.n2} (${lastState.syn.lp2}).`; } if (text) shareSocial(type, text); }); });
+    document.querySelectorAll('.spread-option').forEach(opt => opt.addEventListener('click', () => doSpread(opt.dataset.spread)));
+    document.getElementById('drawThreeRunesBtn')?.addEventListener('click', drawThreeRunes);
+    document.getElementById('drawFiveRunesBtn')?.addEventListener('click', drawFiveRunes);
+    document.getElementById('drawSevenRunesBtn')?.addEventListener('click', drawSevenRunes);
+    document.querySelectorAll('.subnav-btn').forEach(btn => btn.addEventListener('click', function() { document.querySelectorAll('.sub-section').forEach(s=>s.style.display='none'); document.querySelectorAll('.subnav-btn').forEach(x=>x.classList.remove('active')); document.getElementById(this.dataset.sub).style.display='block'; this.classList.add('active'); }));
+    document.getElementById('chatMicBtn')?.addEventListener('click', () => { let input = document.getElementById('chatInput'); if(window.SpeechRecognition){ let rec=new (window.SpeechRecognition||window.webkitSpeechRecognition)(); rec.lang='es-ES'; rec.onresult=e=>{ input.value=e.results[0][0].transcript; sendChat(); }; rec.start(); } });
+    document.getElementById('chatInput')?.addEventListener('keydown', e => { if(e.key === 'Enter') sendChat(); });
+    document.getElementById('historySearch')?.addEventListener('input', () => renderHistory());
+    document.getElementById('historyTypeFilter')?.addEventListener('change', () => renderHistory());
+    document.querySelector('[data-section="estadisticas"]')?.addEventListener('click', () => { setTimeout(() => updateStatsCharts(), 100); });
+    document.querySelectorAll('.suggestion-btn').forEach(btn => { btn.addEventListener('click', () => { document.getElementById('chatInput').value = btn.dataset.question; sendChat(); }); });
+    document.body.addEventListener('click', () => unlockAudio(), { once: true });
+    setTimeout(() => { showWelcomeModal(); document.getElementById('splash-screen')?.classList.add('hidden'); }, 3000);
+});
