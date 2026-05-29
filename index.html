@@ -60,20 +60,13 @@
             </div>
         </section>
 
-        <!-- Tarot (con interruptor de IA automática) -->
+        <!-- Tarot -->
         <section id="tarot" class="section">
             <div class="section-title">🃏 Tarot Rider-Waite</div>
             <p class="section-desc">78 cartas originales con interpretaciones profundas</p>
             <div class="user-input">
                 <input class="mystic-input" id="tarotQ" placeholder="💬 Tu pregunta...">
                 <button class="mic-btn-small" data-mic="tarotQ">🎤</button>
-            </div>
-            <div class="auto-ia-toggle">
-                <label class="switch">
-                    <input type="checkbox" id="tarotAutoIA">
-                    <span class="slider round"></span>
-                </label>
-                <span>🤖 Interpretación automática con IA</span>
             </div>
             <div class="action-buttons">
                 <button class="btn-mystic" id="drawTarotBtn">🎴 Sacar Una Carta</button>
@@ -93,20 +86,13 @@
             <div class="cards-grid" id="minorGrid"></div>
         </section>
 
-        <!-- Runas (con interruptor de IA automática) -->
+        <!-- Runas -->
         <section id="runas" class="section">
             <div class="section-title">ᚱ Oráculo de las Runas</div>
             <p class="section-desc">24 runas del Futhark Antiguo</p>
             <div class="user-input">
                 <input class="mystic-input" id="runaQ" placeholder="🌿 Tu pregunta...">
                 <button class="mic-btn-small" data-mic="runaQ">🎤</button>
-            </div>
-            <div class="auto-ia-toggle">
-                <label class="switch">
-                    <input type="checkbox" id="runasAutoIA">
-                    <span class="slider round"></span>
-                </label>
-                <span>🤖 Interpretación automática con IA</span>
             </div>
             <div class="action-buttons">
                 <button class="btn-mystic" id="drawRuneBtn">ᚠ Una Runa</button>
@@ -164,7 +150,7 @@
             </div>
         </section>
 
-        <!-- Luna ampliada (sin cambios) -->
+        <!-- Luna ampliada -->
         <section id="luna" class="section">
             <div class="section-title">🌙 Oráculo Lunar</div>
             <p class="section-desc">La Luna guía tus emociones y ciclos</p>
@@ -186,7 +172,7 @@
             </div>
         </section>
 
-        <!-- Sueños ampliado (sin cambios) -->
+        <!-- Sueños ampliado -->
         <section id="suenos" class="section">
             <div class="section-title">💭 Intérprete de Sueños</div>
             <p class="section-desc">Descifra los mensajes ocultos de tu inconsciente</p>
@@ -217,7 +203,7 @@
             </div>
         </section>
 
-        <!-- Numerología con pestañas (sin cambios) -->
+        <!-- Numerología con pestañas -->
         <section id="numerologia" class="section">
             <div class="section-title">🔢 Numerología Sagrada</div>
             <p class="section-desc">Descubre el poder de los números en tu vida</p>
@@ -384,12 +370,20 @@
     <script src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js').then(reg => {
-                console.log('Service Worker registrado');
+            navigator.serviceWorker.register('./service-worker.js').then(reg => {
+                console.log('Service Worker registrado', reg);
             }).catch(err => {
                 console.log('Error al registrar SW', err);
             });
         }
+        // Fallback: ocultar splash después de 5 segundos por si hay error
+        setTimeout(() => {
+            const splash = document.getElementById('splash-screen');
+            if (splash && !splash.classList.contains('hidden')) {
+                splash.classList.add('hidden');
+                console.log('Splash ocultado por fallback');
+            }
+        }, 5000);
     </script>
 </body>
 </html>
