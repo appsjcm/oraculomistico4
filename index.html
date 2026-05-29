@@ -60,13 +60,20 @@
             </div>
         </section>
 
-        <!-- Tarot -->
+        <!-- Tarot (con interruptor de IA automática) -->
         <section id="tarot" class="section">
             <div class="section-title">🃏 Tarot Rider-Waite</div>
             <p class="section-desc">78 cartas originales con interpretaciones profundas</p>
             <div class="user-input">
                 <input class="mystic-input" id="tarotQ" placeholder="💬 Tu pregunta...">
                 <button class="mic-btn-small" data-mic="tarotQ">🎤</button>
+            </div>
+            <div class="auto-ia-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="tarotAutoIA">
+                    <span class="slider round"></span>
+                </label>
+                <span>🤖 Interpretación automática con IA</span>
             </div>
             <div class="action-buttons">
                 <button class="btn-mystic" id="drawTarotBtn">🎴 Sacar Una Carta</button>
@@ -86,13 +93,20 @@
             <div class="cards-grid" id="minorGrid"></div>
         </section>
 
-        <!-- Runas -->
+        <!-- Runas (con interruptor de IA automática) -->
         <section id="runas" class="section">
             <div class="section-title">ᚱ Oráculo de las Runas</div>
             <p class="section-desc">24 runas del Futhark Antiguo</p>
             <div class="user-input">
                 <input class="mystic-input" id="runaQ" placeholder="🌿 Tu pregunta...">
                 <button class="mic-btn-small" data-mic="runaQ">🎤</button>
+            </div>
+            <div class="auto-ia-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="runasAutoIA">
+                    <span class="slider round"></span>
+                </label>
+                <span>🤖 Interpretación automática con IA</span>
             </div>
             <div class="action-buttons">
                 <button class="btn-mystic" id="drawRuneBtn">ᚠ Una Runa</button>
@@ -131,6 +145,7 @@
                     <div class="spread-option" data-spread="star"><span class="si">⭐</span><h3>Estrella</h3><p>5 cartas</p></div>
                     <div class="spread-option" data-spread="pyramid"><span class="si">🔺</span><h3>Pirámide</h3><p>6 cartas</p></div>
                     <div class="spread-option" data-spread="elements"><span class="si">🌍</span><h3>5 Elementos</h3><p>5 cartas</p></div>
+                    <div class="spread-option" data-spread="zodiac"><span class="si">♈</span><h3>12 Zodiacales</h3><p>12 cartas</p></div>
                 </div>
             </div>
             <div id="tiradas-runes" class="sub-section" style="display:none">
@@ -149,7 +164,7 @@
             </div>
         </section>
 
-        <!-- Luna ampliada -->
+        <!-- Luna ampliada (sin cambios) -->
         <section id="luna" class="section">
             <div class="section-title">🌙 Oráculo Lunar</div>
             <p class="section-desc">La Luna guía tus emociones y ciclos</p>
@@ -171,7 +186,7 @@
             </div>
         </section>
 
-        <!-- Sueños ampliado -->
+        <!-- Sueños ampliado (sin cambios) -->
         <section id="suenos" class="section">
             <div class="section-title">💭 Intérprete de Sueños</div>
             <p class="section-desc">Descifra los mensajes ocultos de tu inconsciente</p>
@@ -202,7 +217,7 @@
             </div>
         </section>
 
-        <!-- Numerología con pestañas -->
+        <!-- Numerología con pestañas (sin cambios) -->
         <section id="numerologia" class="section">
             <div class="section-title">🔢 Numerología Sagrada</div>
             <p class="section-desc">Descubre el poder de los números en tu vida</p>
@@ -271,7 +286,6 @@
                     <div class="grabovoi-card" data-code="1891012">✨ Propósito<br><small>1891012</small></div>
                     <div class="grabovoi-card" data-code="318798914">🛡️ Protección<br><small>318798914</small></div>
                     <div class="grabovoi-card" data-code="5197148">🧠 Claridad mental<br><small>5197148</small></div>
-                    <div class="grabovoi-card" data-code="318798914">🛡️ Protección<br><small>318798914</small></div>
                 </div>
                 <div id="grabovoiInfo" class="grabovoi-info"></div>
             </div>
